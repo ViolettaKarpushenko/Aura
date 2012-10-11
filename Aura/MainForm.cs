@@ -1,0 +1,165 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data.SQLite;
+using System.Globalization;
+using System.Linq;
+using System.Reflection;
+using System.Windows.Forms;
+
+namespace Aura
+{
+    public partial class MainForm : Form
+    {
+        private readonly SQLiteConnection _connection;
+        private readonly QueryBuilder _queryBuilder;
+
+        public MainForm()
+        {
+            InitializeComponent();
+
+            var connectionStringBuilder = new SQLiteConnectionStringBuilder { DataSource = "aura.db3" };
+
+            _connection = new SQLiteConnection(connectionStringBuilder.ConnectionString);
+
+            _queryBuilder = new QueryBuilder(_connection);
+
+            comboBox1.SelectedIndex = 5;
+            foreach (var column in Controls.OfType<DataGridViewTextBoxColumn>())
+            {
+                column.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            }
+
+            var version = Assembly.GetExecutingAssembly().GetName().Version;
+            Text = string.Format("Aura {0}.{1}.{2}.{3}", version.Major, version.Minor, version.Build, version.Revision);
+        }
+
+        private void OnLoad(object sender, EventArgs e)
+        {
+            _dgvMineralD.DataSource = _queryBuilder.Get(DataTables.MineralData);
+            _dgvMineralD.Update();
+
+            _dgvWaterD.DataSource = _queryBuilder.Get(DataTables.WaterData);
+            _dgvWaterD.Update();
+
+            _dgvBiologicalD.DataSource = _queryBuilder.Get(DataTables.BiologicalData);
+            _dgvBiologicalD.Update();
+
+            _dgvTerritorialD.DataSource = _queryBuilder.Get(DataTables.TerritorialData);
+            _dgvTerritorialD.Update();
+
+            _dgvAnimalsD.DataSource = _queryBuilder.Get(DataTables.AnimalData);
+            _dgvAnimalsD.Update();
+
+            SelectedIndexChanged(null, null);
+        }
+
+        private void SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (comboBox1.Text)
+            {
+                case "Минеральные":
+                    dataGridView1.DataSource = _queryBuilder.Get("v_result_mineral_resources");
+                    break;
+                case "Водные":
+                    dataGridView1.DataSource = _queryBuilder.Get("v_result_water_resources");
+                    break;
+                case "Территориальные":
+                    dataGridView1.DataSource = _queryBuilder.Get("v_result_territorial_resources");
+                    break;
+                case "Растительные":
+                    dataGridView1.DataSource = _queryBuilder.Get("v_result_biological_resources");
+                    break;
+                case "Животные":
+                    dataGridView1.DataSource = _queryBuilder.Get("v_result_animals_resorces");
+                    break;
+                default:
+                    dataGridView1.DataSource = _queryBuilder.Get("v_resut");
+                    break;
+            }
+
+            dataGridView1.Update();
+        }
+
+        private void AddRegion(object sender, EventArgs e)
+        {
+            var queries = new List<string>();
+            {
+                var dialog = new AddRegionForm("Регион", "Название", s => string.IsNullOrEmpty(s) || s.Length > 49 ? "Неверное имя региона" : null);
+                var showDialog = dialog.ShowDialog();
+                if(showDialog == DialogResult.OK)
+                {
+                    queries.Add(string.Format("INSERT INTO [t_regions] ([ID], [Name]) VALUES ({{0}}, '{0}');\r\n", dialog.Value.Replace('\'', '`')));
+                }
+                else
+                {
+                    return;
+                }
+            }
+
+            var simpleTables = new[]
+                                   {
+                                       new SimpleTable
+                                           {
+                                               TableName = "t_mineral_resources",
+                                               Caption = "Минеральные ресурсы",
+                                               Columns = new Dictionary<string, string>
+                                                   {
+                                                       {"DL", "Доломиты"},
+                                                       {"AR", "Глинистые"},
+                                                       {"GS", "Гривийно-пещаные"},
+                                                       {"SA", "Пески"},
+                                                       {"PE", "Торф"},
+                                                       {"SP", "Сапропель"}
+                                                   }
+                                           },
+                                       new SimpleTable
+                                           {
+                                               TableName = "t_water_resources",
+                                               Caption = "Водные ресурсы",
+                                               Columns = new Dictionary<string, string>
+                                                   {
+                                                       {"RW", "Речной сток"},
+                                                       {"UW", "Подземные воды"},
+                                                       {"LW", "Обем воды в озерах"}
+                                                   }
+                                           }
+                                   };
+
+            foreach (var simpleTable in simpleTables)
+            {
+                var dictionnary = new Dictionary<string, string>();
+
+                foreach (var column in simpleTable.Columns)
+                {
+                    double tempDouble;
+                    var dialog = new AddRegionForm(simpleTable.Caption, column.Value, s => !double.TryParse(s, NumberStyles.Any, CultureInfo.CurrentCulture, out tempDouble) ? "Неверное значение" : null);
+                    var showDialog = dialog.ShowDialog();
+                    if (showDialog == DialogResult.OK)
+                    {
+                        dictionnary.Add(column.Key, dialog.Value);
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+
+                var columnsNames = simpleTable.Columns.Select(pair => pair.Key).Select(name => ", [" + name.Replace('\'', '`') + "]").Aggregate((s, s1) => s + s1);
+                var columnsValues = simpleTable.Columns.Select(pair => dictionnary[pair.Key]).Select(name => ", '" + name.Replace('\'', '`') + "'").Aggregate((s, s1) => s + s1);
+
+                queries.Add(string.Format("INSERT INTO [{2}] ([ID]{0}) VALUES ({{0}}{1});\r\n", columnsNames, columnsValues, simpleTable.TableName));
+            }
+
+            string result = queries.Aggregate((s, s1) => s + s1);
+            result += " ";
+        }
+    }
+
+    internal class SimpleTable
+
+    {
+        public string TableName { get; set; }
+        public string Caption { get; set; }
+        public Dictionary<string,string> Columns { get; set; }
+    }
+}
