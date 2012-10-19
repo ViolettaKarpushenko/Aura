@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SQLite;
 using System.Globalization;
 using System.Linq;
@@ -82,6 +83,7 @@ namespace Aura
 
         private void AddRegion(object sender, EventArgs e)
         {
+            // Add region name.
             var queries = new List<string>();
             {
                 var dialog = new AddRegionForm("Регион", "Название", s => string.IsNullOrEmpty(s) || s.Length > 49 ? "Неверное имя региона" : null);
@@ -96,6 +98,8 @@ namespace Aura
                 }
             }
 
+            // Fill simple tables
+            #region Tables definitions
             var simpleTables = new[]
                                    {
                                        new SimpleTable
@@ -122,8 +126,34 @@ namespace Aura
                                                        {"UW", "Подземные воды"},
                                                        {"LW", "Обем воды в озерах"}
                                                    }
+                                           },
+                                       new SimpleTable
+                                           {
+                                               TableName = "t_territorial_resources",
+                                               Caption = "Территориальные ресурсы",
+                                               Columns = new Dictionary<string, string>
+                                                   {
+                                                       {"GA", "Земельные"},
+                                                       {"AA", "Сельское хозяйство"},
+                                                       {"LA", "Озерные"}
+                                                   }
+                                           },
+                                       new SimpleTable
+                                           {
+                                               TableName = "t_biological_resources",
+                                               Caption = "Биологические ресурсы",
+                                               Columns = new Dictionary<string, string>
+                                                   {
+                                                       {"WO", "Древесина"},
+                                                       {"MP", "Лекарственные"},
+                                                       {"FP", "Пищевые"},
+                                                       {"MU", "Грибы"},
+                                                       {"PH", "Фитопланктон"},
+                                                       {"MC", "Макрофиты"}
+                                                   }
                                            }
                                    };
+            #endregion
 
             foreach (var simpleTable in simpleTables)
             {
@@ -150,8 +180,50 @@ namespace Aura
                 queries.Add(string.Format("INSERT INTO [{2}] ([ID]{0}) VALUES ({{0}}{1});\r\n", columnsNames, columnsValues, simpleTable.TableName));
             }
 
-            string result = queries.Aggregate((s, s1) => s + s1);
-            result += " ";
+            // Fill animals
+            queries.Add("INSERT INTO [t_animals] ([ID]) VALUE('{0}');\r\n");
+            _connection.Open();
+            var table = new DataTable();
+            table.Load(new SQLiteCommand("SELECT * FROM [t_animal_species];", _connection).ExecuteReader());
+            _connection.Close();
+            foreach (var column in table.Rows.Cast<DataRow>().Select(row => new {Id = (long)row["ID"], Name = (string)row["Name"]}))
+            {
+                double tempDouble;
+                var dialog = new AddRegionForm("Животные ресурсы", column.Name, s => !double.TryParse(s, NumberStyles.Any, CultureInfo.CurrentCulture, out tempDouble) ? "Неверное значение" : null);
+                var showDialog = dialog.ShowDialog();
+                if (showDialog == DialogResult.OK)
+                {
+                    queries.Add(string.Format("INSERT INTO [t_animal_species_to_animals] ([SID], [AID], [Quantity]) VALUE ('{0}', '{{0}}', '{1}');\r\n", column.Id, dialog.Value));
+                }
+                else
+                {
+                    return;
+                }
+            }
+            _connection.Open();
+            var table2 = new DataTable();
+            table2.Load(new SQLiteCommand("SELECT * FROM [t_animal_others];", _connection).ExecuteReader());
+            _connection.Close();
+            foreach (var column in table2.Rows.Cast<DataRow>().Select(row => new { Id = (long)row["ID"], Name = (string)row["Name"]}))
+            {
+                double tempDouble;
+                var dialog = new AddRegionForm("Животные ресурсы", column.Name, s => !double.TryParse(s, NumberStyles.Any, CultureInfo.CurrentCulture, out tempDouble) ? "Неверное значение" : null);
+                var showDialog = dialog.ShowDialog();
+                if (showDialog == DialogResult.OK)
+                {
+                    queries.Add(string.Format("INSERT INTO [t_animal_others_to_animals] ([OID], [AID], [Quantity]) VALUE ('{0}', '{{0}}', '{1}');\r\n", column.Id, dialog.Value));
+                }
+                else
+                {
+                    return;
+                }
+            }
+
+            _connection.Open();
+            long maximumIndex = (long)new SQLiteCommand("SELECT max([ID]) FROM [t_regions]", _connection).ExecuteScalar();
+            _connection.Close();
+            string aggregate = queries.Aggregate((s, s1) => s + s1);
+            string result = string.Format(aggregate, maximumIndex);
         }
     }
 
