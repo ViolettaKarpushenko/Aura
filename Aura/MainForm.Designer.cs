@@ -51,7 +51,8 @@ namespace Aura
             this.GA = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.ljfdbnmHjkfcnmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this._miAddRegion = new System.Windows.Forms.ToolStripMenuItem();
+            this._miMap = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.Default.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -297,19 +298,27 @@ namespace Aura
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ljfdbnmHjkfcnmToolStripMenuItem});
+            this._miAddRegion,
+            this._miMap});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(947, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // ljfdbnmHjkfcnmToolStripMenuItem
+            // _miAddRegion
             // 
-            this.ljfdbnmHjkfcnmToolStripMenuItem.Name = "ljfdbnmHjkfcnmToolStripMenuItem";
-            this.ljfdbnmHjkfcnmToolStripMenuItem.Size = new System.Drawing.Size(102, 20);
-            this.ljfdbnmHjkfcnmToolStripMenuItem.Text = "Добавить район";
-            this.ljfdbnmHjkfcnmToolStripMenuItem.Click += new System.EventHandler(this.AddRegion);
+            this._miAddRegion.Name = "_miAddRegion";
+            this._miAddRegion.Size = new System.Drawing.Size(102, 20);
+            this._miAddRegion.Text = "Добавить район";
+            this._miAddRegion.Click += new System.EventHandler(this.AddRegion);
+            // 
+            // _miMap
+            // 
+            this._miMap.Name = "_miMap";
+            this._miMap.Size = new System.Drawing.Size(50, 20);
+            this._miMap.Text = "Карта";
+            this._miMap.Click += new System.EventHandler(this.ShowMap);
             // 
             // MainForm
             // 
@@ -367,7 +376,8 @@ namespace Aura
         private DataGridViewTextBoxColumn GA;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private MenuStrip menuStrip1;
-        private ToolStripMenuItem ljfdbnmHjkfcnmToolStripMenuItem;
+        private ToolStripMenuItem _miAddRegion;
+        private ToolStripMenuItem _miMap;
     }
 }
 

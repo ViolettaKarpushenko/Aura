@@ -159,10 +159,10 @@ CREATE VIEW [v_result_mineral_resources] AS
     SELECT
          r.[ID]
         ,r.[Name] AS 'Регион'
-        ,a.[B] + a.[C] + a.[D] + a.[E] + a.[F] + a.[G] AS 'Q1'
-        ,a.[G] AS 'Q2'
-        ,a.[G] * 100 / (a.[B] + a.[C] + a.[D] + a.[E] + a.[F] + a.[G]) AS 'Q3'
-        ,a.[G] / (a.[B] + a.[C] + a.[D] + a.[E] + a.[F]) AS 'Q4'
+        ,a.[B] + a.[C] + a.[D] + a.[E] + a.[F] + a.[G] AS 'Запасы ПГХ'
+        ,a.[G] AS 'Запасы озера'
+        ,a.[G] * 100 / (a.[B] + a.[C] + a.[D] + a.[E] + a.[F] + a.[G]) AS '%'
+        ,a.[G] / (a.[B] + a.[C] + a.[D] + a.[E] + a.[F]) AS 'К-т баланса'
     FROM [t_mineral_resources] AS t
     INNER JOIN [v_a_mineral_resources] AS a ON a.[ID] = t.[ID]
     JOIN [t_regions] AS r ON r.[ID] = t.[ID];
@@ -190,10 +190,10 @@ CREATE VIEW [v_result_water_resources] AS
     SELECT
          r.[ID]
         ,r.[Name] AS 'Регион'
-        ,a.[B] + a.[C] + a.[D] AS 'Q1'
-        ,a.[D] AS 'Q2'
-        ,a.[D] * 100 / (a.[B] + a.[C] + a.[D]) AS 'Q3'
-        ,a.[D] / (a.[B] + a.[C]) AS 'Q4'
+        ,a.[B] + a.[C] + a.[D] AS 'Запасы ПГХ'
+        ,a.[D] AS 'Запасы озера'
+        ,a.[D] * 100 / (a.[B] + a.[C] + a.[D]) AS '%'
+        ,a.[D] / (a.[B] + a.[C]) AS 'К-т баланса'
     FROM [t_water_resources] AS t
     INNER JOIN [v_a_water_resources] AS a ON a.[ID] = t.[ID]
     JOIN [t_regions] AS r ON r.[ID] = t.[ID];
@@ -221,10 +221,10 @@ CREATE VIEW [v_result_territorial_resources] AS
     SELECT
          r.[ID]
         ,r.[Name] AS 'Регион'
-        ,a.[C] + a.[E] AS 'Q1'
-        ,a.[E] AS 'Q2'
-        ,a.[E] / (a.[C] + a.[E]) AS 'Q3'
-        ,a.[E] / a.[C] AS 'Q4'
+        ,a.[C] + a.[E] AS 'Запасы ПГХ'
+        ,a.[E] AS 'Запасы озера'
+        ,a.[E] / (a.[C] + a.[E]) AS '%'
+        ,a.[E] / a.[C] AS 'К-т баланса'
     FROM [t_territorial_resources] AS t
     INNER JOIN [v_a_territorial_resources] AS a ON a.[ID] = t.[ID]
     JOIN [t_regions] AS r ON r.[ID] = t.[ID];
@@ -261,10 +261,10 @@ CREATE VIEW [v_result_biological_resources] AS
     SELECT
          r.[ID]
         ,r.[Name] AS 'Регион'
-        ,a.[B] + a.[C] + a.[D] + a.[E] + a.[F] + a.[G] AS 'Q1'
-        ,a.[F] + a.[G] AS 'Q2'
-        ,(a.[F] + a.[G]) * 100 / (a.[B] + a.[C] + a.[D] + a.[E] + a.[F] + a.[G]) AS 'Q3'
-        ,(a.[F] + a.[G]) / (a.[B] + a.[C] + a.[D] + a.[E]) AS 'Q4'
+        ,a.[B] + a.[C] + a.[D] + a.[E] + a.[F] + a.[G] AS 'Запасы ПГХ'
+        ,a.[F] + a.[G] AS 'Запасы озера'
+        ,(a.[F] + a.[G]) * 100 / (a.[B] + a.[C] + a.[D] + a.[E] + a.[F] + a.[G]) AS '%'
+        ,(a.[F] + a.[G]) / (a.[B] + a.[C] + a.[D] + a.[E]) AS 'К-т баланса'
     FROM [t_biological_resources] AS t
     INNER JOIN [v_a_biological_resources] AS a ON a.[ID] = t.[ID]
     JOIN [t_regions] AS r ON r.[ID] = t.[ID];
@@ -308,10 +308,10 @@ CREATE VIEW [v_result_animals_resorces] AS
     SELECT
          r.[ID]
         ,r.[Name] AS 'Регион'
-        ,(SELECT sum(asp.[Avg]) FROM [v_a_animal_orders] AS asp WHERE asp.[AID] = a.[ID]) + (SELECT sum(aot.[Avg]) FROM [v_a_animal_others] AS aot WHERE aot.[AID] = a.[ID]) AS 'Q1'
-        ,(SELECT sum(aot.[Avg]) FROM [v_a_animal_others] AS aot WHERE aot.[AID] = a.[ID]) AS 'Q2'
-        ,(SELECT sum(aot.[Avg]) FROM [v_a_animal_others] AS aot WHERE aot.[AID] = a.[ID]) * 100 / ((SELECT sum(asp.[Avg]) FROM [v_a_animal_orders] AS asp WHERE asp.[AID] = a.[ID]) + (SELECT sum(aot.[Avg]) FROM [v_a_animal_others] AS aot WHERE aot.[AID] = a.[ID])) AS 'Q3'
-        ,(SELECT sum(aot.[Avg]) FROM [v_a_animal_others] AS aot WHERE aot.[AID] = a.[ID]) / (SELECT sum(asp.[Avg]) FROM [v_a_animal_orders] AS asp WHERE asp.[AID] = a.[ID]) AS 'Q4'
+        ,(SELECT sum(asp.[Avg]) FROM [v_a_animal_orders] AS asp WHERE asp.[AID] = a.[ID]) + (SELECT sum(aot.[Avg]) FROM [v_a_animal_others] AS aot WHERE aot.[AID] = a.[ID]) AS 'Запасы ПГХ'
+        ,(SELECT sum(aot.[Avg]) FROM [v_a_animal_others] AS aot WHERE aot.[AID] = a.[ID]) AS 'Запасы озера'
+        ,(SELECT sum(aot.[Avg]) FROM [v_a_animal_others] AS aot WHERE aot.[AID] = a.[ID]) * 100 / ((SELECT sum(asp.[Avg]) FROM [v_a_animal_orders] AS asp WHERE asp.[AID] = a.[ID]) + (SELECT sum(aot.[Avg]) FROM [v_a_animal_others] AS aot WHERE aot.[AID] = a.[ID])) AS '%'
+        ,(SELECT sum(aot.[Avg]) FROM [v_a_animal_others] AS aot WHERE aot.[AID] = a.[ID]) / (SELECT sum(asp.[Avg]) FROM [v_a_animal_orders] AS asp WHERE asp.[AID] = a.[ID]) AS 'К-т баланса'
     FROM [t_animals] AS a
     JOIN [t_regions] AS r ON r.[ID] = a.[ID];
     
@@ -319,10 +319,10 @@ CREATE VIEW [v_resut] AS
     SELECT
          r.[ID]
         ,r.[Name] AS 'Регион'
-        ,m.[Q1] + w.[Q1] + t.[Q1] + b.[Q1] + a.[Q1] AS 'Q1'
-        ,m.[Q2] + w.[Q2] + t.[Q2] + b.[Q2] + a.[Q2] AS 'Q2'
-        ,(m.[Q2] + w.[Q2] + t.[Q2] + b.[Q2] + a.[Q2]) * 100 / (m.[Q1] + w.[Q1] + t.[Q1] + b.[Q1] + a.[Q1]) AS 'Q3'
-        ,(m.[Q4] + w.[Q4] + t.[Q4] + b.[Q4] + a.[Q4]) / 5 AS 'Q4'
+        ,m.[Запасы ПГХ] + w.[Запасы ПГХ] + t.[Запасы ПГХ] + b.[Запасы ПГХ] + a.[Запасы ПГХ] AS 'Запасы ПГХ'
+        ,m.[Запасы озера] + w.[Запасы озера] + t.[Запасы озера] + b.[Запасы озера] + a.[Запасы озера] AS 'Запасы озера'
+        ,(m.[Запасы озера] + w.[Запасы озера] + t.[Запасы озера] + b.[Запасы озера] + a.[Запасы озера]) * 100 / (m.[Запасы ПГХ] + w.[Запасы ПГХ] + t.[Запасы ПГХ] + b.[Запасы ПГХ] + a.[Запасы ПГХ]) AS '%'
+        ,(m.[К-т баланса] + w.[К-т баланса] + t.[К-т баланса] + b.[К-т баланса] + a.[К-т баланса]) / 5 AS 'К-т баланса'
     FROM [t_regions] AS r
     INNER JOIN [v_result_mineral_resources]     AS m ON m.[ID] = r.[ID]
     INNER JOIN [v_result_water_resources]       AS w ON w.[ID] = r.[ID]
@@ -405,7 +405,6 @@ INSERT INTO [t_regions] ([ID], [Name]) VALUES (15, 'Сенненский');
 INSERT INTO [t_regions] ([ID], [Name]) VALUES (16, 'Ушачский');
 INSERT INTO [t_regions] ([ID], [Name]) VALUES (17, 'Чашникский');
 INSERT INTO [t_regions] ([ID], [Name]) VALUES (18, 'Шарковщинский');
-INSERT INTO [t_regions] ([ID], [Name]) VALUES (19, 'Шумилинский');
 
 INSERT INTO [t_water_resources] ([ID], [RW], [UW], [LW]) VALUES (1, 246375000, 0.26, 123810000);
 INSERT INTO [t_water_resources] ([ID], [RW], [UW], [LW]) VALUES (2, 465314000, 0.11, 973780000);

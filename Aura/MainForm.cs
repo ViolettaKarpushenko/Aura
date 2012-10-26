@@ -84,11 +84,11 @@ namespace Aura
         private void AddRegion(object sender, EventArgs e)
         {
             // Add region name.
-            var queries = new List<string>();
+            var queries = new List<string> { "BEGIN TRANSACTION;\r\n" };
             {
                 var dialog = new AddRegionForm("Регион", "Название", s => string.IsNullOrEmpty(s) || s.Length > 49 ? "Неверное имя региона" : null);
                 var showDialog = dialog.ShowDialog();
-                if(showDialog == DialogResult.OK)
+                if (showDialog == DialogResult.OK)
                 {
                     queries.Add(string.Format("INSERT INTO [t_regions] ([ID], [Name]) VALUES ({{0}}, '{0}');\r\n", dialog.Value.Replace('\'', '`')));
                 }
@@ -181,19 +181,19 @@ namespace Aura
             }
 
             // Fill animals
-            queries.Add("INSERT INTO [t_animals] ([ID]) VALUE('{0}');\r\n");
+            queries.Add("INSERT INTO [t_animals] ([ID]) VALUES ('{0}');\r\n");
             _connection.Open();
             var table = new DataTable();
             table.Load(new SQLiteCommand("SELECT * FROM [t_animal_species];", _connection).ExecuteReader());
             _connection.Close();
-            foreach (var column in table.Rows.Cast<DataRow>().Select(row => new {Id = (long)row["ID"], Name = (string)row["Name"]}))
+            foreach (var column in table.Rows.Cast<DataRow>().Select(row => new { Id = (long)row["ID"], Name = (string)row["Name"] }))
             {
                 double tempDouble;
                 var dialog = new AddRegionForm("Животные ресурсы", column.Name, s => !double.TryParse(s, NumberStyles.Any, CultureInfo.CurrentCulture, out tempDouble) ? "Неверное значение" : null);
                 var showDialog = dialog.ShowDialog();
                 if (showDialog == DialogResult.OK)
                 {
-                    queries.Add(string.Format("INSERT INTO [t_animal_species_to_animals] ([SID], [AID], [Quantity]) VALUE ('{0}', '{{0}}', '{1}');\r\n", column.Id, dialog.Value));
+                    queries.Add(string.Format("INSERT INTO [t_animal_species_to_animals] ([SID], [AID], [Quantity]) VALUES ('{0}', '{{0}}', '{1}');\r\n", column.Id, dialog.Value));
                 }
                 else
                 {
@@ -204,14 +204,14 @@ namespace Aura
             var table2 = new DataTable();
             table2.Load(new SQLiteCommand("SELECT * FROM [t_animal_others];", _connection).ExecuteReader());
             _connection.Close();
-            foreach (var column in table2.Rows.Cast<DataRow>().Select(row => new { Id = (long)row["ID"], Name = (string)row["Name"]}))
+            foreach (var column in table2.Rows.Cast<DataRow>().Select(row => new { Id = (long)row["ID"], Name = (string)row["Name"] }))
             {
                 double tempDouble;
                 var dialog = new AddRegionForm("Животные ресурсы", column.Name, s => !double.TryParse(s, NumberStyles.Any, CultureInfo.CurrentCulture, out tempDouble) ? "Неверное значение" : null);
                 var showDialog = dialog.ShowDialog();
                 if (showDialog == DialogResult.OK)
                 {
-                    queries.Add(string.Format("INSERT INTO [t_animal_others_to_animals] ([OID], [AID], [Quantity]) VALUE ('{0}', '{{0}}', '{1}');\r\n", column.Id, dialog.Value));
+                    queries.Add(string.Format("INSERT INTO [t_animal_others_to_animals] ([OID], [AID], [Quantity]) VALUES ('{0}', '{{0}}', '{1}');\r\n", column.Id, dialog.Value));
                 }
                 else
                 {
@@ -220,18 +220,43 @@ namespace Aura
             }
 
             _connection.Open();
-            long maximumIndex = (long)new SQLiteCommand("SELECT max([ID]) FROM [t_regions]", _connection).ExecuteScalar();
+            long maximumIndex = (long)new SQLiteCommand("SELECT max([ID]) FROM [t_regions]", _connection).ExecuteScalar() + 1L;
             _connection.Close();
+            queries.Add("COMMIT;\r\n");
             string aggregate = queries.Aggregate((s, s1) => s + s1);
             string result = string.Format(aggregate, maximumIndex);
+            _connection.Open();
+            new SQLiteCommand(result, _connection).ExecuteNonQuery();
+            _connection.Close();
         }
-    }
 
-    internal class SimpleTable
+        private void ShowMap(object sender, EventArgs e)
+        {
+            var data = MapData(_queryBuilder.Get("v_resut").Rows.Cast<DataRow>());
 
-    {
-        public string TableName { get; set; }
-        public string Caption { get; set; }
-        public Dictionary<string,string> Columns { get; set; }
+            new MapForm(data).ShowDialog();
+        }
+
+        private IEnumerable<ReportingResult> MapData(IEnumerable<DataRow> rows)
+        {
+            var result = new List<ReportingResult>();
+            foreach (var row in rows)
+            {
+                try
+                {
+                    result.Add(new ReportingResult
+                    {
+                        Id = (long)row["id"],
+                        A1 = (double)row[2],
+                        A2 = (double)row[3],
+                        A3 = (double)row[4],
+                        A4 = (double)row[5]
+                    });
+                }
+                catch { }
+            }
+
+            return result;
+        }
     }
 }

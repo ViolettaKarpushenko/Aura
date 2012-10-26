@@ -46,7 +46,6 @@ namespace Aura
         private DataTable SelectAll(string viewName)
         {
             _connection.Open();
-
             var reader = new SQLiteCommand(string.Format("SELECT * FROM [{0}];", viewName), _connection).ExecuteReader();
             var table = new DataTable();
             table.Load(reader);

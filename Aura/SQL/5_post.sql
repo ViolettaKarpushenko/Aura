@@ -103,7 +103,6 @@ INSERT INTO [t_animals] ([ID]) VALUES (15);
 INSERT INTO [t_animals] ([ID]) VALUES (16);
 INSERT INTO [t_animals] ([ID]) VALUES (17);
 INSERT INTO [t_animals] ([ID]) VALUES (18);
-INSERT INTO [t_animals] ([ID]) VALUES (19);
 
 INSERT INTO [t_animal_orders] ([ID], [Name]) VALUES(1, 'Копытные');
 INSERT INTO [t_animal_orders] ([ID], [Name]) VALUES(2, 'Пушные');
