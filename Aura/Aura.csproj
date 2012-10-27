@@ -113,7 +113,7 @@
     <None Include="SQL\2_drop_tables.sql" />
     <None Include="SQL\3_create_tables.sql" />
     <None Include="SQL\4_create_views.sql" />
-    <None Include="SQL\5_post.sql" />
+    <None Include="SQL\5_post_old.sql" />
     <None Include="SQL\all.sql" />
     <None Include="SQL\conbine_files.exe" />
   </ItemGroup>
