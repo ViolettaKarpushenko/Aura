@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
 using System.Xml.Linq;
@@ -23,12 +22,14 @@ namespace Aura
 
         private void OnClick(object sender, EventArgs e)
         {
+            #if DEBUG
             var ee = e as MouseEventArgs;
             if(ee != null)
             {
                 MessageBox.Show(string.Format("x: {0}, y: {1}", ee.X, ee.Y));
                 Clipboard.SetText(string.Format("x=\"{0}\" y=\"{1}\"", ee.X, ee.Y));
             }
+            #endif
         }
 
         private void MapForm_Paint(object sender, PaintEventArgs e)

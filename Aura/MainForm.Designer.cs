@@ -53,6 +53,7 @@ namespace Aura
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this._miAddRegion = new System.Windows.Forms.ToolStripMenuItem();
             this._miMap = new System.Windows.Forms.ToolStripMenuItem();
+            this.методикаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.Default.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -299,7 +300,8 @@ namespace Aura
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this._miAddRegion,
-            this._miMap});
+            this._miMap,
+            this.методикаToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(947, 24);
@@ -319,6 +321,13 @@ namespace Aura
             this._miMap.Size = new System.Drawing.Size(50, 20);
             this._miMap.Text = "Карта";
             this._miMap.Click += new System.EventHandler(this.ShowMap);
+            // 
+            // методикаToolStripMenuItem
+            // 
+            this.методикаToolStripMenuItem.Name = "методикаToolStripMenuItem";
+            this.методикаToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
+            this.методикаToolStripMenuItem.Text = "Методика";
+            this.методикаToolStripMenuItem.Click += new System.EventHandler(this.OpenManual);
             // 
             // MainForm
             // 
@@ -378,6 +387,7 @@ namespace Aura
         private MenuStrip menuStrip1;
         private ToolStripMenuItem _miAddRegion;
         private ToolStripMenuItem _miMap;
+        private ToolStripMenuItem методикаToolStripMenuItem;
     }
 }
 

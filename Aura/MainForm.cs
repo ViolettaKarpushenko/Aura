@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
@@ -257,6 +258,11 @@ namespace Aura
             }
 
             return result;
+        }
+
+        private void OpenManual(object sender, EventArgs e)
+        {
+            Process.Start("Методика.doc");
         }
     }
 }
