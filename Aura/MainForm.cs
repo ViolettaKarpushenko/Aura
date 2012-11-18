@@ -32,7 +32,7 @@ namespace Aura
             }
 
             var version = Assembly.GetExecutingAssembly().GetName().Version;
-            Text = string.Format("Aura {0}.{1}.{2}.{3}", version.Major, version.Minor, version.Build, version.Revision);
+            Text = string.Format("ГОПРП {0}.{1}.{2}.{3}", version.Major, version.Minor, version.Build, version.Revision);
         }
 
         private void OnLoad(object sender, EventArgs e)

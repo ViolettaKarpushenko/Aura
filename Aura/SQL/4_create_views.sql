@@ -29,11 +29,11 @@
 CREATE VIEW [v_result_mineral_resources] AS
     SELECT
          r.[ID]
-        ,r.[Name] AS 'Регион'
-        ,a.[B] + a.[C] + a.[D] + a.[E] + a.[F] + a.[G] AS 'Запасы ПГХ'
-        ,a.[G] AS 'Запасы озера'
-        ,a.[G] * 100 / (a.[B] + a.[C] + a.[D] + a.[E] + a.[F] + a.[G]) AS '%'
-        ,a.[G] / (a.[B] + a.[C] + a.[D] + a.[E] + a.[F]) AS 'К-т баланса'
+        ,r.[Name] AS 'Район'
+        ,a.[B] + a.[C] + a.[D] + a.[E] + a.[F] + a.[G] AS 'Индекс величиеы ресурсов терротории'
+        ,a.[G] AS 'Индекс величины ресурcов озер'
+        ,a.[G] * 100 / (a.[B] + a.[C] + a.[D] + a.[E] + a.[F] + a.[G]) AS 'Доля ресурсов озёр в суммарном запасе'
+        ,a.[G] / (a.[B] + a.[C] + a.[D] + a.[E] + a.[F]) AS 'Коэффициент соотношения ресурсов'
     FROM [t_mineral_resources] AS t
     INNER JOIN [v_a_mineral_resources] AS a ON a.[ID] = t.[ID]
     JOIN [t_regions] AS r ON r.[ID] = t.[ID];
@@ -60,11 +60,11 @@ CREATE VIEW [v_a_water_resources] AS
 CREATE VIEW [v_result_water_resources] AS
     SELECT
          r.[ID]
-        ,r.[Name] AS 'Регион'
-        ,a.[B] + a.[C] + a.[D] AS 'Запасы ПГХ'
-        ,a.[D] AS 'Запасы озера'
-        ,a.[D] * 100 / (a.[B] + a.[C] + a.[D]) AS '%'
-        ,a.[D] / (a.[B] + a.[C]) AS 'К-т баланса'
+        ,r.[Name] AS 'Район'
+        ,a.[B] + a.[C] + a.[D] AS 'Индекс величиеы ресурсов терротории'
+        ,a.[D] AS 'Индекс величины ресурcов озер'
+        ,a.[D] * 100 / (a.[B] + a.[C] + a.[D]) AS 'Доля ресурсов озёр в суммарном запасе'
+        ,a.[D] / (a.[B] + a.[C]) AS 'Коэффициент соотношения ресурсов'
     FROM [t_water_resources] AS t
     INNER JOIN [v_a_water_resources] AS a ON a.[ID] = t.[ID]
     JOIN [t_regions] AS r ON r.[ID] = t.[ID];
@@ -91,11 +91,11 @@ CREATE VIEW [v_a_territorial_resources] AS
 CREATE VIEW [v_result_territorial_resources] AS
     SELECT
          r.[ID]
-        ,r.[Name] AS 'Регион'
-        ,a.[C] + a.[E] AS 'Запасы ПГХ'
-        ,a.[E] AS 'Запасы озера'
-        ,a.[E] / (a.[C] + a.[E]) AS '%'
-        ,a.[E] / a.[C] AS 'К-т баланса'
+        ,r.[Name] AS 'Район'
+        ,a.[C] + a.[E] AS 'Индекс величиеы ресурсов терротории'
+        ,a.[E] AS 'Индекс величины ресурcов озер'
+        ,a.[E] / (a.[C] + a.[E]) AS 'Доля ресурсов озёр в суммарном запасе'
+        ,a.[E] / a.[C] AS 'Коэффициент соотношения ресурсов'
     FROM [t_territorial_resources] AS t
     INNER JOIN [v_a_territorial_resources] AS a ON a.[ID] = t.[ID]
     JOIN [t_regions] AS r ON r.[ID] = t.[ID];
@@ -131,11 +131,11 @@ CREATE VIEW [v_a_biological_resources] AS
 CREATE VIEW [v_result_biological_resources] AS
     SELECT
          r.[ID]
-        ,r.[Name] AS 'Регион'
-        ,a.[B] + a.[C] + a.[D] + a.[E] + a.[F] + a.[G] AS 'Запасы ПГХ'
-        ,a.[F] + a.[G] AS 'Запасы озера'
-        ,(a.[F] + a.[G]) * 100 / (a.[B] + a.[C] + a.[D] + a.[E] + a.[F] + a.[G]) AS '%'
-        ,(a.[F] + a.[G]) / (a.[B] + a.[C] + a.[D] + a.[E]) AS 'К-т баланса'
+        ,r.[Name] AS 'Район'
+        ,a.[B] + a.[C] + a.[D] + a.[E] + a.[F] + a.[G] AS 'Индекс величиеы ресурсов терротории'
+        ,a.[F] + a.[G] AS 'Индекс величины ресурcов озер'
+        ,(a.[F] + a.[G]) * 100 / (a.[B] + a.[C] + a.[D] + a.[E] + a.[F] + a.[G]) AS 'Доля ресурсов озёр в суммарном запасе'
+        ,(a.[F] + a.[G]) / (a.[B] + a.[C] + a.[D] + a.[E]) AS 'Коэффициент соотношения ресурсов'
     FROM [t_biological_resources] AS t
     INNER JOIN [v_a_biological_resources] AS a ON a.[ID] = t.[ID]
     JOIN [t_regions] AS r ON r.[ID] = t.[ID];
@@ -178,22 +178,22 @@ CREATE VIEW [v_a_animal_others] AS
 CREATE VIEW [v_result_animals_resorces] AS
     SELECT
          r.[ID]
-        ,r.[Name] AS 'Регион'
-        ,(SELECT sum(asp.[Avg]) FROM [v_a_animal_orders] AS asp WHERE asp.[AID] = a.[ID]) + (SELECT sum(aot.[Avg]) FROM [v_a_animal_others] AS aot WHERE aot.[AID] = a.[ID]) AS 'Запасы ПГХ'
-        ,(SELECT sum(aot.[Avg]) FROM [v_a_animal_others] AS aot WHERE aot.[AID] = a.[ID]) AS 'Запасы озера'
-        ,(SELECT sum(aot.[Avg]) FROM [v_a_animal_others] AS aot WHERE aot.[AID] = a.[ID]) * 100 / ((SELECT sum(asp.[Avg]) FROM [v_a_animal_orders] AS asp WHERE asp.[AID] = a.[ID]) + (SELECT sum(aot.[Avg]) FROM [v_a_animal_others] AS aot WHERE aot.[AID] = a.[ID])) AS '%'
-        ,(SELECT sum(aot.[Avg]) FROM [v_a_animal_others] AS aot WHERE aot.[AID] = a.[ID]) / (SELECT sum(asp.[Avg]) FROM [v_a_animal_orders] AS asp WHERE asp.[AID] = a.[ID]) AS 'К-т баланса'
+        ,r.[Name] AS 'Район'
+        ,(SELECT sum(asp.[Avg]) FROM [v_a_animal_orders] AS asp WHERE asp.[AID] = a.[ID]) + (SELECT sum(aot.[Avg]) FROM [v_a_animal_others] AS aot WHERE aot.[AID] = a.[ID]) AS 'Индекс величиеы ресурсов терротории'
+        ,(SELECT sum(aot.[Avg]) FROM [v_a_animal_others] AS aot WHERE aot.[AID] = a.[ID]) AS 'Индекс величины ресурcов озер'
+        ,(SELECT sum(aot.[Avg]) FROM [v_a_animal_others] AS aot WHERE aot.[AID] = a.[ID]) * 100 / ((SELECT sum(asp.[Avg]) FROM [v_a_animal_orders] AS asp WHERE asp.[AID] = a.[ID]) + (SELECT sum(aot.[Avg]) FROM [v_a_animal_others] AS aot WHERE aot.[AID] = a.[ID])) AS 'Доля ресурсов озёр в суммарном запасе'
+        ,(SELECT sum(aot.[Avg]) FROM [v_a_animal_others] AS aot WHERE aot.[AID] = a.[ID]) / (SELECT sum(asp.[Avg]) FROM [v_a_animal_orders] AS asp WHERE asp.[AID] = a.[ID]) AS 'Коэффициент соотношения ресурсов'
     FROM [t_animals] AS a
     JOIN [t_regions] AS r ON r.[ID] = a.[ID];
     
 CREATE VIEW [v_resut] AS
     SELECT
          r.[ID]
-        ,r.[Name] AS 'Регион'
-        ,m.[Запасы ПГХ] + w.[Запасы ПГХ] + t.[Запасы ПГХ] + b.[Запасы ПГХ] + a.[Запасы ПГХ] AS 'Запасы ПГХ'
-        ,m.[Запасы озера] + w.[Запасы озера] + t.[Запасы озера] + b.[Запасы озера] + a.[Запасы озера] AS 'Запасы озера'
-        ,(m.[Запасы озера] + w.[Запасы озера] + t.[Запасы озера] + b.[Запасы озера] + a.[Запасы озера]) * 100 / (m.[Запасы ПГХ] + w.[Запасы ПГХ] + t.[Запасы ПГХ] + b.[Запасы ПГХ] + a.[Запасы ПГХ]) AS '%'
-        ,(m.[К-т баланса] + w.[К-т баланса] + t.[К-т баланса] + b.[К-т баланса] + a.[К-т баланса]) / 5 AS 'К-т баланса'
+        ,r.[Name] AS 'Район'
+        ,m.[Индекс величиеы ресурсов терротории] + w.[Индекс величиеы ресурсов терротории] + t.[Индекс величиеы ресурсов терротории] + b.[Индекс величиеы ресурсов терротории] + a.[Индекс величиеы ресурсов терротории] AS 'Индекс величиеы ресурсов терротории'
+        ,m.[Индекс величины ресурcов озер] + w.[Индекс величины ресурcов озер] + t.[Индекс величины ресурcов озер] + b.[Индекс величины ресурcов озер] + a.[Индекс величины ресурcов озер] AS 'Индекс величины ресурcов озер'
+        ,(m.[Индекс величины ресурcов озер] + w.[Индекс величины ресурcов озер] + t.[Индекс величины ресурcов озер] + b.[Индекс величины ресурcов озер] + a.[Индекс величины ресурcов озер]) * 100 / (m.[Индекс величиеы ресурсов терротории] + w.[Индекс величиеы ресурсов терротории] + t.[Индекс величиеы ресурсов терротории] + b.[Индекс величиеы ресурсов терротории] + a.[Индекс величиеы ресурсов терротории]) AS 'Доля ресурсов озёр в суммарном запасе'
+        ,(m.[Коэффициент соотношения ресурсов] + w.[Коэффициент соотношения ресурсов] + t.[Коэффициент соотношения ресурсов] + b.[Коэффициент соотношения ресурсов] + a.[Коэффициент соотношения ресурсов]) / 5 AS 'Коэффициент соотношения ресурсов'
     FROM [t_regions] AS r
     INNER JOIN [v_result_mineral_resources]     AS m ON m.[ID] = r.[ID]
     INNER JOIN [v_result_water_resources]       AS w ON w.[ID] = r.[ID]
@@ -203,43 +203,43 @@ CREATE VIEW [v_resut] AS
 
 CREATE VIEW [v_t_mineral_resources] AS
     SELECT
-         [rg].[Name]    AS 'Регион'
-        ,[mr].[DL]      AS 'Доломиты'
-        ,[mr].[AR]      AS 'Глинистые'
-        ,[mr].[GS]      AS 'Гравийно песчаные'
-        ,[mr].[SA]      AS 'Пески'
-        ,[mr].[PE]      AS 'Торф'
-        ,[mr].[SP]      AS 'Сапропель'
+         [rg].[Name]    AS 'Район'
+        ,[mr].[DL]      AS 'Доломиты, кг'
+        ,[mr].[AR]      AS 'Глинистые породы, м3'
+        ,[mr].[GS]      AS 'Гравийно-песчаные породы, м3, '
+        ,[mr].[SA]      AS 'Пески, м3'
+        ,[mr].[PE]      AS 'Торф, кг'
+        ,[mr].[SP]      AS 'Сапропель, м3'
     FROM [t_mineral_resources] AS [mr]
         JOIN [t_regions] AS [rg] ON [rg].[ID] = [mr].[ID];
 
 CREATE VIEW [v_t_water_resources] AS
     SELECT
-         [rg].[Name]    AS 'Регион'
-        ,[wr].[RW]      AS 'Речной сток'
-        ,[wr].[UW]      AS 'Подземные воды'
-        ,[wr].[LW]      AS 'Объем воды в озерах'
+         [rg].[Name]    AS 'Район'
+        ,[wr].[RW]      AS 'Речной сток, м3'
+        ,[wr].[UW]      AS 'Подземные воды, м3/ч'
+        ,[wr].[LW]      AS 'Объем воды в озерах, м3'
     FROM [t_water_resources] AS [wr]
         JOIN [t_regions] AS [rg] ON [rg].[ID] = [wr].[ID];
 
 CREATE VIEW [v_t_biological_resources] AS
     SELECT
-         [rg].[Name]    AS 'Регион'
-        ,[br].[WO]      AS 'Древесина'
-        ,[br].[MP]      AS 'Лекарственные'
-        ,[br].[FP]      AS 'Пищевые'
-        ,[br].[MU]      AS 'Грибы'
-        ,[br].[PH]      AS 'Фитопланктон'
-        ,[br].[MC]      AS 'Макрофиты'
+         [rg].[Name]    AS 'Район'
+        ,[br].[WO]      AS 'Древесина, м3'
+        ,[br].[MP]      AS 'Лекарственные, кг'
+        ,[br].[FP]      AS 'Пищевые, кг'
+        ,[br].[MU]      AS 'Грибы, кг'
+        ,[br].[PH]      AS 'Фитопланктон, кг'
+        ,[br].[MC]      AS 'Макрофиты, кг'
     FROM [t_biological_resources] AS [br]
         JOIN [t_regions] AS [rg] ON [rg].[ID] = [br].[ID];
 
 CREATE VIEW [v_t_territorial_resources] AS
     SELECT
-         [rg].[Name]    AS 'Регион'
-        ,[tr].[GA]      AS 'Земельные'
-        ,[tr].[AA]      AS 'Сельское хозяйство'
-        ,[tr].[LA]      AS 'Озерные'
+         [rg].[Name]    AS 'Район'
+        ,[tr].[GA]      AS 'Общая площадь земель, м2'
+        ,[tr].[AA]      AS 'Площадь с/х земель, м2'
+        ,[tr].[LA]      AS 'Площадь озер, м2'
     FROM [t_territorial_resources] AS [tr]
         JOIN [t_regions] AS [rg] ON [rg].[ID] = [tr].[ID];
 

@@ -38,7 +38,7 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(851, 470);
             this.Name = "MapForm";
-            this.Text = "MapForm";
+            this.Text = "Карта";
             this.Click += new System.EventHandler(this.OnClick);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.MapForm_Paint);
             this.ResumeLayout(false);
