@@ -1,0 +1,229 @@
+﻿@using Aura.Web.Models
+
+@model RegionsModel
+
+@{
+    ViewBag.TabId = 6;
+    ViewBag.Title = "Регионы";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="region-view">
+    <table class="table table-bordered table-striped" style="width: 500px;">
+        <thead>
+            <tr>
+                <th style="width: 450px;">Область</th>
+                <th style="width: 50px;"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var region in Model.Regons)
+            {
+                <tr row-id="@region.Id">
+                    <td>
+                        <span class="region-name">@region.Name</span>
+                        <input type="text" class="region-name" value="@region.Name" />
+                    </td>
+                    <td>
+                        <i class="icon-edit edit-region" title="Редактаровать"></i>
+                        <i class="icon-trash delete-region" title="Удалить"></i>
+                        <i class="icon-ok save-region" title="Сохранить"></i>
+                        <i class="icon-remove cancel-save-region" title="Отменить"></i>
+                    </td>
+                </tr>
+            }
+            <tr row-id="null">
+                <td>
+                    <input type="text" class="new-region-name" />
+                </td>
+                <td>
+                    <i class="icon-ok add-region" title="Сохранить"></i>
+                    <i class="icon-remove cancel-add-region" title="Отменить"></i>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button type="button" class="btn btn-success add-region">Добавить регион</button>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            this.el = $("#region-view");
+
+            $('.edit-region', this.el).click(function (event) {
+                var row = $(event.currentTarget).closest('tr');
+
+                $('span.region-name, i.edit-region, i.delete-region', row).hide();
+                $('input.region-name', row).show();
+                $('i.save-region, i.cancel-save-region', row).show().css('display', 'inline-block');
+            });
+
+            $('.cancel-save-region', this.el).click(function (event) {
+                var row = $(event.currentTarget).closest('tr');
+
+                var nameSpan = $('span.region-name', row);
+                var nameInput = $('input.region-name', row);
+
+                if (nameSpan.text() === nameInput.val() || (nameSpan.text() !== nameInput.val() && confirm("Уверены что хотите отменить изменения?"))) {
+                    nameInput.val(nameSpan.text());
+
+                    $('input.region-name, i.save-region, i.cancel-save-region', row).hide();
+                    $('span.region-name', row).show();
+                    $('i.edit-region, i.delete-region', row).show().css('display', 'inline-block');
+                    $('span.help-inline', row).remove();
+                }
+            });
+
+            $('button.add-region', this.el).click($.proxy(function (event) {
+                var row = $('tr[row-id=null]', this.el);
+                $(event.currentTarget).hide();
+                row.show();
+            }, this));
+
+            $('.cancel-add-region', this.el).click($.proxy(function () {
+                var row = $('tr[row-id=null]', this.el);
+
+                var nameInput = $('input.new-region-name', row);
+
+                if (nameInput.val() === '' || (nameInput.val() !== '' && confirm("Уверены что хотите отменить изменения?"))) {
+                    nameInput.val('');
+                    row.hide();
+                    $('span.help-inline', row).remove();
+                    $('button.add-region', this.el).show();
+                    $('span.help-inline', row).remove();
+                }
+            }, this));
+
+            $('i.add-region', this.el).click($.proxy(function () {
+                var row = $('tr[row-id=null]', this.el);
+
+                $('span.help-inline', row).remove();
+
+                var nameInput = $('input.new-region-name');
+                if (nameInput.val() === '') {
+                    nameInput.after('<span class="help-inline">Название области не может быть пустым.</span>');
+                    return;
+                }
+
+                if (nameInput.val().length > 50) {
+                    nameInput.after('<span class="help-inline">Название области не может быть длиннее 50 символов.</span>');
+                    return;
+                }
+
+                if (!/^[А-Яа-я ]+$/ig.test(nameInput.val())) {
+                    nameInput.after('<span class="help-inline">Название области не может содержать символы отличные от русских букв и пробелов.</span>');
+                    return;
+                }
+
+                var url = '@Url.Action("AddRegion", "Regions")';
+
+                var model = {
+                    name: nameInput.val()
+                };
+
+                $.post(url, model, $.proxy(function (response) {
+                    if (response.success === true) {
+                        window.location.reload();
+                        return;
+                    }
+
+                    if (!response.message) {
+                        response.message = "Сервис временно не доступен.";
+                    }
+
+                    if (response.selector) {
+                        $(response.selector, row).after('<span class="help-inline">' + response.message + '</span>');
+                    } else {
+                        alert(response.message);
+                    }
+                }, this));
+            }, this));
+
+            $('i.save-region', this.el).click($.proxy(function (event) {
+                var row = $(event.currentTarget).closest('tr');
+
+                $('span.help-inline').remove();
+
+                var nameSpan = $('span.region-name', row);
+                var nameInput = $('input.region-name', row);
+
+                if (nameSpan.text() === nameInput.val()) {
+                    $('input.region-name, i.save-region, i.cancel-save-region', row).hide();
+                    $('span.region-name', row).show();
+                    $('i.edit-region, i.delete-region', row).show().css('display', 'inline-block');
+                    return;
+                }
+
+                if (nameInput.val() === '') {
+                    nameInput.after('<span class="help-inline">Название области не может быть пустым.</span>');
+                    return;
+                }
+
+                if (nameInput.val().length > 50) {
+                    nameInput.after('<span class="help-inline">Название области не может быть длиннее 50 символов.</span>');
+                    return;
+                }
+
+                if (!/^[А-Яа-я ]+$/ig.test(nameInput.val())) {
+                    nameInput.after('<span class="help-inline">Название области не может содержать символы отличные от русских букв и пробелов.</span>');
+                    return;
+                }
+
+                var url = '@Url.Action("UpdateRegion", "Regions")';
+
+                var model = {
+                    id: row.attr('row-id'),
+                    name: nameInput.val()
+                };
+
+                $.post(url, model, $.proxy(function (response) {
+                    if (response.success === true) {
+                        nameSpan.text(nameInput.val());
+
+                        $('input.region-name, i.save-region, i.cancel-save-region', row).hide();
+                        $('span.region-name', row).show();
+                        $('i.edit-region, i.delete-region', row).show().css('display', 'inline-block');
+                        return;
+                    }
+
+                    if (!response.message) {
+                        response.message = "Сервис временно не доступен.";
+                    }
+
+                    if (response.selector) {
+                        $(response.selector, row).after('<span class="help-inline">' + response.message + '</span>');
+                    } else {
+                        alert(response.message);
+                    }
+                }, this));
+            }, this));
+
+            $('i.delete-region', this.el).click(function (event) {
+                var row = $(event.currentTarget).closest('tr');
+                var url = '@Url.Action("DeleteRegion", "Regions")';
+
+                var model = {
+                    id: row.attr('row-id')
+                };
+
+                $.post(url, model, $.proxy(function (response) {
+                    if (response.success === true) {
+                        row.remove();
+                        return;
+                    }
+
+                    if (!response.message) {
+                        response.message = "Сервис временно не доступен.";
+                    }
+
+                    if (response.selector) {
+                        $(response.selector, row).after('<span class="help-inline">' + response.message + '</span>');
+                    } else {
+                        alert(response.message);
+                    }
+                }, this));
+            });
+        });
+    </script>
+}

@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SQLite;
+using System.Linq;
 using System.Web;
+
 using Dapper;
 
 namespace Aura.Web.Data
@@ -17,10 +19,15 @@ namespace Aura.Web.Data
             ConnectionString = builder.ConnectionString;
         }
 
-        protected static string ConnectionString { get; set; }
+        private static string ConnectionString { get; set; }
 
-        protected IEnumerable<T> Execute<T>(string query)
+        protected IEnumerable<T> Execute<T>(string query, params object[] @params)
         {
+            if (@params != null && @params.Any())
+            {
+                query = string.Format(query, @params);
+            }
+
             using (var connection = new SQLiteConnection(ConnectionString))
             {
                 connection.Open();
@@ -29,12 +36,17 @@ namespace Aura.Web.Data
             }
         }
 
-        protected void Execute(string query)
+        protected void Execute(string query, params object[] @params)
         {
+            if (@params != null && @params.Any())
+            {
+                query = string.Format(query, @params);
+            }
+
             using (var connection = new SQLiteConnection(ConnectionString))
             {
                 connection.Open();
-                connection.Query(query);
+                connection.Execute(query);
             }
         }
     }
