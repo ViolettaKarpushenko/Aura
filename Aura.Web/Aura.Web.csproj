@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C4D0B545-7921-44CF-AD4C-DAB03898294B}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Aura.Web</RootNamespace>
+    <AssemblyName>Aura.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Dapper">
+      <HintPath>..\packages\Dapper.1.12.1\lib\net40\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>..\packages\System.Data.SQLite.x86.1.0.85.0\lib\net40\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq">
+      <HintPath>..\packages\System.Data.SQLite.x86.1.0.85.0\lib\net40\System.Data.SQLite.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20715.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IntegratedController.cs" />
+    <Compile Include="Controllers\ResultController.cs" />
+    <Compile Include="Controllers\StocksController.cs" />
+    <Compile Include="Controllers\UseController.cs" />
+    <Compile Include="Data\Repository.cs" />
+    <Compile Include="Data\ResultRepository.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AnimalModel.cs" />
+    <Compile Include="Models\AnimalViewModel.cs" />
+    <Compile Include="Models\BiologicalModel.cs" />
+    <Compile Include="Models\BiologicalViewModel.cs" />
+    <Compile Include="Models\MineralModel.cs" />
+    <Compile Include="Models\MineralViewModel.cs" />
+    <Compile Include="Models\TerritorialModel.cs" />
+    <Compile Include="Models\TerritorialViewModel.cs" />
+    <Compile Include="Models\WaterModel.cs" />
+    <Compile Include="Models\WaterViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\images\glyphicons-halflings-white.png" />
+    <Content Include="Content\images\glyphicons-halflings.png" />
+    <Content Include="Content\less\bootstrap.css">
+      <DependentUpon>bootstrap.less</DependentUpon>
+    </Content>
+    <Content Include="Content\less\bootstrap.min.css">
+      <DependentUpon>bootstrap.less</DependentUpon>
+    </Content>
+    <Content Include="Content\less\main.css">
+      <DependentUpon>main.less</DependentUpon>
+    </Content>
+    <Content Include="Content\less\main.min.css">
+      <DependentUpon>main.less</DependentUpon>
+    </Content>
+    <Content Include="Content\less\responsive.css">
+      <DependentUpon>responsive.less</DependentUpon>
+    </Content>
+    <Content Include="Content\less\responsive.min.css">
+      <DependentUpon>responsive.less</DependentUpon>
+    </Content>
+    <Content Include="Content\less\tables.css">
+      <DependentUpon>tables.less</DependentUpon>
+    </Content>
+    <Content Include="Content\less\tables.min.css">
+      <DependentUpon>tables.less</DependentUpon>
+    </Content>
+    <Content Include="Content\less\variables.css">
+      <DependentUpon>variables.less</DependentUpon>
+    </Content>
+    <Content Include="Content\less\variables.min.css">
+      <DependentUpon>variables.less</DependentUpon>
+    </Content>
+    <Content Include="Global.asax" />
+    <Content Include="App_Data\aura.db3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\less\wells.less" />
+    <Content Include="Content\less\variables.less" />
+    <Content Include="Content\less\utilities.less" />
+    <Content Include="Content\less\type.less" />
+    <Content Include="Content\less\tooltip.less" />
+    <Content Include="Content\less\thumbnails.less" />
+    <Content Include="Content\less\tables.less" />
+    <Content Include="Content\less\sprites.less" />
+    <Content Include="Content\less\scaffolding.less" />
+    <Content Include="Content\less\responsive-utilities.less" />
+    <Content Include="Content\less\responsive-navbar.less" />
+    <Content Include="Content\less\responsive-768px-979px.less" />
+    <Content Include="Content\less\responsive-767px-max.less" />
+    <Content Include="Content\less\responsive-1200px-min.less" />
+    <Content Include="Content\less\responsive.less" />
+    <Content Include="Content\less\reset.less" />
+    <Content Include="Content\less\progress-bars.less" />
+    <Content Include="Content\less\popovers.less" />
+    <Content Include="Content\less\pagination.less" />
+    <Content Include="Content\less\pager.less" />
+    <Content Include="Content\less\navs.less" />
+    <Content Include="Content\less\navbar.less" />
+    <Content Include="Content\less\modals.less" />
+    <Content Include="Content\less\mixins.less" />
+    <Content Include="Content\less\media.less" />
+    <Content Include="Content\less\layouts.less" />
+    <Content Include="Content\less\labels-badges.less" />
+    <Content Include="Content\less\hero-unit.less" />
+    <Content Include="Content\less\grid.less" />
+    <Content Include="Content\less\forms.less" />
+    <Content Include="Content\less\dropdowns.less" />
+    <Content Include="Content\less\component-animations.less" />
+    <Content Include="Content\less\code.less" />
+    <Content Include="Content\less\close.less" />
+    <Content Include="Content\less\carousel.less" />
+    <Content Include="Content\less\buttons.less" />
+    <Content Include="Content\less\button-groups.less" />
+    <Content Include="Content\less\breadcrumbs.less" />
+    <Content Include="Content\less\bootstrap.less" />
+    <Content Include="Content\less\alerts.less" />
+    <Content Include="Content\less\accordion.less" />
+    <Content Include="Content\less\main.less" />
+    <None Include="Scripts\jquery-1.9.1.intellisense.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery-1.9.1.js" />
+    <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <Content Include="Scripts\jquery-1.9.1.min.map" />
+    <Content Include="Scripts\less.min.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Stocks\Mineral.cshtml" />
+    <Content Include="Views\Stocks\Water.cshtml" />
+    <Content Include="Views\Stocks\Biological.cshtml" />
+    <Content Include="Views\Stocks\Territorial.cshtml" />
+    <Content Include="Views\Stocks\Animal.cshtml" />
+    <Content Include="Views\Integrated\Animal.cshtml" />
+    <Content Include="Views\Integrated\Biological.cshtml" />
+    <Content Include="Views\Integrated\Mineral.cshtml" />
+    <Content Include="Views\Integrated\Territorial.cshtml" />
+    <Content Include="Views\Integrated\Water.cshtml" />
+    <Content Include="Views\Result\Animal.cshtml" />
+    <Content Include="Views\Result\Biological.cshtml" />
+    <Content Include="Views\Result\Mineral.cshtml" />
+    <Content Include="Views\Result\Territorial.cshtml" />
+    <Content Include="Views\Result\Water.cshtml" />
+    <Content Include="Views\Use\Animal.cshtml" />
+    <Content Include="Views\Use\Biological.cshtml" />
+    <Content Include="Views\Use\Mineral.cshtml" />
+    <Content Include="Views\Use\Territorial.cshtml" />
+    <Content Include="Views\Use\Water.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\Stocks\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\</OutputPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>48894</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:46082/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

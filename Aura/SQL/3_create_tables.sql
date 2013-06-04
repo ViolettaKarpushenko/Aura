@@ -1,20 +1,4 @@
-﻿CREATE TABLE [t_unit_categories](
-     [ID]       integer         NOT NULL PRIMARY KEY ASC AUTOINCREMENT
-    ,[CName]    nvarchar(50)    NOT NULL UNIQUE
-    ,[UName]    nvarchar(50)    NOT NULL UNIQUE
-    ,[SUName]   nvarchar(5)     NOT NULL UNIQUE
-);
-
-CREATE TABLE [t_units](
-     [ID]           integer         NOT NULL PRIMARY KEY ASC AUTOINCREMENT
-    ,[CID]          integer         NOT NULL REFERENCES [t_units_category] ([ID])
-    ,[Factor]       decimal(10, 5)  NOT NULL DEFAULT 1
-    ,[Prefix]       nvarchar(50)    NULL
-    ,[SPrefix]      nvarchar(5)     NULL
-    ,[AlterName]    nvarchar(50)    NULL
-);
-
-CREATE TABLE [t_regions](
+﻿CREATE TABLE [t_regions](
      [ID]   integer         NOT NULL PRIMARY KEY ASC AUTOINCREMENT
     ,[Name] nvarchar(50)    NOT NULL UNIQUE
 );

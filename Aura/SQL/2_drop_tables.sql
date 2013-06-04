@@ -9,6 +9,4 @@ DROP TABLE IF EXISTS [t_water_resources];
 DROP TABLE IF EXISTS [t_biological_resources];
 DROP TABLE IF EXISTS [t_territorial_resources];
 DROP TABLE IF EXISTS [t_regions];
-DROP TABLE IF EXISTS [t_units];
-DROP TABLE IF EXISTS [t_unit_categories];
 --------------------------------------------------------

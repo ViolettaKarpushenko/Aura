@@ -1,0 +1,35 @@
+﻿@using System.Globalization
+@using Aura.Web.Models
+
+@model TerritorialViewModel
+
+@{
+    ViewBag.TabId = 3;
+    ViewBag.SubTabId = 3;
+    ViewBag.Title = "Использование - Территориальные";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table table-bordered table-hover table-striped">
+    <thead>
+        <tr class="text-center">
+            <th>Район</th>
+            <th>Индекс величины ресурсов территории</th>
+            <th>Индекс величины ресурсов озер</th>
+            <th>Доля ресурсов озёр в суммарном запасе</th>
+            <th>Коэффициент соотношения ресурсов</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Items)
+        {
+            <tr rowid="@item.Id">
+                <td>@item.Region</td>
+                <td>@item.AreaIndex.ToString("N", CultureInfo.CurrentCulture)</td>
+                <td>@item.ResourcesIndex.ToString("N", CultureInfo.CurrentCulture)</td>
+                <td>@item.ResourcesShare.ToString("N", CultureInfo.CurrentCulture)</td>
+                <td>@item.ResourcesRatio.ToString("N", CultureInfo.CurrentCulture)</td>
+            </tr>
+        }
+    </tbody>
+</table>

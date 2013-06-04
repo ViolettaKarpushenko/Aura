@@ -1,0 +1,105 @@
+﻿@using System.Reflection
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@("Aura - " + ViewBag.Title)</title>
+    <link type="text/css" rel="stylesheet" href="@Url.Content("~/Content/less/main.min.css")" />
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="brand" href="@Url.Action("Index", "Home")">Aura</a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav" id="menu-ul">
+                        <li tabid="1">
+                            <a href="#">Главная</a>
+                        </li>
+                        <li class="dropdown" tabid="2">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Запасы<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li subtabid="1"><a href="@Url.Action("Mineral", "Stocks")">Минеральные</a></li>
+                                <li subtabid="2"><a href="@Url.Action("Water", "Stocks")">Водные</a></li>
+                                <li subtabid="3"><a href="@Url.Action("Territorial", "Stocks")">Территориальные</a></li>
+                                <li subtabid="4"><a href="@Url.Action("Biological", "Stocks")">Растительные</a></li>
+                                <li subtabid="5"><a href="@Url.Action("Animal", "Stocks")">Животного мира</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown" tabid="3">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Использование<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li subtabid="1"><a href="@Url.Action("Mineral", "Use")">Минеральные</a></li>
+                                <li subtabid="2"><a href="@Url.Action("Water", "Use")">Водные</a></li>
+                                <li subtabid="3"><a href="@Url.Action("Territorial", "Use")">Территориальные</a></li>
+                                <li subtabid="4"><a href="@Url.Action("Biological", "Use")">Растительные</a></li>
+                                <li subtabid="5"><a href="@Url.Action("Animal", "Use")">Животного мира</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown" tabid="4">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Итог<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li subtabid="1"><a href="@Url.Action("Mineral", "Result")">Минеральные</a></li>
+                                <li subtabid="2"><a href="@Url.Action("Water", "Result")">Водные</a></li>
+                                <li subtabid="3"><a href="@Url.Action("Territorial", "Result")">Территориальные</a></li>
+                                <li subtabid="4"><a href="@Url.Action("Biological", "Result")">Растительные</a></li>
+                                <li subtabid="5"><a href="@Url.Action("Animal", "Result")">Животного мира</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown" tabid="5">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Интегральная таблица<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li subtabid="1"><a href="@Url.Action("Mineral", "Integrated")">Минеральные</a></li>
+                                <li subtabid="2"><a href="@Url.Action("Water", "Integrated")">Водные</a></li>
+                                <li subtabid="3"><a href="@Url.Action("Territorial", "Integrated")">Территориальные</a></li>
+                                <li subtabid="4"><a href="@Url.Action("Biological", "Integrated")">Растительные</a></li>
+                                <li subtabid="5"><a href="@Url.Action("Animal", "Integrated")">Животного мира</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row-fluid">
+            <div class="span12" id="content">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer text-center">
+        Aura&nbsp;@("v" + Assembly.GetExecutingAssembly().GetName().Version)&nbsp;&copy;&nbsp;@DateTime.Now.Year
+    </footer>
+
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.9.1.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+    <script type="text/javascript">
+        $(function () {
+            var tabId = '@ViewBag.TabId';
+            if (!(tabId | 0)) {
+                tabId = 1;
+            }
+
+            $('#menu-ul li[tabid]').removeClass('active');
+            var activeTab = $('#menu-ul li[tabid=' + tabId + ']');
+            activeTab.addClass('active');
+
+            var subTabId = '@ViewBag.SubTabId';
+            if (!(subTabId | 0)) {
+                subTabId = 1;
+            }
+
+            activeTab.find('li[subtabid]').removeClass('active');
+            activeTab.find('li[subtabid=' + subTabId + ']').addClass('active');
+        })
+    </script>
+</body>
+</html>

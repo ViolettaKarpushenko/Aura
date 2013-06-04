@@ -1,17 +1,4 @@
-﻿INSERT INTO [t_unit_categories] ([ID], [CName], [UName], [SUName]) VALUES(1, 'Масса', 'грамм', 'г');
-INSERT INTO [t_unit_categories] ([ID], [CName], [UName], [SUName]) VALUES(2, 'Объем', 'метр3', 'м3');
-INSERT INTO [t_unit_categories] ([ID], [CName], [UName], [SUName]) VALUES(3, 'Количество', 'штука', 'шт');
-
-INSERT INTO [t_units] ([ID], [CID]) VALUES(1, 1);
-INSERT INTO [t_units] ([ID], [CID], [Factor], [Prefix], [SPrefix]) VALUES(2, 1, 1000, 'кило', 'к');
-INSERT INTO [t_units] ([ID], [CID], [Factor], [Prefix], [SPrefix], [AlterName]) VALUES(3, 1, 1000000, 'Мега', 'М', 'тонна');
-INSERT INTO [t_units] ([ID], [CID], [Factor], [AlterName]) VALUES(4, 1, 100000, 'центнер');
-INSERT INTO [t_units] ([ID], [CID]) VALUES(5, 2);
-INSERT INTO [t_units] ([ID], [CID], [Factor], [AlterName]) VALUES(6, 2, 0.001, 'литр');
-INSERT INTO [t_units] ([ID], [CID], [Factor], [Prefix], [SPrefix]) VALUES(7, 2, 1000000000, 'кило', 'к');
-INSERT INTO [t_units] ([ID], [CID]) VALUES(8, 3);
-
-INSERT INTO [t_regions] ([ID], [Name]) VALUES (1, 'Бешенковичский');
+﻿INSERT INTO [t_regions] ([ID], [Name]) VALUES (1, 'Бешенковичский');
 INSERT INTO [t_regions] ([ID], [Name]) VALUES (2, 'Браславский');
 INSERT INTO [t_regions] ([ID], [Name]) VALUES (3, 'Верхнедвинский');
 INSERT INTO [t_regions] ([ID], [Name]) VALUES (4, 'Витебский');
