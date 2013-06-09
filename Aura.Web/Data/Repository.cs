@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SQLite;
 using System.Linq;
+using System.Text;
 using System.Web;
 
 using Dapper;
@@ -48,6 +49,29 @@ namespace Aura.Web.Data
                 connection.Open();
                 connection.Execute(query);
             }
+        }
+        
+        protected string BuildAggregateQueryPattern(string tableName, int tableId, int columnQuantity)
+        {
+            var query = new StringBuilder();
+            query.Append("SELECT ");
+            query.Append("[r].[ID] AS [RegionID] ");
+            query.Append(",[r].[Name] AS [RegionName] ");
+
+            for (var i = 1; i <= columnQuantity; i++)
+            {
+                query.AppendFormat(
+                    ",ifnull((SELECT [s{0}].[Value] FROM [{1}] AS [s{0}] WHERE [s{0}].[TableID] = {2} AND [s{0}].[ColumnID] = {{{3}}} AND [s{0}].[RegionID] = [r].[ID]), 0.0) AS [{{{4}}}] ",
+                    i,
+                    tableName,
+                    tableId,
+                    (i * 2) - 2,
+                    (i * 2) - 1);
+            }
+
+            query.Append("FROM [regions] AS [r] ");
+
+            return query.ToString();
         }
     }
 }

@@ -1,6 +1,40 @@
-﻿@{
+﻿@using Aura.Web.Common
+@using Aura.Web.Models
+
+@model TerritorialViewModel
+
+@{
     ViewBag.TabId = 2;
     ViewBag.SubTabId = 3;
     ViewBag.Title = "Запасы - Территориальные";
     Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table table-bordered table-hover table-striped">
+    <thead>
+        <tr class="text-center">
+            <th>Район</th>
+            <th>Площадь</th>
+            <th>Земельные</th>
+            <th>С/Х</th>
+            <th>Озёрные</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Items)
+        {
+            <tr rowid="@item.RegionId">
+                <td>@item.RegionName</td>
+                <td colid="@((int)TerritorialColumns.Plochad)">@item.Plochad</td>
+                <td colid="@((int)TerritorialColumns.Zemelnye)">@item.Zemelnye</td>
+                <td colid="@((int)TerritorialColumns.Sh)">@item.Sh</td>
+                <td colid="@((int)TerritorialColumns.Ozernye)">@item.Ozernye</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts
+{
+    <script type="text/javascript">initItemUpdate($, '@((int)Tables.Territorial)', '@Url.Action("Update", "Stocks")');</script>
 }

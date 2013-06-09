@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 
 namespace Aura.Web.Controllers
 {
@@ -7,31 +8,31 @@ namespace Aura.Web.Controllers
         [HttpGet]
         public ActionResult Animal()
         {
-            return View();
+            throw new NotImplementedException();
         }
 
         [HttpGet]
         public ActionResult Biological()
         {
-            return View();
+            throw new NotImplementedException();
         }
 
         [HttpGet]
         public ActionResult Mineral()
         {
-            return View();
+            throw new NotImplementedException();
         }
 
         [HttpGet]
         public ActionResult Territorial()
         {
-            return View();
+            throw new NotImplementedException();
         }
 
         [HttpGet]
         public ActionResult Water()
         {
-            return View();
+            throw new NotImplementedException();
         }
     }
 }

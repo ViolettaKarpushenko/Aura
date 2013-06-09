@@ -2,16 +2,16 @@ namespace Aura.Web.Models
 {
     public class TerritorialModel
     {
-        public int Id { get; set; }
+        public int RegionId { get; set; }
 
-        public string Region { get; set; }
+        public string RegionName { get; set; }
 
-        public double AreaIndex { get; set; }
+        public double Plochad { get; set; }
 
-        public double ResourcesIndex { get; set; }
+        public double Zemelnye { get; set; }
 
-        public double ResourcesShare { get; set; }
+        public double Sh { get; set; }
 
-        public double ResourcesRatio { get; set; }
+        public double Ozernye { get; set; }
     }
 }

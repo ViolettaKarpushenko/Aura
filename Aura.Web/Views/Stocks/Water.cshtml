@@ -1,5 +1,7 @@
-﻿@using System.Globalization
+﻿@using Aura.Web.Common
+@using Aura.Web.Models
 
+@model WaterViewModel
 
 @{
     ViewBag.TabId = 2;
@@ -12,22 +14,25 @@
     <thead>
         <tr class="text-center">
             <th>Район</th>
-            <th>Индекс величины ресурсов территории</th>
-            <th>Индекс величины ресурсов озер</th>
-            <th>Доля ресурсов озёр в суммарном запасе</th>
-            <th>Коэффициент соотношения ресурсов</th>
+            <th>Речной сток</th>
+            <th>Подземные воды</th>
+            <th>Объем воды</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model.Items)
         {
-            <tr rowid="@item.Id">
-                <td>@item.Region</td>
-                <td>@item.AreaIndex.ToString("N", CultureInfo.CurrentCulture)</td>
-                <td>@item.ResourcesIndex.ToString("N", CultureInfo.CurrentCulture)</td>
-                <td>@item.ResourcesShare.ToString("N", CultureInfo.CurrentCulture)</td>
-                <td>@item.ResourcesRatio.ToString("N", CultureInfo.CurrentCulture)</td>
+            <tr rowid="@item.RegionId">
+                <td>@item.RegionName</td>
+                <td colid="@((int)WaterColumns.RechnoiStok)">@item.RechnoiStok</td>
+                <td colid="@((int)WaterColumns.PodzemnyeVody)">@item.PodzemnyeVody</td>
+                <td colid="@((int)WaterColumns.ObemVody)">@item.ObemVody</td>
             </tr>
         }
     </tbody>
 </table>
+
+@section scripts
+{
+    <script type="text/javascript">initItemUpdate($, '@((int)Tables.Water)', '@Url.Action("Update", "Stocks")');</script>
+}

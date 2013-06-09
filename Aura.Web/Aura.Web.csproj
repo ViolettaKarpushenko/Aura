@@ -52,16 +52,26 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\BiologicalColumns.cs" />
+    <Compile Include="Common\WaterColumns.cs" />
+    <Compile Include="Common\TerritorialColumns.cs" />
+    <Compile Include="Common\MineralsColumns.cs" />
     <Compile Include="Common\PresentationException.cs" />
+    <Compile Include="Common\Tables.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IntegratedController.cs" />
     <Compile Include="Controllers\RegionsController.cs" />
     <Compile Include="Controllers\ResultController.cs" />
     <Compile Include="Controllers\StocksController.cs" />
     <Compile Include="Controllers\UseController.cs" />
+    <Compile Include="Data\BiologicalRepository.cs" />
+    <Compile Include="Data\CommonRepository.cs" />
+    <Compile Include="Data\IEntityRepository.cs" />
+    <Compile Include="Data\MineralRepository.cs" />
     <Compile Include="Data\RegionsRepository.cs" />
     <Compile Include="Data\Repository.cs" />
-    <Compile Include="Data\ResultRepository.cs" />
+    <Compile Include="Data\TerritirialRepository.cs" />
+    <Compile Include="Data\WaterRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -73,6 +83,8 @@
     <Compile Include="Models\MineralViewModel.cs" />
     <Compile Include="Models\RegionModel.cs" />
     <Compile Include="Models\RegionsModel.cs" />
+    <Compile Include="Models\ResultModel.cs" />
+    <Compile Include="Models\ResultsViewModel.cs" />
     <Compile Include="Models\TerritorialModel.cs" />
     <Compile Include="Models\TerritorialViewModel.cs" />
     <Compile Include="Models\WaterModel.cs" />
@@ -82,35 +94,11 @@
   <ItemGroup>
     <Content Include="Content\less\images\glyphicons-halflings-white.png" />
     <Content Include="Content\less\images\glyphicons-halflings.png" />
-    <Content Include="Content\less\bootstrap.css">
-      <DependentUpon>bootstrap.less</DependentUpon>
-    </Content>
-    <Content Include="Content\less\bootstrap.min.css">
-      <DependentUpon>bootstrap.less</DependentUpon>
-    </Content>
     <Content Include="Content\less\main.css">
       <DependentUpon>main.less</DependentUpon>
     </Content>
     <Content Include="Content\less\main.min.css">
       <DependentUpon>main.less</DependentUpon>
-    </Content>
-    <Content Include="Content\less\responsive.css">
-      <DependentUpon>responsive.less</DependentUpon>
-    </Content>
-    <Content Include="Content\less\responsive.min.css">
-      <DependentUpon>responsive.less</DependentUpon>
-    </Content>
-    <Content Include="Content\less\tables.css">
-      <DependentUpon>tables.less</DependentUpon>
-    </Content>
-    <Content Include="Content\less\tables.min.css">
-      <DependentUpon>tables.less</DependentUpon>
-    </Content>
-    <Content Include="Content\less\variables.css">
-      <DependentUpon>variables.less</DependentUpon>
-    </Content>
-    <Content Include="Content\less\variables.min.css">
-      <DependentUpon>variables.less</DependentUpon>
     </Content>
     <Content Include="Global.asax" />
     <Content Include="Content\less\wells.less" />
@@ -122,12 +110,6 @@
     <Content Include="Content\less\tables.less" />
     <Content Include="Content\less\sprites.less" />
     <Content Include="Content\less\scaffolding.less" />
-    <Content Include="Content\less\responsive-utilities.less" />
-    <Content Include="Content\less\responsive-navbar.less" />
-    <Content Include="Content\less\responsive-768px-979px.less" />
-    <Content Include="Content\less\responsive-767px-max.less" />
-    <Content Include="Content\less\responsive-1200px-min.less" />
-    <Content Include="Content\less\responsive.less" />
     <Content Include="Content\less\reset.less" />
     <Content Include="Content\less\progress-bars.less" />
     <Content Include="Content\less\popovers.less" />
@@ -157,12 +139,10 @@
     <Content Include="Content\less\main.less" />
     <Content Include="App_Data\aura.db" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
-    <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />
-    <Content Include="Scripts\less.min.js" />
+    <Content Include="Scripts\utils.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

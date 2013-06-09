@@ -1,6 +1,44 @@
-﻿@{
+﻿@using Aura.Web.Common
+@using Aura.Web.Models
+
+@model BiologicalViewModel
+
+@{
     ViewBag.TabId = 3;
     ViewBag.SubTabId = 4;
     ViewBag.Title = "Использование - Растительные";
     Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table table-bordered table-hover table-striped">
+    <thead>
+        <tr class="text-center">
+            <th>Район</th>
+            <th>Древесина</th>
+            <th>Лекарственные</th>
+            <th>Пищевые</th>
+            <th>Грибы</th>
+            <th>Фитопланктон</th>
+            <th>Макрофиты</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Items)
+        {
+            <tr rowid="@item.RegionId">
+                <td>@item.RegionName</td>
+                <td colid="@((int)BiologicalColumns.Drevesina)">@item.Drevesina</td>
+                <td colid="@((int)BiologicalColumns.Lekarstvennye)">@item.Lekarstvennye</td>
+                <td colid="@((int)BiologicalColumns.Pishcevye)">@item.Pishcevye</td>
+                <td colid="@((int)BiologicalColumns.Griby)">@item.Griby</td>
+                <td colid="@((int)BiologicalColumns.Fitoplankton)">@item.Fitoplankton</td>
+                <td colid="@((int)BiologicalColumns.Makrofity)">@item.Makrofity</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts
+{
+    <script type="text/javascript">initItemUpdate($, '@((int)Tables.Biological)', '@Url.Action("Update", "Use")');</script>
 }
