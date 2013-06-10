@@ -22,7 +22,7 @@ namespace Aura.Web.Data
 
         private static string ConnectionString { get; set; }
 
-        protected IEnumerable<T> Execute<T>(string query, params object[] @params)
+        protected static IEnumerable<T> Execute<T>(string query, params object[] @params)
         {
             if (@params != null && @params.Any())
             {
@@ -37,7 +37,7 @@ namespace Aura.Web.Data
             }
         }
 
-        protected void Execute(string query, params object[] @params)
+        protected static void Execute(string query, params object[] @params)
         {
             if (@params != null && @params.Any())
             {
@@ -50,21 +50,9 @@ namespace Aura.Web.Data
                 connection.Execute(query);
             }
         }
-        
+
         protected string BuildAggregateQueryPattern(string tableName, int tableId, int columnQuantity)
         {
-            // TODO: Use this query.
-            /*
-            SELECT
-                 [r].[ID] AS [RegionID]
-                ,[r].[Name] AS [RegionName]
-                ,ifnull([s1].[Value], 0.0) AS [Dolomity]
-                ,ifnull([s2].[Value], 0.0) AS [Glinistye]
-            FROM [regions] AS [r]
-            LEFT JOIN [stocks] AS [s1] ON [s1].[RegionID] = [r].[Id] AND [s1].[TableID] = 1 AND [s1].[ColumnID] = 1
-            LEFT JOIN [stocks] AS [s2] ON [s2].[RegionID] = [r].[Id] AND [s2].[TableID] = 1 AND [s2].[ColumnID] = 2
-             */
-
             var query = new StringBuilder();
             query.Append("SELECT ");
             query.Append("[r].[ID] AS [RegionID] ");
@@ -73,15 +61,22 @@ namespace Aura.Web.Data
             for (var i = 1; i <= columnQuantity; i++)
             {
                 query.AppendFormat(
-                    ",ifnull((SELECT [s{0}].[Value] FROM [{1}] AS [s{0}] WHERE [s{0}].[TableID] = {2} AND [s{0}].[ColumnID] = {{{3}}} AND [s{0}].[RegionID] = [r].[ID]), 0.0) AS [{{{4}}}] ",
+                    ",ifnull([s{0}].[Value], 0.0) AS [{{{1}}}] ",
                     i,
-                    tableName,
-                    tableId,
-                    (i * 2) - 2,
                     (i * 2) - 1);
             }
 
             query.Append("FROM [regions] AS [r] ");
+
+            for (var i = 1; i <= columnQuantity; i++)
+            {
+                query.AppendFormat(
+                    "LEFT JOIN [{1}] AS [s{0}] ON [s{0}].[RegionID] = [r].[Id] AND [s{0}].[TableID] = {2} AND [s{0}].[ColumnID] = {{{3}}} ",
+                    i,
+                    tableName,
+                    tableId,
+                    (i * 2) - 2);
+            }
 
             return query.ToString();
         }
