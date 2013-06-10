@@ -53,6 +53,18 @@ namespace Aura.Web.Data
         
         protected string BuildAggregateQueryPattern(string tableName, int tableId, int columnQuantity)
         {
+            // TODO: Use this query.
+            /*
+            SELECT
+                 [r].[ID] AS [RegionID]
+                ,[r].[Name] AS [RegionName]
+                ,ifnull([s1].[Value], 0.0) AS [Dolomity]
+                ,ifnull([s2].[Value], 0.0) AS [Glinistye]
+            FROM [regions] AS [r]
+            LEFT JOIN [stocks] AS [s1] ON [s1].[RegionID] = [r].[Id] AND [s1].[TableID] = 1 AND [s1].[ColumnID] = 1
+            LEFT JOIN [stocks] AS [s2] ON [s2].[RegionID] = [r].[Id] AND [s2].[TableID] = 1 AND [s2].[ColumnID] = 2
+             */
+
             var query = new StringBuilder();
             query.Append("SELECT ");
             query.Append("[r].[ID] AS [RegionID] ");
