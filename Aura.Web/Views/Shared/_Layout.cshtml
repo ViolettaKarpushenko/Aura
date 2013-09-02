@@ -1,4 +1,5 @@
 ﻿@using System.Reflection
+@using Aura.Web.Controllers
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,8 +7,6 @@
     <meta name="viewport" content="width=device-width" />
     <title>@("Aura - " + ViewBag.Title)</title>
     <link type="text/css" rel="stylesheet" href="@Url.Content("~/Content/less/main.min.css")" />
-    <style type="text/css">
-    </style>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -65,7 +64,7 @@
                             </ul>
                         </li>
                         <li tabid="6">
-                            <a href="@Url.Action("Regions", "Regions")">Регионы</a>
+                            <a href="@Url.Action("Index", "Regions")">Регионы</a>
                         </li>
                     </ul>
                 </div>
@@ -81,7 +80,7 @@
     </div>
 
     <footer class="text-center">
-        Aura&nbsp;@("v" + Assembly.GetExecutingAssembly().GetName().Version)&nbsp;&copy;&nbsp;@DateTime.Now.Year
+        Aura&nbsp;@("v" + typeof(HomeController).Assembly.GetName().Version)&nbsp;&copy;&nbsp;@DateTime.Now.Year
     </footer>
 
     <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.9.1.min.js")"></script>

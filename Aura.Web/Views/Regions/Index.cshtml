@@ -116,7 +116,7 @@
                     return;
                 }
 
-                var url = '@Url.Action("AddRegion", "Regions")';
+                var url = '@Url.Action("Add", "Regions")';
 
                 var model = {
                     name: nameInput.val()
@@ -170,7 +170,7 @@
                     return;
                 }
 
-                var url = '@Url.Action("UpdateRegion", "Regions")';
+                var url = '@Url.Action("Update", "Regions")';
 
                 var model = {
                     id: row.attr('row-id'),
@@ -201,7 +201,7 @@
 
             $('i.delete-region', this.el).click(function (event) {
                 var row = $(event.currentTarget).closest('tr');
-                var url = '@Url.Action("DeleteRegion", "Regions")';
+                var url = '@Url.Action("Delete", "Regions")';
 
                 var model = {
                     id: row.attr('row-id')

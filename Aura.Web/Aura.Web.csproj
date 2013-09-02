@@ -138,6 +138,7 @@
     <Content Include="Content\less\accordion.less" />
     <Content Include="Content\less\main.less" />
     <Content Include="App_Data\aura.db" />
+    <None Include="Properties\PublishProfiles\prod.ftp.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
@@ -174,12 +175,10 @@
     <Content Include="Views\Use\Mineral.cshtml" />
     <Content Include="Views\Use\Territorial.cshtml" />
     <Content Include="Views\Use\Water.cshtml" />
-    <Content Include="Views\Regions\Regions.cshtml" />
+    <Content Include="Views\Regions\Index.cshtml" />
     <Content Include="Settings.StyleCop" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\Stocks\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>

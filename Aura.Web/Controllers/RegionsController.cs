@@ -16,7 +16,7 @@ namespace Aura.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult Regions()
+        public ActionResult Index()
         {
             var model = _regionsRepository.GetRegions();
 
@@ -24,7 +24,7 @@ namespace Aura.Web.Controllers
         }
 
         [HttpPost]
-        public JsonResult UpdateRegion(int id, string name)
+        public JsonResult Update(int id, string name)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -58,7 +58,7 @@ namespace Aura.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddRegion(string name)
+        public ActionResult Add(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -92,7 +92,7 @@ namespace Aura.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult DeleteRegion(int id)
+        public ActionResult Delete(int id)
         {
             try
             {
