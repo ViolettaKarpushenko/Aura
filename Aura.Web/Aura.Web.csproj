@@ -137,7 +137,7 @@
     <Content Include="Content\less\alerts.less" />
     <Content Include="Content\less\accordion.less" />
     <Content Include="Content\less\main.less" />
-    <Content Include="App_Data\aura.db" />
+    <None Include="App_Data\aura.db" />
     <None Include="Properties\PublishProfiles\prod.ftp.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.min.js" />
