@@ -11,6 +11,7 @@ namespace Aura.Web.Controllers
         private readonly IEntityRepository<BiologicalViewModel> _biologicalRepository;
         private readonly IEntityRepository<TerritorialViewModel> _territirialRepository;
         private readonly IEntityRepository<WaterViewModel> _waterRepository;
+        private readonly IEntityRepository<AnimalViewModel> _animalRepository;
         private readonly CommonRepository _commonRepository;
 
         public StocksController()
@@ -20,12 +21,15 @@ namespace Aura.Web.Controllers
             _territirialRepository = new TerritirialRepository();
             _waterRepository = new WaterRepository();
             _commonRepository = new CommonRepository();
+            _animalRepository = new AnimalRepository();
         }
 
         [HttpGet]
         public ActionResult Animal()
         {
-            throw new NotImplementedException();
+            var model = _animalRepository.GetStocks();
+
+            return View(model);
         }
 
         [HttpGet]

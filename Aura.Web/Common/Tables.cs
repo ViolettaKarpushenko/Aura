@@ -5,6 +5,7 @@ namespace Aura.Web.Common
         Minerals = 1,
         Biological = 2,
         Territorial = 3,
-        Water = 4
+        Water = 4,
+        Animal = 5,
     }
 }

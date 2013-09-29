@@ -48,37 +48,31 @@ namespace Aura.Web.Data
             var avgFitoplankton = stocks.Average(stock => stock.Fitoplankton);
             var avgMakrofity = stocks.Average(stock => stock.Makrofity);
 
-            var results =
-                stocks.Select(
-                    stock =>
-                    new
-                        {
-                            stock,
-                            zapasyPhg =
-                        stock.Drevesina/avgDrevesina + stock.Lekarstvennye/avgLekarstvennye +
-                        stock.Pishcevye/avgPishcevye + stock.Griby/avgGriby + stock.Fitoplankton/avgFitoplankton +
-                        stock.Makrofity/avgMakrofity
-                        })
-                      .Select(
-                          @t =>
-                          new
-                              {
-                                  @t,
-                                  zapasyOzera = @t.stock.Fitoplankton/avgFitoplankton + @t.stock.Makrofity/avgMakrofity
-                              })
-                      .OrderBy(@t => @t.@t.stock.RegionName)
-                      .Select(@t => new ResultModel
-                          {
-                              RegionId = @t.@t.stock.RegionId,
-                              RegionName = @t.@t.stock.RegionName,
-                              ZapasyPhg = @t.@t.zapasyPhg,
-                              ZapasyOzera = @t.zapasyOzera,
-                              Percent = @t.zapasyOzera/@t.@t.zapasyPhg,
-                              KoefBalansa =
-                                  @t.zapasyOzera/
-                                  (@t.@t.stock.Drevesina/avgDrevesina + @t.@t.stock.Lekarstvennye/avgLekarstvennye +
-                                   @t.@t.stock.Pishcevye/avgPishcevye + @t.@t.stock.Griby/avgGriby)
-                          });
+            var results = stocks.Select(stock => new
+                {
+                    stock,
+                    zapasyPhg = (stock.Drevesina / avgDrevesina + stock.Lekarstvennye / avgLekarstvennye) +
+                                (stock.Pishcevye / avgPishcevye + stock.Griby / avgGriby + stock.Fitoplankton / avgFitoplankton) +
+                                (stock.Makrofity / avgMakrofity)
+                })
+                .Select(stock => new
+                {
+                    stock,
+                    zapasyOzera = stock.stock.Fitoplankton / avgFitoplankton + stock.stock.Makrofity / avgMakrofity
+                })
+                .OrderBy(@t => @t.stock.stock.RegionName)
+                .Select(@t => new ResultModel
+                    {
+                        RegionId = @t.stock.stock.RegionId,
+                        RegionName = @t.stock.stock.RegionName,
+                        ZapasyPhg = @t.stock.zapasyPhg,
+                        ZapasyOzera = @t.zapasyOzera,
+                        Percent = @t.zapasyOzera / @t.stock.zapasyPhg,
+                        KoefBalansa =
+                            @t.zapasyOzera /
+                            (@t.stock.stock.Drevesina / avgDrevesina + @t.stock.stock.Lekarstvennye / avgLekarstvennye +
+                            @t.stock.stock.Pishcevye / avgPishcevye + @t.stock.stock.Griby / avgGriby)
+                    });
 
             return new ResultsViewModel { Items = results };
         }

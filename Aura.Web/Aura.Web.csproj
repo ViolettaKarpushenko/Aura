@@ -52,6 +52,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\AnimalColumns.cs" />
     <Compile Include="Common\BiologicalColumns.cs" />
     <Compile Include="Common\WaterColumns.cs" />
     <Compile Include="Common\TerritorialColumns.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="Controllers\ResultController.cs" />
     <Compile Include="Controllers\StocksController.cs" />
     <Compile Include="Controllers\UseController.cs" />
+    <Compile Include="Data\AnimalRepository.cs" />
     <Compile Include="Data\BiologicalRepository.cs" />
     <Compile Include="Data\CommonRepository.cs" />
     <Compile Include="Data\IEntityRepository.cs" />
