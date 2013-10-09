@@ -1,6 +1,5 @@
-﻿using System;
-using System.Linq;
-using System.Runtime.InteropServices;
+﻿using System.Linq;
+
 using Aura.Web.Common;
 using Aura.Web.Models;
 
@@ -53,8 +52,8 @@ namespace Aura.Web.Data
                 AnimalColumns.Teterev,
                 (int)AnimalColumns.Rabchik,
                 AnimalColumns.Rabchik,
-                (int)AnimalColumns.SerayKuropatka,
-                AnimalColumns.SerayKuropatka,
+                (int)AnimalColumns.SerayaKuropatka,
+                AnimalColumns.SerayaKuropatka,
                 (int)AnimalColumns.DikayaUtka,
                 AnimalColumns.DikayaUtka,
                 (int)AnimalColumns.Zooplankton,
@@ -79,51 +78,109 @@ namespace Aura.Web.Data
 
         public ResultsViewModel GetResult()
         {
-            throw new NotImplementedException();
-            /*
             var stocks = GetStocks().Items.AsParallel();
 
-            var avgKopytnye = stocks.Average(stock => stock.Los + stock.Olen + stock.Kosula + stock.Kaban);
+            var avgLos = stocks.Average(stock => stock.Los);
 
-            var avgPushnie = stocks.Average(stock =>
-                        stock.ZayacBelak + stock.ZayacRusak + stock.Kunica + stock.Lisica + stock.Ondatra + stock.Norka +
-                        stock.Bobr + stock.Volk + stock.Barsuk + stock.Vydra + stock.EnotovidnayaSobaka + stock.Rys +
-                        stock.Belka);
+            var avgOlen = stocks.Average(stock => stock.Olen);
 
-            var avgPtici = stocks.Average(stock => stock.Gluhar + stock.Teterev + stock.Rabchik + stock.SerayKuropatka + stock.DikayaUtka);
+            var avgKosula = stocks.Average(stock => stock.Kosula);
 
-            var avgZooplankton = stocks.Average(stosk => stosk.Zooplankton);
+            var avgKaban = stocks.Average(stock => stock.Kaban);
+
+            var avgZayacBelak = stocks.Average(stock => stock.ZayacBelak);
+
+            var avgZayacRusak = stocks.Average(stock => stock.ZayacRusak);
+
+            var avgKunica = stocks.Average(stock => stock.Kunica);
+
+            var avgLisica = stocks.Average(stock => stock.Lisica);
+
+            var avgOndatra = stocks.Average(stock => stock.Ondatra);
+
+            var avgNorka = stocks.Average(stock => stock.Norka);
+
+            var avgBobr = stocks.Average(stock => stock.Bobr);
+
+            var avgVolk = stocks.Average(stock => stock.Volk);
+
+            var avgBarsuk = stocks.Average(stock => stock.Barsuk);
+
+            var avgVydra = stocks.Average(stock => stock.Vydra);
+
+            var avgEnotovidnayaSobaka = stocks.Average(stock => stock.EnotovidnayaSobaka);
+
+            var avgRys = stocks.Average(stock => stock.Rys);
+
+            var avgBelka = stocks.Average(stock => stock.Belka);
+
+            var avgGluhar = stocks.Average(stock => stock.Gluhar);
+
+            var avgTeterev = stocks.Average(stock => stock.Teterev);
+
+            var avgRabchik = stocks.Average(stock => stock.Rabchik);
+
+            var avgSerayaKuropatka = stocks.Average(stock => stock.SerayaKuropatka);
+
+            var avgDikayaUtka = stocks.Average(stock => stock.DikayaUtka);
+
+            var avgZooplankton = stocks.Average(stock => stock.Zooplankton);
 
             var avgBentos = stocks.Average(stock => stock.Bentos);
 
-            var avgRuba = stocks.Average(stock => stock.Ryba);
+            var avgRyba = stocks.Average(stock => stock.Ryba);
+
+            var avgPtica = stocks.Average(stock2 =>
+                            stock2.DikayaUtka / avgDikayaUtka +
+                            stock2.SerayaKuropatka / avgSerayaKuropatka +
+                            stock2.Rabchik / avgRabchik +
+                            stock2.Teterev / avgTeterev +
+                            stock2.Gluhar / avgGluhar);
+
+            var avgJivotnye = stocks.Average(stock2 =>
+                            stock2.ZayacBelak / avgZayacBelak +
+                            stock2.ZayacRusak / avgZayacRusak +
+                            stock2.Kunica / avgKunica +
+                            stock2.Lisica / avgLisica +
+                            stock2.Ondatra / avgOndatra +
+                            stock2.Norka / avgNorka +
+                            stock2.Bobr / avgBobr +
+                            stock2.Volk / avgVolk +
+                            stock2.Barsuk / avgBarsuk +
+                            stock2.Vydra / avgVydra +
+                            stock2.EnotovidnayaSobaka / avgEnotovidnayaSobaka +
+                            stock2.Rys / avgRys +
+                            stock2.Belka / avgBelka);
+
+            var avgKopytnye = stocks.Average(stock3 =>
+                            stock3.Los / avgLos +
+                            stock3.Olen / avgOlen +
+                            stock3.Kosula / avgKosula +
+                            stock3.Kaban / avgKaban);
 
             var results = stocks.Select(stock => new
-            {
-                stock,
-                zapasyPhg = 
-            })
-                .Select(stock => new
                 {
                     stock,
-                    zapasyOzera = stock.stock.Fitoplankton / avgFitoplankton + stock.stock.Makrofity / avgMakrofity
+                    zaposyOzer = stock.Bentos / avgBentos + stock.Zooplankton / avgZooplankton + stock.Ryba / avgRyba
                 })
-                .OrderBy(@t => @t.stock.stock.RegionName)
-                .Select(@t => new ResultModel
+                .Select(stock => new
                 {
-                    RegionId = @t.stock.stock.RegionId,
-                    RegionName = @t.stock.stock.RegionName,
-                    ZapasyPhg = @t.stock.zapasyPhg,
-                    ZapasyOzera = @t.zapasyOzera,
-                    Percent = @t.zapasyOzera / @t.stock.zapasyPhg,
-                    KoefBalansa =
-                        @t.zapasyOzera /
-                        (@t.stock.stock.Drevesina / avgDrevesina + @t.stock.stock.Lekarstvennye / avgLekarstvennye +
-                        @t.stock.stock.Pishcevye / avgPishcevye + @t.stock.stock.Griby / avgGriby)
-                });
+                    stock.stock,
+                    stock.zaposyOzer,
+                    zapasyPhg = stock.zaposyOzer + avgPtica + avgJivotnye + avgKopytnye
+                })
+                .Select(stock => new ResultModel
+                {
+                    ZapasyPhg = stock.zapasyPhg,
+                    ZapasyOzera = stock.zaposyOzer,
+                    Percent = stock.zapasyPhg * stock.zaposyOzer,
+                    KoefBalansa = stock.zaposyOzer / (stock.zapasyPhg - stock.zaposyOzer),
+                    RegionId = stock.stock.RegionId,
+                    RegionName = stock.stock.RegionName
+                })
+                .OrderBy(stock => stock.RegionName);
 
             return new ResultsViewModel { Items = results };
-            */
         }
     }
 }

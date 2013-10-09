@@ -60,19 +60,19 @@ namespace Aura.Web.Data
                     stock,
                     zapasyOzera = stock.stock.Fitoplankton / avgFitoplankton + stock.stock.Makrofity / avgMakrofity
                 })
-                .OrderBy(@t => @t.stock.stock.RegionName)
-                .Select(@t => new ResultModel
-                    {
-                        RegionId = @t.stock.stock.RegionId,
-                        RegionName = @t.stock.stock.RegionName,
-                        ZapasyPhg = @t.stock.zapasyPhg,
-                        ZapasyOzera = @t.zapasyOzera,
-                        Percent = @t.zapasyOzera / @t.stock.zapasyPhg,
-                        KoefBalansa =
-                            @t.zapasyOzera /
-                            (@t.stock.stock.Drevesina / avgDrevesina + @t.stock.stock.Lekarstvennye / avgLekarstvennye +
-                            @t.stock.stock.Pishcevye / avgPishcevye + @t.stock.stock.Griby / avgGriby)
-                    });
+                .Select(stock => new ResultModel
+                {
+                    RegionId = stock.stock.stock.RegionId,
+                    RegionName = stock.stock.stock.RegionName,
+                    ZapasyPhg = stock.stock.zapasyPhg,
+                    ZapasyOzera = stock.zapasyOzera,
+                    Percent = stock.zapasyOzera / stock.stock.zapasyPhg,
+                    KoefBalansa =
+                        stock.zapasyOzera /
+                        (stock.stock.stock.Drevesina / avgDrevesina + stock.stock.stock.Lekarstvennye / avgLekarstvennye +
+                        stock.stock.stock.Pishcevye / avgPishcevye + stock.stock.stock.Griby / avgGriby)
+                })
+                .OrderBy(stock => stock.RegionName);
 
             return new ResultsViewModel { Items = results };
         }

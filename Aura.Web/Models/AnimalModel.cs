@@ -46,7 +46,7 @@ namespace Aura.Web.Models
 
         public double Rabchik { get; set; }
 
-        public double SerayKuropatka { get; set; }
+        public double SerayaKuropatka { get; set; }
 
         public double DikayaUtka { get; set; }
 

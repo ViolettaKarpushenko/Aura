@@ -24,7 +24,7 @@
         Gluhar = 18,
         Teterev = 19,
         Rabchik = 20,
-        SerayKuropatka = 21,
+        SerayaKuropatka = 21,
         DikayaUtka = 22,
 
         Zooplankton = 23,

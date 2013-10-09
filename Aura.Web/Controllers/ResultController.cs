@@ -23,7 +23,9 @@ namespace Aura.Web.Controllers
         [HttpGet]
         public ActionResult Animal()
         {
-            throw new NotImplementedException();
+            var model = _biologicalRepository.GetResult();
+
+            return View(model);
         }
 
         [HttpGet]
