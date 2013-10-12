@@ -7,73 +7,73 @@
     ViewBag.Title = "Запасы - Животного мира";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<table class="table table-bordered table-hover table-striped">
-    <thead>
-        <tr class="text-center">
-            <th>Район</th>
-            <th>Лось</th>
-            <th>Олень</th>
-            <th>Косуля</th>
-            <th>Кабан</th>
-            <th>Заяц-беляк</th>
-            <th>Заяц-русак</th>
-            <th>Куница</th>
-            <th>Лисица</th>
-            <th>Ондатра</th>
-            <th>Норка</th>
-            <th>Бобр</th>
-            <th>Волк</th>
-            <th>Барсук</th>
-            <th>Выдра</th>
-            <th>Енотовидная собака</th>
-            <th>Рысь</th>
-            <th>Белка</th>
-            <th>Глухарь</th>
-            <th>Тетерев</th>
-            <th>Рябчик</th>
-            <th>Серая куропатка</th>
-            <th>Дикая утка</th>
-            <th>Зоопланктон, т</th>
-            <th>Бентос, т</th>
-            <th>Рыба, ц</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Items)
-        {
-            <tr rowid="@item.RegionId">
-                <td>@item.RegionName</td>
-                <td colid="@((int)AnimalColumns.Los)">@item.Los</td>
-                <td colid="@((int)AnimalColumns.Olen)">@item.Olen</td>
-                <td colid="@((int)AnimalColumns.Kosula)">@item.Kosula</td>
-                <td colid="@((int)AnimalColumns.Kaban)">@item.Kaban</td>
-                <td colid="@((int)AnimalColumns.ZayacBelak)">@item.ZayacBelak</td>
-                <td colid="@((int)AnimalColumns.ZayacRusak)">@item.ZayacRusak</td>
-                <td colid="@((int)AnimalColumns.Kunica)">@item.Kunica</td>
-                <td colid="@((int)AnimalColumns.Lisica)">@item.Lisica</td>
-                <td colid="@((int)AnimalColumns.Ondatra)">@item.Ondatra</td>
-                <td colid="@((int)AnimalColumns.Norka)">@item.Norka</td>
-                <td colid="@((int)AnimalColumns.Bobr)">@item.Bobr</td>
-                <td colid="@((int)AnimalColumns.Volk)">@item.Volk</td>
-                <td colid="@((int)AnimalColumns.Barsuk)">@item.Barsuk</td>
-                <td colid="@((int)AnimalColumns.Vydra)">@item.Vydra</td>
-                <td colid="@((int)AnimalColumns.EnotovidnayaSobaka)">@item.EnotovidnayaSobaka</td>
-                <td colid="@((int)AnimalColumns.Rys)">@item.Rys</td>
-                <td colid="@((int)AnimalColumns.Belka)">@item.Belka</td>
-                <td colid="@((int)AnimalColumns.Gluhar)">@item.Gluhar</td>
-                <td colid="@((int)AnimalColumns.Teterev)">@item.Teterev</td>
-                <td colid="@((int)AnimalColumns.Rabchik)">@item.Rabchik</td>
-                <td colid="@((int)AnimalColumns.SerayaKuropatka)">@item.SerayaKuropatka</td>
-                <td colid="@((int)AnimalColumns.DikayaUtka)">@item.DikayaUtka</td>
-                <td colid="@((int)AnimalColumns.Zooplankton)">@item.Zooplankton</td>
-                <td colid="@((int)AnimalColumns.Bentos)">@item.Bentos</td>
-                <td colid="@((int)AnimalColumns.Ryba)">@item.Ryba</td>
+<div style="overflow-x: auto">
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr class="text-center">
+                <th>Район</th>
+                <th>Лось</th>
+                <th>Олень</th>
+                <th>Косуля</th>
+                <th>Кабан</th>
+                <th>Заяц-беляк</th>
+                <th>Заяц-русак</th>
+                <th>Куница</th>
+                <th>Лисица</th>
+                <th>Ондатра</th>
+                <th>Норка</th>
+                <th>Бобр</th>
+                <th>Волк</th>
+                <th>Барсук</th>
+                <th>Выдра</th>
+                <th>Енотовидная&nbsp;собака</th>
+                <th>Рысь</th>
+                <th>Белка</th>
+                <th>Глухарь</th>
+                <th>Тетерев</th>
+                <th>Рябчик</th>
+                <th>Серая&nbsp;куропатка</th>
+                <th>Дикая&nbsp;утка</th>
+                <th>Зоопланктон,&nbsp;т</th>
+                <th>Бентос,&nbsp;т</th>
+                <th>Рыба,&nbsp;ц</th>
             </tr>
-        }
-    </tbody>
-</table>
-
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr rowid="@item.RegionId">
+                    <td>@item.RegionName</td>
+                    <td colid="@((int)AnimalColumns.Los)">@item.Los</td>
+                    <td colid="@((int)AnimalColumns.Olen)">@item.Olen</td>
+                    <td colid="@((int)AnimalColumns.Kosula)">@item.Kosula</td>
+                    <td colid="@((int)AnimalColumns.Kaban)">@item.Kaban</td>
+                    <td colid="@((int)AnimalColumns.ZayacBelak)">@item.ZayacBelak</td>
+                    <td colid="@((int)AnimalColumns.ZayacRusak)">@item.ZayacRusak</td>
+                    <td colid="@((int)AnimalColumns.Kunica)">@item.Kunica</td>
+                    <td colid="@((int)AnimalColumns.Lisica)">@item.Lisica</td>
+                    <td colid="@((int)AnimalColumns.Ondatra)">@item.Ondatra</td>
+                    <td colid="@((int)AnimalColumns.Norka)">@item.Norka</td>
+                    <td colid="@((int)AnimalColumns.Bobr)">@item.Bobr</td>
+                    <td colid="@((int)AnimalColumns.Volk)">@item.Volk</td>
+                    <td colid="@((int)AnimalColumns.Barsuk)">@item.Barsuk</td>
+                    <td colid="@((int)AnimalColumns.Vydra)">@item.Vydra</td>
+                    <td colid="@((int)AnimalColumns.EnotovidnayaSobaka)">@item.EnotovidnayaSobaka</td>
+                    <td colid="@((int)AnimalColumns.Rys)">@item.Rys</td>
+                    <td colid="@((int)AnimalColumns.Belka)">@item.Belka</td>
+                    <td colid="@((int)AnimalColumns.Gluhar)">@item.Gluhar</td>
+                    <td colid="@((int)AnimalColumns.Teterev)">@item.Teterev</td>
+                    <td colid="@((int)AnimalColumns.Rabchik)">@item.Rabchik</td>
+                    <td colid="@((int)AnimalColumns.SerayaKuropatka)">@item.SerayaKuropatka</td>
+                    <td colid="@((int)AnimalColumns.DikayaUtka)">@item.DikayaUtka</td>
+                    <td colid="@((int)AnimalColumns.Zooplankton)">@item.Zooplankton</td>
+                    <td colid="@((int)AnimalColumns.Bentos)">@item.Bentos</td>
+                    <td colid="@((int)AnimalColumns.Ryba)">@item.Ryba</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 @section scripts
 {
     <script type="text/javascript">initItemUpdate($, '@((int)Tables.Animal)', '@Url.Action("Update", "Stocks")');</script>
