@@ -4,7 +4,7 @@ using Aura.Web.Models;
 
 namespace Aura.Web.Data
 {
-    public class TerritirialRepository : Repository, IEntityRepository<TerritorialViewModel>
+    public class TerritorialRepository : Repository, IEntityRepository<TerritorialViewModel>
     {
         private TerritorialViewModel GetItems(string tableName)
         {

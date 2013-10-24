@@ -34,5 +34,11 @@ namespace Aura.Web.Controllers
         {
             throw new NotImplementedException();
         }
+
+        [HttpGet]
+        public ActionResult Economic()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

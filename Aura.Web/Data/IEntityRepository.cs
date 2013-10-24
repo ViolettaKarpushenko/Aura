@@ -2,7 +2,7 @@ using Aura.Web.Models;
 
 namespace Aura.Web.Data
 {
-    public interface IEntityRepository<T>
+    public interface IEntityRepository<out T>
     {
         T GetStocks();
 

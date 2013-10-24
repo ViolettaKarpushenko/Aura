@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Common\AnimalColumns.cs" />
     <Compile Include="Common\BiologicalColumns.cs" />
+    <Compile Include="Common\EconomicColumns.cs" />
     <Compile Include="Common\WaterColumns.cs" />
     <Compile Include="Common\TerritorialColumns.cs" />
     <Compile Include="Common\MineralsColumns.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="Data\AnimalRepository.cs" />
     <Compile Include="Data\BiologicalRepository.cs" />
     <Compile Include="Data\CommonRepository.cs" />
+    <Compile Include="Data\EconomicRepository.cs" />
     <Compile Include="Data\IEntityRepository.cs" />
     <Compile Include="Data\MineralRepository.cs" />
     <Compile Include="Data\RegionsRepository.cs" />
@@ -81,6 +83,8 @@
     <Compile Include="Models\AnimalViewModel.cs" />
     <Compile Include="Models\BiologicalModel.cs" />
     <Compile Include="Models\BiologicalViewModel.cs" />
+    <Compile Include="Models\EconomicModel.cs" />
+    <Compile Include="Models\EconomicViewModel.cs" />
     <Compile Include="Models\MineralModel.cs" />
     <Compile Include="Models\MineralViewModel.cs" />
     <Compile Include="Models\RegionModel.cs" />
@@ -94,6 +98,26 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\images\home\image001.png" />
+    <Content Include="Content\images\home\image002.png" />
+    <Content Include="Content\images\home\image003.png" />
+    <Content Include="Content\images\home\image004.png" />
+    <Content Include="Content\images\home\image005.png" />
+    <Content Include="Content\images\home\image006.png" />
+    <Content Include="Content\images\home\image007.png" />
+    <Content Include="Content\images\home\image008.png" />
+    <Content Include="Content\images\home\image009.png" />
+    <Content Include="Content\images\home\image010.png" />
+    <Content Include="Content\images\home\image011.png" />
+    <Content Include="Content\images\home\image012.png" />
+    <Content Include="Content\images\home\image013.png" />
+    <Content Include="Content\images\home\image014.png" />
+    <Content Include="Content\images\home\image015.png" />
+    <Content Include="Content\images\home\image016.png" />
+    <Content Include="Content\images\home\image017.png" />
+    <Content Include="Content\images\home\image018.png" />
+    <Content Include="Content\images\home\image019.png" />
+    <Content Include="Content\images\home\image020.png" />
     <Content Include="Content\less\images\glyphicons-halflings-white.png" />
     <Content Include="Content\less\images\glyphicons-halflings.png" />
     <Content Include="Content\less\main.css">
@@ -180,6 +204,10 @@
     <Content Include="Views\Use\Water.cshtml" />
     <Content Include="Views\Regions\Index.cshtml" />
     <Content Include="Settings.StyleCop" />
+    <Content Include="Views\Integrated\Economic.cshtml" />
+    <Content Include="Views\Result\Economic.cshtml" />
+    <Content Include="Views\Stocks\Economic.cshtml" />
+    <Content Include="Views\Use\Economic.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -208,7 +236,7 @@
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
+          <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>48894</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:46082/</IISUrl>

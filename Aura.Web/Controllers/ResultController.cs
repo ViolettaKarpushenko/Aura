@@ -9,15 +9,17 @@ namespace Aura.Web.Controllers
     {
         private readonly IEntityRepository<MineralViewModel> _mineralRepository;
         private readonly IEntityRepository<BiologicalViewModel> _biologicalRepository;
-        private readonly IEntityRepository<TerritorialViewModel> _territirialRepository;
+        private readonly IEntityRepository<TerritorialViewModel> _territorialRepository;
         private readonly IEntityRepository<WaterViewModel> _waterRepository;
+        private readonly IEntityRepository<EconomicViewModel> _economicRepository;
 
         public ResultController()
         {
             _mineralRepository = new MineralRepository();
             _biologicalRepository = new BiologicalRepository();
-            _territirialRepository = new TerritirialRepository();
+            _territorialRepository = new TerritorialRepository();
             _waterRepository = new WaterRepository();
+            _economicRepository = new EconomicRepository();
         }
 
         [HttpGet]
@@ -47,7 +49,7 @@ namespace Aura.Web.Controllers
         [HttpGet]
         public ActionResult Territorial()
         {
-            var model = _territirialRepository.GetResult();
+            var model = _territorialRepository.GetResult();
 
             return View(model);
         }
@@ -56,6 +58,14 @@ namespace Aura.Web.Controllers
         public ActionResult Water()
         {
             var model = _waterRepository.GetResult();
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult Economic()
+        {
+            var model = _economicRepository.GetResult();
 
             return View(model);
         }

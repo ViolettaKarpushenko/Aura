@@ -9,7 +9,7 @@ namespace Aura.Web.Data
     {
         private AnimalViewModel GetItems(string tableName)
         {
-            var query = BuildAggregateQueryPattern(tableName, (int)Tables.Animal, 6);
+            var query = BuildAggregateQueryPattern(tableName, (int)Tables.Animal, 25);
             var stockData = Execute<AnimalModel>(
                 query,
                 (int)AnimalColumns.Los,

@@ -1,0 +1,77 @@
+﻿@using Aura.Web.Common
+@using Aura.Web.Models
+
+@model EconomicViewModel
+
+@{
+    ViewBag.TabId = 3;
+    ViewBag.SubTabId = 6;
+    ViewBag.Title = "Использование - Хозяйственное использование";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="overflow-x: auto">
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr class="text-center">
+                <th>Район</th>
+                <th>объем воды, млн м3</th>
+                <th>изъято, тыс м3/год</th>
+                <th>использовано всего</th>
+                <th>хозяйственно-бытовое водопотребление</th>
+                <th>промышленное водопотребление</th>
+                <th>сельскохозяйственное водопотребление</th>
+                <th>рыбохозяйственное водопотребление</th>
+                <th>площадь озер, км2</th>
+                <th>вместимость, чел</th>
+                <th>сапропель, тыс м3</th>
+                <th>добыто</th>
+                <th>заготовка макрофитов</th>
+                <th>заготовлено, кг</th>
+                <th>фитопланктон, т</th>
+                <th>добыто</th>
+                <th>зоопланктон, т</th>
+                <th>добыто</th>
+                <th>заготовка зообентоса</th>
+                <th>заготовлено, кг</th>
+                <th>рыболовство</th>
+                <th>вылов, ц</th>
+                <th>озер.ООПТ</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr rowid="@item.RegionId">
+                    <td>@item.RegionName</td>
+                    <td colid="@((int)EconomicColumns.ObemVody)">@item.ObemVody</td>
+                    <td colid="@((int)EconomicColumns.Izjato)">@item.Izjato</td>
+                    <td colid="@((int)EconomicColumns.IspolzovanoVsego)">@item.IspolzovanoVsego</td>
+                    <td colid="@((int)EconomicColumns.HozjajstvennoBytovoeVodopotreblenie)">@item.HozjajstvennoBytovoeVodopotreblenie</td>
+                    <td colid="@((int)EconomicColumns.PromyshlennoeVodopotreblenie)">@item.PromyshlennoeVodopotreblenie</td>
+                    <td colid="@((int)EconomicColumns.SelskohozjajstvennoeVodopotreblenie)">@item.SelskohozjajstvennoeVodopotreblenie</td>
+                    <td colid="@((int)EconomicColumns.RybohozjajstvennoeVodopotreblenie)">@item.RybohozjajstvennoeVodopotreblenie</td>
+                    <td colid="@((int)EconomicColumns.Ploshhad)">@item.Ploshhad</td>
+                    <td colid="@((int)EconomicColumns.Vmestimost)">@item.Vmestimost</td>
+                    <td colid="@((int)EconomicColumns.Sapropel)">@item.Sapropel</td>
+                    <td colid="@((int)EconomicColumns.Dobyto1)">@item.Dobyto1</td>
+                    <td colid="@((int)EconomicColumns.ZagotovkaMakrofitov)">@item.ZagotovkaMakrofitov</td>
+                    <td colid="@((int)EconomicColumns.Zagotovleno1)">@item.Zagotovleno1</td>
+                    <td colid="@((int)EconomicColumns.Fitoplankton)">@item.Fitoplankton</td>
+                    <td colid="@((int)EconomicColumns.Dobyto2)">@item.Dobyto2</td>
+                    <td colid="@((int)EconomicColumns.Zooplankton)">@item.Zooplankton</td>
+                    <td colid="@((int)EconomicColumns.Dobyto3)">@item.Dobyto3</td>
+                    <td colid="@((int)EconomicColumns.ZagotovkaZoobentosa)">@item.ZagotovkaZoobentosa</td>
+                    <td colid="@((int)EconomicColumns.Zagotovleno2)">@item.Zagotovleno2</td>
+                    <td colid="@((int)EconomicColumns.Rybolovstvo)">@item.Rybolovstvo</td>
+                    <td colid="@((int)EconomicColumns.Vylov)">@item.Vylov</td>
+                    <td colid="@((int)EconomicColumns.OzerOopt)">@item.OzerOopt</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@section scripts
+{
+    <script type="text/javascript">initItemUpdate($, '@((int)Tables.Economic)', '@Url.Action("Update", "Use")');</script>
+}
