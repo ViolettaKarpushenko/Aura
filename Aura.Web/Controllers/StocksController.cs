@@ -5,14 +5,13 @@ using Aura.Web.Models;
 
 namespace Aura.Web.Controllers
 {
-    public class StocksController : Controller
+    public class StocksController : Controller, IEntityController
     {
         private readonly IEntityRepository<MineralViewModel> _mineralRepository;
         private readonly IEntityRepository<BiologicalViewModel> _biologicalRepository;
         private readonly IEntityRepository<TerritorialViewModel> _territorialRepository;
         private readonly IEntityRepository<WaterViewModel> _waterRepository;
         private readonly IEntityRepository<AnimalViewModel> _animalRepository;
-        private readonly IEntityRepository<EconomicViewModel> _economicRepository;
         private readonly CommonRepository _commonRepository;
 
         public StocksController()
@@ -23,7 +22,6 @@ namespace Aura.Web.Controllers
             _waterRepository = new WaterRepository();
             _commonRepository = new CommonRepository();
             _animalRepository = new AnimalRepository();
-            _economicRepository = new EconomicRepository();
         }
 
         [HttpGet]
@@ -62,14 +60,6 @@ namespace Aura.Web.Controllers
         public ActionResult Water()
         {
             var model = _waterRepository.GetStocks();
-
-            return View(model);
-        }
-
-        [HttpGet]
-        public ActionResult Economic()
-        {
-            var model = _economicRepository.GetStocks();
 
             return View(model);
         }

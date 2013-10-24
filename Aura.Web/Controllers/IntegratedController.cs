@@ -3,7 +3,7 @@ using System.Web.Mvc;
 
 namespace Aura.Web.Controllers
 {
-    public class IntegratedController : Controller
+    public class IntegratedController : Controller, IEntityController
     {
         [HttpGet]
         public ActionResult Animal()
@@ -31,12 +31,6 @@ namespace Aura.Web.Controllers
 
         [HttpGet]
         public ActionResult Water()
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpGet]
-        public ActionResult Economic()
         {
             throw new NotImplementedException();
         }

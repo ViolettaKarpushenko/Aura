@@ -54,13 +54,13 @@
   <ItemGroup>
     <Compile Include="Common\AnimalColumns.cs" />
     <Compile Include="Common\BiologicalColumns.cs" />
-    <Compile Include="Common\EconomicColumns.cs" />
     <Compile Include="Common\WaterColumns.cs" />
     <Compile Include="Common\TerritorialColumns.cs" />
     <Compile Include="Common\MineralsColumns.cs" />
     <Compile Include="Common\PresentationException.cs" />
     <Compile Include="Common\Tables.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IEntityController.cs" />
     <Compile Include="Controllers\IntegratedController.cs" />
     <Compile Include="Controllers\RegionsController.cs" />
     <Compile Include="Controllers\ResultController.cs" />
@@ -69,7 +69,6 @@
     <Compile Include="Data\AnimalRepository.cs" />
     <Compile Include="Data\BiologicalRepository.cs" />
     <Compile Include="Data\CommonRepository.cs" />
-    <Compile Include="Data\EconomicRepository.cs" />
     <Compile Include="Data\IEntityRepository.cs" />
     <Compile Include="Data\MineralRepository.cs" />
     <Compile Include="Data\RegionsRepository.cs" />
@@ -83,8 +82,6 @@
     <Compile Include="Models\AnimalViewModel.cs" />
     <Compile Include="Models\BiologicalModel.cs" />
     <Compile Include="Models\BiologicalViewModel.cs" />
-    <Compile Include="Models\EconomicModel.cs" />
-    <Compile Include="Models\EconomicViewModel.cs" />
     <Compile Include="Models\MineralModel.cs" />
     <Compile Include="Models\MineralViewModel.cs" />
     <Compile Include="Models\RegionModel.cs" />
@@ -204,10 +201,6 @@
     <Content Include="Views\Use\Water.cshtml" />
     <Content Include="Views\Regions\Index.cshtml" />
     <Content Include="Settings.StyleCop" />
-    <Content Include="Views\Integrated\Economic.cshtml" />
-    <Content Include="Views\Result\Economic.cshtml" />
-    <Content Include="Views\Stocks\Economic.cshtml" />
-    <Content Include="Views\Use\Economic.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
