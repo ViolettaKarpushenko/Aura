@@ -120,151 +120,151 @@
     <Content Include="Content\less\main.css" />
     <Content Include="Content\less\main.min.css" />
     <Content Include="Global.asax" />
-    <Content Include="Content\less\wells.less">
+    <None Include="Content\less\wells.less">
       <Compile>False</Compile>
       <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\variables.less">
+    </None>
+    <None Include="Content\less\variables.less">
       <Compile>False</Compile>
       <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\utilities.less">
+    </None>
+    <None Include="Content\less\utilities.less">
       <Compile>False</Compile>
       <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\type.less">
+    </None>
+    <None Include="Content\less\type.less">
       <Compile>False</Compile>
       <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\tooltip.less">
+    </None>
+    <None Include="Content\less\tooltip.less">
       <Compile>False</Compile>
       <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\thumbnails.less">
+    </None>
+    <None Include="Content\less\thumbnails.less">
       <Compile>False</Compile>
       <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\tables.less">
+    </None>
+    <None Include="Content\less\tables.less">
       <Compile>False</Compile>
       <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\sprites.less">
+    </None>
+    <None Include="Content\less\sprites.less">
       <Compile>False</Compile>
       <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\scaffolding.less">
+    </None>
+    <None Include="Content\less\scaffolding.less">
       <Compile>False</Compile>
       <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\reset.less">
+    </None>
+    <None Include="Content\less\reset.less">
       <Compile>False</Compile>
       <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\progress-bars.less">
+    </None>
+    <None Include="Content\less\progress-bars.less">
       <Compile>False</Compile>
       <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\popovers.less">
+    </None>
+    <None Include="Content\less\popovers.less">
       <Compile>False</Compile>
       <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\pagination.less">
+    </None>
+    <None Include="Content\less\pagination.less">
       <Compile>False</Compile>
       <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\pager.less">
+    </None>
+    <None Include="Content\less\pager.less">
       <Compile>False</Compile>
       <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\navs.less">
+    </None>
+    <None Include="Content\less\navs.less">
       <Compile>False</Compile>
       <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\navbar.less">
+    </None>
+    <None Include="Content\less\navbar.less">
       <Compile>False</Compile>
       <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\modals.less">
+    </None>
+    <None Include="Content\less\modals.less">
       <Compile>False</Compile>
       <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\mixins.less">
+    </None>
+    <None Include="Content\less\mixins.less">
       <Compile>False</Compile>
       <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\media.less">
+    </None>
+    <None Include="Content\less\media.less">
       <Compile>False</Compile>
       <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\layouts.less">
+    </None>
+    <None Include="Content\less\layouts.less">
       <Compile>False</Compile>
       <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\labels-badges.less">
+    </None>
+    <None Include="Content\less\labels-badges.less">
       <Compile>False</Compile>
       <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\hero-unit.less">
+    </None>
+    <None Include="Content\less\hero-unit.less">
       <Compile>False</Compile>
       <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\grid.less">
+    </None>
+    <None Include="Content\less\grid.less">
       <Compile>False</Compile>
       <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\forms.less">
+    </None>
+    <None Include="Content\less\forms.less">
       <Compile>False</Compile>
       <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\dropdowns.less">
+    </None>
+    <None Include="Content\less\dropdowns.less">
       <Compile>False</Compile>
       <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\component-animations.less">
+    </None>
+    <None Include="Content\less\component-animations.less">
       <Compile>False</Compile>
       <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\code.less">
+    </None>
+    <None Include="Content\less\code.less">
       <Compile>False</Compile>
       <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\close.less">
+    </None>
+    <None Include="Content\less\close.less">
       <Compile>False</Compile>
       <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\carousel.less">
+    </None>
+    <None Include="Content\less\carousel.less">
       <Compile>False</Compile>
       <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\buttons.less">
+    </None>
+    <None Include="Content\less\buttons.less">
       <Compile>False</Compile>
       <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\button-groups.less">
+    </None>
+    <None Include="Content\less\button-groups.less">
       <Compile>False</Compile>
       <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\breadcrumbs.less">
+    </None>
+    <None Include="Content\less\breadcrumbs.less">
       <Compile>False</Compile>
       <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\bootstrap.less">
+    </None>
+    <None Include="Content\less\bootstrap.less">
       <Compile>False</Compile>
       <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\alerts.less">
+    </None>
+    <None Include="Content\less\alerts.less">
       <Compile>False</Compile>
       <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\accordion.less">
+    </None>
+    <None Include="Content\less\accordion.less">
       <Compile>False</Compile>
       <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\main.less">
+    </None>
+    <None Include="Content\less\main.less">
       <Compile>True</Compile>
       <Minify>True</Minify>
-    </Content>
-    <None Include="App_Data\aura.db" />
+    </None>
+    <Content Include="App_Data\aura.db" />
     <None Include="Properties\PublishProfiles\prod.ftp.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.min.js" />
