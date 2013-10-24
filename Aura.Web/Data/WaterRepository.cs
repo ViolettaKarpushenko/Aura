@@ -10,7 +10,7 @@ namespace Aura.Web.Data
         private WaterViewModel GetItems(string tableName)
         {
             var query = BuildAggregateQueryPattern(tableName, (int)Tables.Water, 3);
-            var stockData = Execute<WaterModel>(
+            var data = Execute<WaterModel>(
                 query,
                 (int)WaterColumns.RechnoiStok,
                 WaterColumns.RechnoiStok,
@@ -19,7 +19,7 @@ namespace Aura.Web.Data
                 (int)WaterColumns.ObemVody,
                 WaterColumns.ObemVody);
 
-            return new WaterViewModel { Items = stockData.OrderBy(stock => stock.RegionName) };
+            return new WaterViewModel { Items = data.OrderBy(stock => stock.RegionName) };
         }
 
         public WaterViewModel GetStocks()
@@ -29,7 +29,44 @@ namespace Aura.Web.Data
 
         public WaterViewModel GetUse()
         {
-            return GetItems("use");
+            var useQuery = BuildAggregateQueryPattern("use", (int)Tables.Water, 6);
+            var useData = Execute<WaterModel>(
+                useQuery,
+                (int)WaterColumns.VodyIzato,
+                WaterColumns.VodyIzato,
+                (int)WaterColumns.VodyIspolzovano,
+                WaterColumns.VodyIspolzovano,
+                (int)WaterColumns.HbPotreblenie,
+                WaterColumns.HbPotreblenie,
+                (int)WaterColumns.PPotreblenie,
+                WaterColumns.PPotreblenie,
+                (int)WaterColumns.ShPotreblenie,
+                WaterColumns.ShPotreblenie,
+                (int)WaterColumns.RhPotreblenie,
+                WaterColumns.RhPotreblenie).AsParallel();
+
+            var stocksQuery = BuildAggregateQueryPattern("stocks", (int)Tables.Water, 1);
+            var stocksData = Execute<WaterModel>(
+                stocksQuery,
+                (int)WaterColumns.ObemVody,
+                WaterColumns.ObemVody).AsParallel();
+
+            var items = from use in useData
+                        join stock in stocksData on use.RegionId equals stock.RegionId
+                        select new WaterModel
+                            {
+                                RegionId = use.RegionId,
+                                RegionName = use.RegionName,
+                                VodyIzato = use.VodyIzato,
+                                VodyIspolzovano = use.VodyIspolzovano,
+                                HbPotreblenie = use.HbPotreblenie,
+                                PPotreblenie = use.PPotreblenie,
+                                ShPotreblenie = use.ShPotreblenie,
+                                RhPotreblenie = use.RhPotreblenie,
+                                ObemVody = stock.ObemVody
+                            };
+
+            return new WaterViewModel { Items = items.OrderBy(stock => stock.RegionName) };
         }
 
         public ResultsViewModel GetResult()

@@ -36,7 +36,13 @@ function initItemUpdate($, tableId, url) {
                     value: value
                 };
 
-                $.post(url, model, function (result) {
+                var postUrl = url;
+                var alterUrl = sender.attr('alter-update-action');
+                if (alterUrl) {
+                    postUrl = alterUrl;
+                }
+
+                $.post(postUrl, model, function (result) {
                     if (!result.success) {
                         alert(result.message);
                     } else {
