@@ -1,4 +1,6 @@
 using Aura.Web.Common;
+using Aura.Web.Common.Columns;
+using Aura.Web.Interfaces;
 using Aura.Web.Models;
 using System.Linq;
 
@@ -6,25 +8,19 @@ namespace Aura.Web.Data
 {
     public class BiologicalRepository : Repository, IEntityRepository<BiologicalViewModel>
     {
-        private BiologicalViewModel GetItems(string tableName)
+        private static BiologicalViewModel GetItems(string tableName)
         {
-            var query = BuildAggregateQueryPattern(tableName, (int)Tables.Biological, 6);
-            var stockData = Execute<BiologicalModel>(
-                query,
-                (int)BiologicalColumns.Drevesina,
+            var data = ExecuteAggregateQuery<BiologicalModel>(
+                tableName,
+                (int)Tables.Biological,
                 BiologicalColumns.Drevesina,
-                (int)BiologicalColumns.Lekarstvennye,
                 BiologicalColumns.Lekarstvennye,
-                (int)BiologicalColumns.Pishcevye,
                 BiologicalColumns.Pishcevye,
-                (int)BiologicalColumns.Griby,
                 BiologicalColumns.Griby,
-                (int)BiologicalColumns.Fitoplankton,
                 BiologicalColumns.Fitoplankton,
-                (int)BiologicalColumns.Makrofity,
                 BiologicalColumns.Makrofity);
 
-            return new BiologicalViewModel { Items = stockData.OrderBy(stock => stock.RegionName) };
+            return new BiologicalViewModel { Items = data.OrderBy(stock => stock.RegionName) };
         }
 
         public BiologicalViewModel GetStocks()
@@ -34,7 +30,25 @@ namespace Aura.Web.Data
 
         public BiologicalViewModel GetUse()
         {
-            return GetItems("use");
+            var useData = ExecuteAggregateQuery<BiologicalModel>("use", (int)Tables.Biological, BiologicalColumns.ZagotovlenoMakrofitov, BiologicalColumns.ZagotovlenoFitoplankton)
+                                .AsParallel();
+            var stocksData = ExecuteAggregateQuery<BiologicalModel>("stocks", (int)Tables.Biological, BiologicalColumns.Makrofity, BiologicalColumns.Fitoplankton)
+                                .AsParallel();
+
+            var items = from use in useData
+                        join stock in stocksData on use.RegionId equals stock.RegionId
+                        select new BiologicalModel
+                        {
+                            RegionId = use.RegionId,
+                            RegionName = use.RegionName,
+
+                            ZagotovlenoMakrofitov = use.ZagotovlenoMakrofitov,
+                            ZagotovlenoFitoplankton = use.ZagotovlenoFitoplankton,
+                            Makrofity = stock.Makrofity,
+                            Fitoplankton = stock.Fitoplankton
+                        };
+
+            return new BiologicalViewModel { Items = items.OrderBy(stock => stock.RegionName) };
         }
 
         public ResultsViewModel GetResult()

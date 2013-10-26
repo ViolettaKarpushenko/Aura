@@ -22,12 +22,25 @@
     <IISExpressUseClassicPipelineMode />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="Dapper">
       <HintPath>..\packages\Dapper.1.12.1\lib\net40\Dapper.dll</HintPath>
     </Reference>
+    <Reference Include="dotless.Core">
+      <HintPath>..\packages\dotless.1.3.1.0\lib\dotless.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.3.0.1.10\lib\net40\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.SQLite">
@@ -36,6 +49,12 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.1\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization.Less">
+      <HintPath>..\packages\System.Web.Optimization.Less.1.2.3\lib\net40\System.Web.Optimization.Less.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -50,17 +69,20 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="WebGrease">
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\AnimalColumns.cs" />
-    <Compile Include="Common\BiologicalColumns.cs" />
-    <Compile Include="Common\WaterColumns.cs" />
-    <Compile Include="Common\TerritorialColumns.cs" />
-    <Compile Include="Common\MineralsColumns.cs" />
+    <Compile Include="Common\Columns\AnimalColumns.cs" />
+    <Compile Include="Common\Columns\BiologicalColumns.cs" />
+    <Compile Include="Common\Columns\WaterColumns.cs" />
+    <Compile Include="Common\Columns\TerritorialColumns.cs" />
+    <Compile Include="Common\Columns\MineralsColumns.cs" />
     <Compile Include="Common\PresentationException.cs" />
     <Compile Include="Common\Tables.cs" />
+    <Compile Include="Controllers\EntityControllerBase.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\IEntityController.cs" />
     <Compile Include="Controllers\IntegratedController.cs" />
     <Compile Include="Controllers\RegionsController.cs" />
     <Compile Include="Controllers\ResultController.cs" />
@@ -69,15 +91,18 @@
     <Compile Include="Data\AnimalRepository.cs" />
     <Compile Include="Data\BiologicalRepository.cs" />
     <Compile Include="Data\CommonRepository.cs" />
-    <Compile Include="Data\IEntityRepository.cs" />
     <Compile Include="Data\MineralRepository.cs" />
     <Compile Include="Data\RegionsRepository.cs" />
     <Compile Include="Data\Repository.cs" />
-    <Compile Include="Data\TerritirialRepository.cs" />
+    <Compile Include="Data\TerritorialRepository.cs" />
     <Compile Include="Data\WaterRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\ICommonRepository.cs" />
+    <Compile Include="Interfaces\IEntityController.cs" />
+    <Compile Include="Interfaces\IEntityRepository.cs" />
+    <Compile Include="Interfaces\IRegionsRepository.cs" />
     <Compile Include="Models\AnimalModel.cs" />
     <Compile Include="Models\AnimalViewModel.cs" />
     <Compile Include="Models\BiologicalModel.cs" />
@@ -92,9 +117,13 @@
     <Compile Include="Models\TerritorialViewModel.cs" />
     <Compile Include="Models\WaterModel.cs" />
     <Compile Include="Models\WaterViewModel.cs" />
+    <Compile Include="AuraModule.cs" />
+    <Compile Include="AuraControllerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\images\glyphicons-halflings-white.png" />
+    <Content Include="Content\images\glyphicons-halflings.png" />
     <Content Include="Content\images\home\image001.png" />
     <Content Include="Content\images\home\image002.png" />
     <Content Include="Content\images\home\image003.png" />
@@ -117,8 +146,9 @@
     <Content Include="Content\images\home\image020.png" />
     <Content Include="Content\less\images\glyphicons-halflings-white.png" />
     <Content Include="Content\less\images\glyphicons-halflings.png" />
-    <Content Include="Content\less\main.css" />
-    <Content Include="Content\less\main.min.css" />
+    <Content Include="Content\less\main.css">
+      <DependentUpon>main.less</DependentUpon>
+    </Content>
     <Content Include="Global.asax" />
     <None Include="Content\less\wells.less">
       <Compile>False</Compile>
@@ -262,16 +292,21 @@
     </None>
     <None Include="Content\less\main.less">
       <Compile>True</Compile>
-      <Minify>True</Minify>
+      <Minify>False</Minify>
     </None>
     <Content Include="App_Data\aura.db" />
     <None Include="Properties\PublishProfiles\prod.ftp.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
+    <Content Include="robots.txt" />
+    <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />
     <Content Include="Scripts\utils.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

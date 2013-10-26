@@ -17,5 +17,9 @@ namespace Aura.Web.Models
         public double Fitoplankton { get; set; }
 
         public double Makrofity { get; set; }
+
+        public double ZagotovlenoMakrofitov { get; set; }
+
+        public double ZagotovlenoFitoplankton { get; set; }
     }
 }

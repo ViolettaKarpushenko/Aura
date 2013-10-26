@@ -1,4 +1,4 @@
-namespace Aura.Web.Common
+namespace Aura.Web.Common.Columns
 {
     public enum WaterColumns
     {

@@ -1,6 +1,40 @@
-﻿@{
+﻿@model AnimalViewModel
+@{
     ViewBag.TabId = 3;
     ViewBag.SubTabId = 5;
     ViewBag.Title = "Использование - Животного мира";
     Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div style="overflow-x: auto">
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr class="text-center">
+                <th>Район</th>
+                <th>Сезонная биомасса зоопланктона, т</th>
+                <th>Заготовлено зоопланктона, кг/год</th>
+                <th>Сезонная биомасса зообентоса, т</th>
+                <th>Заготовлено зообентоса, кг/год</th>
+                <th>Промысловый запас рыбы, ц</th>
+                <th>Вылов рыбы, ц/год</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr rowid="@item.RegionId">
+                    <td>@item.RegionName</td>
+                    <td colid="@((int)AnimalColumns.Zooplankton)" alter-update-action="@Url.Action("Update", "Stocks")">@item.Zooplankton</td>
+                    <td colid="@((int)AnimalColumns.ZagotovlenoZooplankton)">@item.ZagotovlenoZooplankton</td>
+                    <td colid="@((int)AnimalColumns.Bentos)" alter-update-action="@Url.Action("Update", "Stocks")">@item.Bentos</td>
+                    <td colid="@((int)AnimalColumns.ZagotovlenoBentos)">@item.ZagotovlenoBentos</td>
+                    <td colid="@((int)AnimalColumns.Ryba)" alter-update-action="@Url.Action("Update", "Stocks")">@item.Ryba</td>
+                    <td colid="@((int)AnimalColumns.ZagotovlenoRyba)">@item.ZagotovlenoRyba</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@section scripts
+{
+    <script type="text/javascript">initItemUpdate($, '@((int)Tables.Animal)', '@Url.Action("Update", "Use")');</script>
 }

@@ -1,12 +1,21 @@
-﻿using System.Globalization;
-using System.Threading;
+﻿using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using System.Web.Optimization;
+using Ninject;
 
 namespace Aura.Web
 {
-    public class MvcApplication : System.Web.HttpApplication
+    public class MvcApplication : HttpApplication
     {
+        private static IKernel _kernel;
+
+        private static void RegisterGlobalDependancies()
+        {
+            _kernel = new StandardKernel(new AuraModule());
+            ControllerBuilder.Current.SetControllerFactory(new AuraControllerFactory(_kernel));
+        }
+
         protected void Application_Start()
         {
             RouteTable.Routes.Clear();
@@ -14,10 +23,12 @@ namespace Aura.Web
             RouteTable.Routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             RouteTable.Routes.IgnoreRoute("{resource}.ashx/{*pathInfo}");
 
-            RouteTable.Routes.MapRoute(
-                "Default",
-                "{controller}/{action}",
-                new { controller = "Home", action = "Index" });
+            RouteTable.Routes.MapRoute("Default", "{controller}/{action}", new { controller = "Home", action = "Index" });
+
+            RegisterGlobalDependancies();
+
+            BundleTable.Bundles.Add(new LessBundle("~/Content/less/styles.css").Include("~/Content/less/main.less"));
+            BundleTable.Bundles.Add(new ScriptBundle("~/Scripts/scripts.js").Include("~/Scripts/jquery-{version}.js", "~/Scripts/bootstrap.js", "~/Scripts/utils.js"));
         }
     }
 }

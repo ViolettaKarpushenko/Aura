@@ -1,7 +1,4 @@
-﻿@using Aura.Web.Common
-@using Aura.Web.Models
-
-@model BiologicalViewModel
+﻿@model BiologicalViewModel
 
 @{
     ViewBag.TabId = 3;
@@ -14,12 +11,10 @@
     <thead>
         <tr class="text-center">
             <th>Район</th>
-            <th>Общий запас древесины,<br />тыс. м куб</th>
-            <th>Эксплуатационный запас лекарственных растений,<br />т</th>
-            <th>Эксплуатационный запас пищевых растений,<br />т</th>
-            <th>Эксплуатационный запас грибов,<br />т</th>
-            <th>Сезонная биомасса фитопланктона,<br />т</th>
-            <th>Промысловый запас макрофитов,<br />т</th>
+            <th>Промысловый запас макрофитов, т</th>
+            <th>Заготовлено макрофитов, кг/год</th>
+            <th>Сезонная биомасса фитопланктона, т</th>
+            <th>Заготовлено фитопланктона, кг/год</th>
         </tr>
     </thead>
     <tbody>
@@ -27,12 +22,10 @@
         {
             <tr rowid="@item.RegionId">
                 <td>@item.RegionName</td>
-                <td colid="@((int)BiologicalColumns.Drevesina)">@item.Drevesina</td>
-                <td colid="@((int)BiologicalColumns.Lekarstvennye)">@item.Lekarstvennye</td>
-                <td colid="@((int)BiologicalColumns.Pishcevye)">@item.Pishcevye</td>
-                <td colid="@((int)BiologicalColumns.Griby)">@item.Griby</td>
-                <td colid="@((int)BiologicalColumns.Fitoplankton)">@item.Fitoplankton</td>
-                <td colid="@((int)BiologicalColumns.Makrofity)">@item.Makrofity</td>
+                <td colid="@((int)BiologicalColumns.Makrofity)" alter-update-action="@Url.Action("Update", "Stocks")">@item.Makrofity</td>
+                <td colid="@((int)BiologicalColumns.ZagotovlenoMakrofitov)">@item.ZagotovlenoMakrofitov</td>
+                <td colid="@((int)BiologicalColumns.Fitoplankton)" alter-update-action="@Url.Action("Update", "Stocks")">@item.Fitoplankton</td>
+                <td colid="@((int)BiologicalColumns.ZagotovlenoFitoplankton)">@item.ZagotovlenoFitoplankton</td>
             </tr>
         }
     </tbody>

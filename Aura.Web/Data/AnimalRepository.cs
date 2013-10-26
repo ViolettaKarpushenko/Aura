@@ -1,79 +1,71 @@
 ﻿using System.Linq;
 
 using Aura.Web.Common;
+using Aura.Web.Common.Columns;
+using Aura.Web.Interfaces;
 using Aura.Web.Models;
 
 namespace Aura.Web.Data
 {
     public class AnimalRepository : Repository, IEntityRepository<AnimalViewModel>
     {
-        private AnimalViewModel GetItems(string tableName)
-        {
-            var query = BuildAggregateQueryPattern(tableName, (int)Tables.Animal, 25);
-            var stockData = Execute<AnimalModel>(
-                query,
-                (int)AnimalColumns.Los,
-                AnimalColumns.Los,
-                (int)AnimalColumns.Olen,
-                AnimalColumns.Olen,
-                (int)AnimalColumns.Kosula,
-                AnimalColumns.Kosula,
-                (int)AnimalColumns.Kaban,
-                AnimalColumns.Kaban,
-                (int)AnimalColumns.ZayacBelak,
-                AnimalColumns.ZayacBelak,
-                (int)AnimalColumns.ZayacRusak,
-                AnimalColumns.ZayacRusak,
-                (int)AnimalColumns.Kunica,
-                AnimalColumns.Kunica,
-                (int)AnimalColumns.Lisica,
-                AnimalColumns.Lisica,
-                (int)AnimalColumns.Ondatra,
-                AnimalColumns.Ondatra,
-                (int)AnimalColumns.Norka,
-                AnimalColumns.Norka,
-                (int)AnimalColumns.Bobr,
-                AnimalColumns.Bobr,
-                (int)AnimalColumns.Volk,
-                AnimalColumns.Volk,
-                (int)AnimalColumns.Barsuk,
-                AnimalColumns.Barsuk,
-                (int)AnimalColumns.Vydra,
-                AnimalColumns.Vydra,
-                (int)AnimalColumns.EnotovidnayaSobaka,
-                AnimalColumns.EnotovidnayaSobaka,
-                (int)AnimalColumns.Rys,
-                AnimalColumns.Rys,
-                (int)AnimalColumns.Belka,
-                AnimalColumns.Belka,
-                (int)AnimalColumns.Gluhar,
-                AnimalColumns.Gluhar,
-                (int)AnimalColumns.Teterev,
-                AnimalColumns.Teterev,
-                (int)AnimalColumns.Rabchik,
-                AnimalColumns.Rabchik,
-                (int)AnimalColumns.SerayaKuropatka,
-                AnimalColumns.SerayaKuropatka,
-                (int)AnimalColumns.DikayaUtka,
-                AnimalColumns.DikayaUtka,
-                (int)AnimalColumns.Zooplankton,
-                AnimalColumns.Zooplankton,
-                (int)AnimalColumns.Bentos,
-                AnimalColumns.Bentos,
-                (int)AnimalColumns.Ryba,
-                AnimalColumns.Ryba);
-
-            return new AnimalViewModel { Items = stockData.OrderBy(stock => stock.RegionName) };
-        }
-
         public AnimalViewModel GetStocks()
         {
-            return GetItems("stocks");
+            var data = ExecuteAggregateQuery<AnimalModel>(
+                "stocks",
+                (int)Tables.Animal,
+                AnimalColumns.Los,
+                AnimalColumns.Olen,
+                AnimalColumns.Kosula,
+                AnimalColumns.Kaban,
+                AnimalColumns.ZayacBelak,
+                AnimalColumns.ZayacRusak,
+                AnimalColumns.Kunica,
+                AnimalColumns.Lisica,
+                AnimalColumns.Ondatra,
+                AnimalColumns.Norka,
+                AnimalColumns.Bobr,
+                AnimalColumns.Volk,
+                AnimalColumns.Barsuk,
+                AnimalColumns.Vydra,
+                AnimalColumns.EnotovidnayaSobaka,
+                AnimalColumns.Rys,
+                AnimalColumns.Belka,
+                AnimalColumns.Gluhar,
+                AnimalColumns.Teterev,
+                AnimalColumns.Rabchik,
+                AnimalColumns.SerayaKuropatka,
+                AnimalColumns.DikayaUtka,
+                AnimalColumns.Zooplankton,
+                AnimalColumns.Bentos,
+                AnimalColumns.Ryba);
+
+            return new AnimalViewModel { Items = data.OrderBy(stock => stock.RegionName) };
         }
 
         public AnimalViewModel GetUse()
         {
-            return GetItems("use");
+            var useData = ExecuteAggregateQuery<AnimalModel>("use", (int)Tables.Animal, AnimalColumns.ZagotovlenoZooplankton, AnimalColumns.ZagotovlenoBentos, AnimalColumns.ZagotovlenoRyba)
+                                .AsParallel();
+            var stocksData = ExecuteAggregateQuery<AnimalModel>("stocks", (int)Tables.Animal, AnimalColumns.Zooplankton, AnimalColumns.Bentos, AnimalColumns.Ryba)
+                                .AsParallel();
+
+            var items = from use in useData
+                        join stock in stocksData on use.RegionId equals stock.RegionId
+                        select new AnimalModel
+                        {
+                            RegionId = use.RegionId,
+                            RegionName = use.RegionName,
+
+                            ZagotovlenoZooplankton = use.ZagotovlenoZooplankton,
+                            ZagotovlenoBentos = use.ZagotovlenoBentos,
+                            ZagotovlenoRyba = use.ZagotovlenoRyba,
+                            Zooplankton = stock.Zooplankton,
+                            Bentos = stock.Bentos,
+                            Ryba = stock.Ryba
+                        };
+
+            return new AnimalViewModel { Items = items.OrderBy(stock => stock.RegionName) };
         }
 
         public ResultsViewModel GetResult()

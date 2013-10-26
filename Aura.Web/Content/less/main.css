@@ -5262,36 +5262,64 @@ a.badge:focus {
 .affix {
   position: fixed;
 }
-#content {
+.container-fluid.content,
+.container.content {
   padding-top: 60px;
+  min-height: 700px;
 }
-#region-view .edit-region,
-#region-view .delete-region,
-#region-view .save-region,
-#region-view .cancel-save-region,
-#region-view .add-region,
-#region-view .cancel-add-region {
+.container-fluid.content #region-view table,
+.container.content #region-view table {
+  width: 500px;
+  margin: auto;
+}
+.container-fluid.content #region-view > button,
+.container.content #region-view > button {
+  margin: auto;
+  display: block;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+.container-fluid.content #region-view .edit-region,
+.container.content #region-view .edit-region,
+.container-fluid.content #region-view .delete-region,
+.container.content #region-view .delete-region,
+.container-fluid.content #region-view .save-region,
+.container.content #region-view .save-region,
+.container-fluid.content #region-view .cancel-save-region,
+.container.content #region-view .cancel-save-region,
+.container-fluid.content #region-view .add-region,
+.container.content #region-view .add-region,
+.container-fluid.content #region-view .cancel-add-region,
+.container.content #region-view .cancel-add-region {
   cursor: pointer;
 }
-#region-view .save-region,
-#region-view .cancel-save-region {
+.container-fluid.content #region-view .save-region,
+.container.content #region-view .save-region,
+.container-fluid.content #region-view .cancel-save-region,
+.container.content #region-view .cancel-save-region {
   display: none;
 }
-#region-view input.region-name {
+.container-fluid.content #region-view input.region-name,
+.container.content #region-view input.region-name {
   display: none;
 }
-#region-view tr[row-id=null] {
+.container-fluid.content #region-view tr[row-id=null],
+.container.content #region-view tr[row-id=null] {
   display: none;
 }
-#region-view tr,
-#region-view tr td {
+.container-fluid.content #region-view tr,
+.container.content #region-view tr,
+.container-fluid.content #region-view tr td,
+.container.content #region-view tr td {
   height: 20px;
 }
-#region-view input.new-region-name {
+.container-fluid.content #region-view input.new-region-name,
+.container.content #region-view input.new-region-name {
   margin: 0;
   width: 400px;
   height: 15px;
 }
-#region-view span.help-inline {
+.container-fluid.content #region-view span.help-inline,
+.container.content #region-view span.help-inline {
   color: #e04100;
 }

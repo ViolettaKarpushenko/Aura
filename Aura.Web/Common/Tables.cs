@@ -6,7 +6,6 @@ namespace Aura.Web.Common
         Biological = 2,
         Territorial = 3,
         Water = 4,
-        Animal = 5,
-        Economic = 6
+        Animal = 5
     }
 }

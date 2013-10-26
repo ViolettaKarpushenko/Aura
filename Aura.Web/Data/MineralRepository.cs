@@ -1,31 +1,27 @@
 using System.Linq;
 
 using Aura.Web.Common;
+using Aura.Web.Common.Columns;
+using Aura.Web.Interfaces;
 using Aura.Web.Models;
 
 namespace Aura.Web.Data
 {
     public class MineralRepository : Repository, IEntityRepository<MineralViewModel>
     {
-        private MineralViewModel GetItems(string tableName)
+        private static MineralViewModel GetItems(string tableName)
         {
-            var query = BuildAggregateQueryPattern(tableName, (int)Tables.Minerals, 6);
-            var stockData = Execute<MineralModel>(
-                query,
-                (int)MineralsColumns.Dolomity,
+            var data = ExecuteAggregateQuery<MineralModel>(
+                tableName,
+                (int)Tables.Minerals,
                 MineralsColumns.Dolomity,
-                (int)MineralsColumns.Glinistye,
                 MineralsColumns.Glinistye,
-                (int)MineralsColumns.Peski,
                 MineralsColumns.Peski,
-                (int)MineralsColumns.Torf,
                 MineralsColumns.Torf,
-                (int)MineralsColumns.GravinoPeschanye,
                 MineralsColumns.GravinoPeschanye,
-                (int)MineralsColumns.Sapropel,
                 MineralsColumns.Sapropel);
 
-            return new MineralViewModel { Items = stockData.OrderBy(stock => stock.RegionName) };
+            return new MineralViewModel { Items = data.OrderBy(stock => stock.RegionName) };
         }
 
         public MineralViewModel GetStocks()
@@ -35,7 +31,20 @@ namespace Aura.Web.Data
 
         public MineralViewModel GetUse()
         {
-            return GetItems("use");
+            var useData = ExecuteAggregateQuery<MineralModel>("use", (int)Tables.Minerals, MineralsColumns.DobychaSapropel).AsParallel();
+            var stocksData = ExecuteAggregateQuery<MineralModel>("stocks", (int)Tables.Minerals, MineralsColumns.Sapropel).AsParallel();
+
+            var items = from use in useData
+                        join stock in stocksData on use.RegionId equals stock.RegionId
+                        select new MineralModel
+                        {
+                            RegionId = use.RegionId,
+                            RegionName = use.RegionName,
+                            DobychaSapropel = use.DobychaSapropel,
+                            Sapropel = stock.Sapropel
+                        };
+
+            return new MineralViewModel { Items = items.OrderBy(stock => stock.RegionName) };
         }
 
         public ResultsViewModel GetResult()
@@ -50,7 +59,12 @@ namespace Aura.Web.Data
             var avgGravinoPeschanye = stocks.Average(stock => stock.GravinoPeschanye);
 
             var results = from stock in stocks
-                          let zapasyPhg = stock.Dolomity / avgDolomity + stock.Peski / avgPeski + stock.Glinistye / avgGlinistye + stock.GravinoPeschanye / avgGravinoPeschanye + stock.Torf / avgTorf + stock.Sapropel / avgSapropel
+                          let zapasyPhg = stock.Dolomity / avgDolomity +
+                                            stock.Peski / avgPeski +
+                                            stock.Glinistye / avgGlinistye +
+                                            stock.GravinoPeschanye / avgGravinoPeschanye +
+                                            stock.Torf / avgTorf +
+                                            stock.Sapropel / avgSapropel
                           let zapasyOzera = stock.Sapropel / avgSapropel
                           orderby stock.RegionName
                           select new ResultModel

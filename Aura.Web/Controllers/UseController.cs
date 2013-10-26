@@ -1,31 +1,39 @@
-﻿using System;
-using System.Web.Mvc;
-using Aura.Web.Data;
+﻿using System.Web.Mvc;
+using Aura.Web.Interfaces;
 using Aura.Web.Models;
 
 namespace Aura.Web.Controllers
 {
-    public class UseController : Controller, IEntityController
+    public class UseController : EntityControllerBase, IEntityController
     {
         private readonly IEntityRepository<MineralViewModel> _mineralRepository;
         private readonly IEntityRepository<BiologicalViewModel> _biologicalRepository;
         private readonly IEntityRepository<TerritorialViewModel> _territorialRepository;
         private readonly IEntityRepository<WaterViewModel> _waterRepository;
-        private readonly CommonRepository _commonRepository;
+        private readonly IEntityRepository<AnimalViewModel> _animalRepository;
 
-        public UseController()
+        public UseController(
+            IEntityRepository<MineralViewModel> mineralRepository,
+            IEntityRepository<BiologicalViewModel> biologicalRepository,
+            IEntityRepository<TerritorialViewModel> territorialRepository,
+            IEntityRepository<WaterViewModel> waterRepository,
+            IEntityRepository<AnimalViewModel> animalRepository,
+            ICommonRepository commonRepository)
+            : base("use", commonRepository)
         {
-            _mineralRepository = new MineralRepository();
-            _biologicalRepository = new BiologicalRepository();
-            _territorialRepository = new TerritorialRepository();
-            _waterRepository = new WaterRepository();
-            _commonRepository = new CommonRepository();
+            _mineralRepository = mineralRepository;
+            _biologicalRepository = biologicalRepository;
+            _territorialRepository = territorialRepository;
+            _waterRepository = waterRepository;
+            _animalRepository = animalRepository;
         }
 
         [HttpGet]
         public ActionResult Animal()
         {
-            throw new NotImplementedException();
+            var model = _animalRepository.GetUse();
+
+            return View(model);
         }
 
         [HttpGet]
@@ -58,20 +66,6 @@ namespace Aura.Web.Controllers
             var model = _waterRepository.GetUse();
 
             return View(model);
-        }
-
-        [HttpPost]
-        public JsonResult Update(int tableId, int columnId, int regionId, double value)
-        {
-            try
-            {
-                _commonRepository.UpdateValue("use", tableId, columnId, regionId, value);
-                return Json(new { success = true });
-            }
-            catch (Exception exception)
-            {
-                return Json(new { success = false, message = exception.Message });
-            }
         }
     }
 }

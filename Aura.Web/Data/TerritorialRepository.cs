@@ -1,26 +1,24 @@
 ﻿using System.Linq;
 using Aura.Web.Common;
+using Aura.Web.Common.Columns;
+using Aura.Web.Interfaces;
 using Aura.Web.Models;
 
 namespace Aura.Web.Data
 {
     public class TerritorialRepository : Repository, IEntityRepository<TerritorialViewModel>
     {
-        private TerritorialViewModel GetItems(string tableName)
+        private static TerritorialViewModel GetItems(string tableName)
         {
-            var query = BuildAggregateQueryPattern(tableName, (int)Tables.Territorial, 4);
-            var stockData = Execute<TerritorialModel>(
-                query,
-                (int)TerritorialColumns.Plochad,
+            var data = ExecuteAggregateQuery<TerritorialModel>(
+                tableName,
+                (int)Tables.Territorial,
                 TerritorialColumns.Plochad,
-                (int)TerritorialColumns.Zemelnye,
                 TerritorialColumns.Zemelnye,
-                (int)TerritorialColumns.Sh,
                 TerritorialColumns.Sh,
-                (int)TerritorialColumns.Ozernye,
                 TerritorialColumns.Ozernye);
 
-            return new TerritorialViewModel { Items = stockData.OrderBy(stock => stock.RegionName) };
+            return new TerritorialViewModel { Items = data.OrderBy(stock => stock.RegionName) };
         }
 
         public TerritorialViewModel GetStocks()
@@ -30,7 +28,23 @@ namespace Aura.Web.Data
 
         public TerritorialViewModel GetUse()
         {
-            return GetItems("use");
+            var stocksData = ExecuteAggregateQuery<TerritorialModel>("stocks", (int)Tables.Territorial, TerritorialColumns.Plochad)
+                                .AsParallel();
+            var useData = ExecuteAggregateQuery<TerritorialModel>("use", (int)Tables.Territorial, TerritorialColumns.VmestimostRekreacionnyhZon, TerritorialColumns.PlochadOopt)
+                                .AsParallel();
+
+            var items = from use in useData
+                        join stock in stocksData on use.RegionId equals stock.RegionId
+                        select new TerritorialModel
+                        {
+                            RegionId = use.RegionId,
+                            RegionName = use.RegionName,
+                            VmestimostRekreacionnyhZon = use.VmestimostRekreacionnyhZon,
+                            PlochadOopt = use.PlochadOopt,
+                            Plochad = stock.Plochad
+                        };
+
+            return new TerritorialViewModel { Items = items.OrderBy(stock => stock.RegionName) };
         }
 
         public ResultsViewModel GetResult()

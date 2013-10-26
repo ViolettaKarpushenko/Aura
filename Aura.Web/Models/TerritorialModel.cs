@@ -13,5 +13,9 @@ namespace Aura.Web.Models
         public double Sh { get; set; }
 
         public double Ozernye { get; set; }
+
+        public double VmestimostRekreacionnyhZon { get; set; }
+
+        public double PlochadOopt { get; set; }
     }
 }

@@ -1,28 +1,33 @@
-﻿using System;
-using System.Web.Mvc;
-using Aura.Web.Data;
+﻿using System.Web.Mvc;
+using Aura.Web.Interfaces;
 using Aura.Web.Models;
 
 namespace Aura.Web.Controllers
 {
-    public class StocksController : Controller, IEntityController
+    public class StocksController : EntityControllerBase, IEntityController
     {
         private readonly IEntityRepository<MineralViewModel> _mineralRepository;
         private readonly IEntityRepository<BiologicalViewModel> _biologicalRepository;
         private readonly IEntityRepository<TerritorialViewModel> _territorialRepository;
         private readonly IEntityRepository<WaterViewModel> _waterRepository;
         private readonly IEntityRepository<AnimalViewModel> _animalRepository;
-        private readonly CommonRepository _commonRepository;
 
-        public StocksController()
+        public StocksController(
+            IEntityRepository<MineralViewModel> mineralRepository,
+            IEntityRepository<BiologicalViewModel> biologicalRepository,
+            IEntityRepository<TerritorialViewModel> territorialRepository,
+            IEntityRepository<WaterViewModel> waterRepository,
+            IEntityRepository<AnimalViewModel> animalRepository,
+            ICommonRepository commonRepository)
+            : base("stocks", commonRepository)
         {
-            _mineralRepository = new MineralRepository();
-            _biologicalRepository = new BiologicalRepository();
-            _territorialRepository = new TerritorialRepository();
-            _waterRepository = new WaterRepository();
-            _commonRepository = new CommonRepository();
-            _animalRepository = new AnimalRepository();
+            _mineralRepository = mineralRepository;
+            _biologicalRepository = biologicalRepository;
+            _territorialRepository = territorialRepository;
+            _waterRepository = waterRepository;
+            _animalRepository = animalRepository;
         }
+
 
         [HttpGet]
         public ActionResult Animal()
@@ -62,20 +67,6 @@ namespace Aura.Web.Controllers
             var model = _waterRepository.GetStocks();
 
             return View(model);
-        }
-
-        [HttpPost]
-        public JsonResult Update(int tableId, int columnId, int regionId, double value)
-        {
-            try
-            {
-                _commonRepository.UpdateValue("stocks", tableId, columnId, regionId, value);
-                return Json(new { success = true });
-            }
-            catch (Exception exception)
-            {
-                return Json(new { success = false, message = exception.Message });
-            }
         }
     }
 }

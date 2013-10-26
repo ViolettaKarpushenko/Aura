@@ -2,17 +2,17 @@
 using System.Web.Mvc;
 
 using Aura.Web.Common;
-using Aura.Web.Data;
+using Aura.Web.Interfaces;
 
 namespace Aura.Web.Controllers
 {
     public class RegionsController : Controller
     {
-        private readonly RegionsRepository _regionsRepository;
+        private readonly IRegionsRepository _regionsRepository;
 
-        public RegionsController()
+        public RegionsController(IRegionsRepository regionsRepository)
         {
-            _regionsRepository = new RegionsRepository();
+            _regionsRepository = regionsRepository;
         }
 
         [HttpGet]

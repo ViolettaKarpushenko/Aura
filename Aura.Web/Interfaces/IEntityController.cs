@@ -1,6 +1,6 @@
-﻿using System.Web.Mvc;
+using System.Web.Mvc;
 
-namespace Aura.Web.Controllers
+namespace Aura.Web.Interfaces
 {
     public interface IEntityController
     {

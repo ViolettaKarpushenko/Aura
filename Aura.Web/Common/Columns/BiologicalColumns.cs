@@ -1,4 +1,4 @@
-namespace Aura.Web.Common
+namespace Aura.Web.Common.Columns
 {
     public enum BiologicalColumns
     {
@@ -7,6 +7,10 @@ namespace Aura.Web.Common
         Pishcevye = 3,
         Griby = 4,
         Fitoplankton = 5,
-        Makrofity = 6
+        Makrofity = 6,
+
+        // Use.
+        ZagotovlenoMakrofitov = 7,
+        ZagotovlenoFitoplankton = 8
     }
 }

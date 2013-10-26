@@ -1,4 +1,5 @@
-﻿@using Aura.Web.Controllers
+﻿@using System.Web.Optimization
+@using Aura.Web.Controllers
 
 <!DOCTYPE html>
 <html>
@@ -6,7 +7,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@("Aura - " + ViewBag.Title)</title>
-    <link type="text/css" rel="stylesheet" href="@Url.Content("~/Content/less/main.min.css")" />
+    @Styles.Render("~/Content/less/styles.css")
+    <link type="text/css" rel="stylesheet" href="@Url.Content("~/Content/less/main.css")" />
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -64,14 +66,14 @@
                             </ul>
                         </li>
                         <li tabid="6">
-                            <a href="@Url.Action("Index", "Regions")">Добавить район</a>
+                            <a href="@Url.Action("Index", "Regions")">Районы</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
-    <div class="container-fluid">
+    <div class="container-fluid content">
         <div class="row-fluid">
             <div class="span12" id="content">
                 @RenderBody()
@@ -83,9 +85,7 @@
         Aura&nbsp;@("v" + typeof(HomeController).Assembly.GetName().Version)&nbsp;&copy;&nbsp;@DateTime.Now.Year
     </footer>
 
-    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.9.1.min.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Scripts/utils.js")"></script>
+    @Scripts.Render("~/Scripts/scripts.js")
     <script type="text/javascript">initMenu($, '@ViewBag.TabId', '@ViewBag.SubTabId');</script>
 
     @RenderSection("scripts", false)

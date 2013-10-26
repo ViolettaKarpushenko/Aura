@@ -1,10 +1,11 @@
 using System.Linq;
 using Aura.Web.Common;
+using Aura.Web.Interfaces;
 using Aura.Web.Models;
 
 namespace Aura.Web.Data
 {
-    public class RegionsRepository : Repository
+    public class RegionsRepository : Repository, IRegionsRepository
     {
         public RegionsModel GetRegions()
         {

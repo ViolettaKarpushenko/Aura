@@ -17,5 +17,7 @@ namespace Aura.Web.Models
         public double Torf { get; set; }
 
         public double GravinoPeschanye { get; set; }
+
+        public double DobychaSapropel { get; set; }
     }
 }

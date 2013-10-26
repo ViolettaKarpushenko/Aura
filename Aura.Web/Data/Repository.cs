@@ -1,10 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Web;
-
 using Dapper;
 
 namespace Aura.Web.Data
@@ -51,7 +51,28 @@ namespace Aura.Web.Data
             }
         }
 
-        protected string BuildAggregateQueryPattern(string tableName, int tableId, int columnQuantity)
+        protected static IEnumerable<T> ExecuteAggregateQuery<T>(string tableName, int tableId, params Enum[] columns)
+        {
+            var content = CreateAggregatePatternFillContent(columns).ToArray();
+            var queryPattern = BuildAggregateQueryPattern(tableName, tableId, columns.Length);
+            var query = string.Format(queryPattern, content);
+
+            return Execute<T>(query);
+        }
+
+        private static IEnumerable<object> CreateAggregatePatternFillContent(IEnumerable<Enum> columns)
+        {
+            foreach (var column in columns)
+            {
+                var value = (ulong)Convert.ChangeType(column, typeof(ulong));
+                var name = Enum.GetName(column.GetType(), column);
+
+                yield return value;
+                yield return name;
+            }
+        }
+
+        protected static string BuildAggregateQueryPattern(string tableName, int tableId, int columnQuantity)
         {
             var query = new StringBuilder();
             query.Append("SELECT ");

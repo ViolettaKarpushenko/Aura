@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using Aura.Web.Data;
+using Aura.Web.Interfaces;
 using Aura.Web.Models;
 
 namespace Aura.Web.Controllers
@@ -11,13 +12,18 @@ namespace Aura.Web.Controllers
         private readonly IEntityRepository<TerritorialViewModel> _territorialRepository;
         private readonly IEntityRepository<WaterViewModel> _waterRepository;
 
-        public ResultController()
+        public ResultController(
+            IEntityRepository<MineralViewModel> mineralRepository,
+            IEntityRepository<BiologicalViewModel> biologicalRepository,
+            IEntityRepository<TerritorialViewModel> territorialRepository,
+            IEntityRepository<WaterViewModel> waterRepository)
         {
-            _mineralRepository = new MineralRepository();
-            _biologicalRepository = new BiologicalRepository();
-            _territorialRepository = new TerritorialRepository();
-            _waterRepository = new WaterRepository();
+            _mineralRepository = mineralRepository;
+            _biologicalRepository = biologicalRepository;
+            _territorialRepository = territorialRepository;
+            _waterRepository = waterRepository;
         }
+
 
         [HttpGet]
         public ActionResult Animal()

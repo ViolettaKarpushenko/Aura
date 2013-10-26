@@ -1,7 +1,4 @@
-﻿@using Aura.Web.Common
-@using Aura.Web.Models
-
-@model MineralViewModel
+﻿@model MineralViewModel
 
 @{
     ViewBag.TabId = 3;
@@ -14,12 +11,8 @@
     <thead>
         <tr class="text-center">
             <th>Район</th>
-            <th>Балансовые запасы доломита,<br />тыс. т</th>
-            <th>Балансовые запасы глинистых пород,<br />тыс. т</th>
-            <th>Балансовые запасы песка,<br />тыс. т</th>
-            <th>Балансовые запасы торфа,<br />тыс. т</th>
-            <th>Балансовые запасы песчано-гравийно-валунного материала,<br />тыс. м куб</th>
-            <th>Разведанные запасы сапропелей,<br />тыс. м куб</th>
+            <th>Разведанные запасы сапропелей, тыс. м куб</th>
+            <th>Добыча сапропелей, тыс. м куб/год</th>
         </tr>
     </thead>
     <tbody>
@@ -27,12 +20,8 @@
         {
             <tr rowid="@item.RegionId">
                 <td>@item.RegionName</td>
-                <td colid="@((int)MineralsColumns.Dolomity)">@item.Dolomity</td>
-                <td colid="@((int)MineralsColumns.Glinistye)">@item.Glinistye</td>
-                <td colid="@((int)MineralsColumns.Peski)">@item.Peski</td>
-                <td colid="@((int)MineralsColumns.Torf)">@item.Torf</td>
-                <td colid="@((int)MineralsColumns.GravinoPeschanye)">@item.GravinoPeschanye</td>
-                <td colid="@((int)MineralsColumns.Sapropel)">@item.Sapropel</td>
+                <td colid="@((int)MineralsColumns.Sapropel)" alter-update-action="@Url.Action("Update", "Stocks")">@item.Sapropel</td>
+                <td colid="@((int)MineralsColumns.DobychaSapropel)">@item.DobychaSapropel</td>
             </tr>
         }
     </tbody>

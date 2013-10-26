@@ -56,5 +56,10 @@ namespace Aura.Web.Models
 
         public double Ryba { get; set; }
 
+        public double ZagotovlenoZooplankton { get; set; }
+
+        public double ZagotovlenoBentos { get; set; }
+
+        public double ZagotovlenoRyba { get; set; }
     }
 }

@@ -1,10 +1,16 @@
 ﻿using System;
 using System.Web.Mvc;
+using Aura.Web.Interfaces;
 
 namespace Aura.Web.Controllers
 {
-    public class IntegratedController : Controller, IEntityController
+    public class IntegratedController : EntityControllerBase, IEntityController
     {
+        public IntegratedController(ICommonRepository commonRepository)
+            : base("integrated", commonRepository)
+        {
+        }
+
         [HttpGet]
         public ActionResult Animal()
         {

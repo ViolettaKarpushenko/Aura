@@ -1,4 +1,4 @@
-﻿namespace Aura.Web.Common
+﻿namespace Aura.Web.Common.Columns
 {
     public enum AnimalColumns
     {
@@ -29,6 +29,11 @@
 
         Zooplankton = 23,
         Bentos = 24,
-        Ryba = 25
+        Ryba = 25,
+
+        // Use.
+        ZagotovlenoZooplankton = 26,
+        ZagotovlenoBentos = 27,
+        ZagotovlenoRyba = 28
     }
 }

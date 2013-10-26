@@ -1,37 +1,52 @@
 @import "bootstrap.less";
 
-#content {
-    padding-top: 60px;
-}
+.container-fluid, .container {
+    &.content {
+        padding-top: 60px;
+        min-height: 700px;
 
-#region-view {
-    .edit-region, .delete-region, .save-region, .cancel-save-region, .add-region, .cancel-add-region {
-        cursor: pointer;
-    }
+        #region-view {
+            table {
+                width: 500px;
+                margin: auto;
+            }
 
-    .save-region, .cancel-save-region {
-        display: none;
-    }
+            & > button {
+                margin: auto;
+                display: block;
+                margin-top: 50px;
+                margin-bottom: 50px;
+            }
 
-    input.region-name {
-        display: none;
-    }
+            .edit-region, .delete-region, .save-region, .cancel-save-region, .add-region, .cancel-add-region {
+                cursor: pointer;
+            }
 
-    tr[row-id=null] {
-        display: none;
-    }
+            .save-region, .cancel-save-region {
+                display: none;
+            }
 
-    tr, tr td {
-        height: 20px;
-    }
+            input.region-name {
+                display: none;
+            }
 
-    input.new-region-name {
-        margin: 0;
-        width: 400px;
-        height: 15px;
-    }
+            tr[row-id=null] {
+                display: none;
+            }
 
-    span.help-inline {
-        color: #e04100;
+            tr, tr td {
+                height: 20px;
+            }
+
+            input.new-region-name {
+                margin: 0;
+                width: 400px;
+                height: 15px;
+            }
+
+            span.help-inline {
+                color: #e04100;
+            }
+        }
     }
 }

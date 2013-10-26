@@ -1,4 +1,4 @@
-namespace Aura.Web.Common
+ namespace Aura.Web.Common.Columns
 {
     public enum MineralsColumns
     {
@@ -7,6 +7,9 @@ namespace Aura.Web.Common
         Peski = 3,
         Torf = 4,
         GravinoPeschanye = 5,
-        Sapropel = 6
+        Sapropel = 6,
+
+        // Use.
+        DobychaSapropel = 7
     }
 }
