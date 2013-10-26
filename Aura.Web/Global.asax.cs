@@ -30,9 +30,11 @@ namespace Aura.Web
             BundleTable.Bundles.Add(new LessBundle("~/Content/less/styles.css").Include("~/Content/less/main.less"));
             BundleTable.Bundles.Add(new ScriptBundle("~/Scripts/scripts.js").Include(
                 "~/Scripts/jquery-{version}.js",
+                "~/Scripts/jquery-ui-{version}.custom.js",
                 "~/Scripts/bootstrap.js",
                 "~/Scripts/underscore.js",
                 "~/Scripts/backbone.js",
+                "~/Scripts/modules.js",
                 "~/Scripts/Views/view.*"));
         }
     }

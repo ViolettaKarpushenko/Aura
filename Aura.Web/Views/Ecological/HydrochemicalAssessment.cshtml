@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.TabId = 7;
+    ViewBag.SubTabId = 1;
+    ViewBag.Title = "Экологическое состояние - Гидрохимическая оценка";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="view-hydrochemical-assessment" class="row-fluid">
+    <div id="element-container" class="span6">
+        <div class="caption">
+            <h4>Ингредиенты</h4>
+        </div>
+        <div class="placeholder">
+            @{
+                var random = new Random();
+                for (var i = 0; i < 35; i++)
+                {
+                    var text = Guid.NewGuid().ToString("N").Substring(0, random.Next(5, 15));
+                    var value = random.Next(1, 10);
+                    
+                    <div class="alert alert-info item">
+                        <span class="name">@text</span>&nbsp;(<span class="value">@value</span>)
+                    </div>
+                }
+            }
+        </div>
+    </div>
+    <div id="element-calculator" class="span6">
+        <div class="caption">
+            <h4>ИЗВ (индекс загрязнения воды)</h4>
+        </div>
+        <div class="placeholder">
+            @*@{
+                for (var i = 0; i < 10; i++)
+                {
+                    var text = Guid.NewGuid().ToString("N").Substring(0, random.Next(5, 15));
+                    var value = random.Next(1, 10000);
+                    <div class="alert alert-info item">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <span class="name">@text</span>&nbsp;(<span class="value">@value</span>)<br />
+                        <input type="number" />
+                    </div>
+                }
+            }*@
+        </div>
+        <div class="modal-footer row-fluid">
+            <div class="span6">
+                <span>ИЗВ = <span id="index-label">0</span></span><br />
+                <span>Нормированный = <span id="ball-label">--</span></span>
+            </div>
+            <div class="span6">
+                <button id="clear-btn" type="button" class="btn btn-small btn-danger">Очистить</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    <script type="text/javascript">
+        window.ecologicalAssessmentView = new EcologicalAssessmentView();
+    </script>
+}

@@ -81,6 +81,7 @@
     <Compile Include="Common\Columns\MineralsColumns.cs" />
     <Compile Include="Common\PresentationException.cs" />
     <Compile Include="Common\Tables.cs" />
+    <Compile Include="Controllers\EcologicalController.cs" />
     <Compile Include="Controllers\EntityControllerBase.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IntegratedController.cs" />
@@ -150,6 +151,9 @@
       <DependentUpon>main.less</DependentUpon>
     </Content>
     <Content Include="Global.asax" />
+    <Content Include="Content\less\views\view.table.less" />
+    <Content Include="Content\less\views\view.regions.less" />
+    <Content Include="Content\less\views\view.ecological.assessment.less" />
     <None Include="Content\less\wells.less">
       <Compile>False</Compile>
       <Minify>False</Minify>
@@ -306,8 +310,11 @@
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />
+    <Content Include="Scripts\jquery-ui-1.10.3.custom.js" />
+    <Content Include="Scripts\modules.js" />
     <Content Include="Scripts\underscore.js" />
     <Content Include="Scripts\underscore.min.js" />
+    <Content Include="Scripts\Views\view.hydrochemicalassessment.js" />
     <Content Include="Scripts\Views\view.menu.js" />
     <Content Include="Scripts\Views\view.regions.js" />
     <Content Include="Scripts\Views\view.table.js" />
@@ -347,6 +354,10 @@
     <Content Include="Views\Use\Water.cshtml" />
     <Content Include="Views\Regions\Index.cshtml" />
     <Content Include="Settings.StyleCop" />
+    <Content Include="Views\Ecological\HydrochemicalAssessment.cshtml" />
+    <Content Include="Views\Ecological\GeochemicalAssessment.cshtml" />
+    <Content Include="Views\Ecological\HydrobiologicalAssessment.cshtml" />
+    <Content Include="Views\Ecological\ReservoirTransformation.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -1,0 +1,43 @@
+#regions-view {
+    table {
+        width: 500px;
+        margin: auto;
+    }
+
+    & > button {
+        margin: auto;
+        display: block;
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+
+    .edit-region, .delete-region, .save-region, .cancel-save-region, .add-region, .cancel-add-region {
+        cursor: pointer;
+    }
+
+    .save-region, .cancel-save-region {
+        display: none;
+    }
+
+    input.region-name {
+        display: none;
+    }
+
+    tr[row-id=null] {
+        display: none;
+    }
+
+    tr, tr td {
+        height: 20px;
+    }
+
+    input.new-region-name {
+        margin: 0;
+        width: 400px;
+        height: 15px;
+    }
+
+    span.help-inline {
+        color: #e04100;
+    }
+}
