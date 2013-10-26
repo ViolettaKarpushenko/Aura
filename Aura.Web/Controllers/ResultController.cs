@@ -1,5 +1,4 @@
 ﻿using System.Web.Mvc;
-using Aura.Web.Data;
 using Aura.Web.Interfaces;
 using Aura.Web.Models;
 

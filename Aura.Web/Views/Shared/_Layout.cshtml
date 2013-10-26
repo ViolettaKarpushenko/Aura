@@ -1,17 +1,13 @@
-﻿@using System.Web.Optimization
-@using Aura.Web.Controllers
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@("Aura - " + ViewBag.Title)</title>
     @Styles.Render("~/Content/less/styles.css")
-    <link type="text/css" rel="stylesheet" href="@Url.Content("~/Content/less/main.css")" />
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div id="menu-view" class="navbar navbar-inverse navbar-fixed-top">
         <div class="navbar-inner">
             <div class="container-fluid">
                 <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -86,7 +82,9 @@
     </footer>
 
     @Scripts.Render("~/Scripts/scripts.js")
-    <script type="text/javascript">initMenu($, '@ViewBag.TabId', '@ViewBag.SubTabId');</script>
+    <script type="text/javascript">
+        window.menuView = new MenuView({ tabId: '@ViewBag.TabId', subTabId: '@ViewBag.SubTabId' });
+    </script>
 
     @RenderSection("scripts", false)
 </body>

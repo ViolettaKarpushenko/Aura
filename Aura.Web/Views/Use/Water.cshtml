@@ -6,7 +6,8 @@
     ViewBag.Title = "Использование - Водные ресурсы";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div style="overflow-x: auto">
+
+<div id="table-view">
     <table class="table table-bordered table-hover table-striped">
         <thead>
             <tr class="text-center">
@@ -37,7 +38,10 @@
         </tbody>
     </table>
 </div>
+
 @section scripts
 {
-    <script type="text/javascript">initItemUpdate($, '@((int)Tables.Water)', '@Url.Action("Update", "Use")');</script>
+    <script type="text/javascript">
+        window.tableView = new TableView({ tableId: '@((int)Tables.Water)', url: '@Url.Action("Update", "Use")' });
+    </script>
 }

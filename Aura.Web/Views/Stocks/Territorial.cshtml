@@ -7,31 +7,35 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<table class="table table-bordered table-hover table-striped">
-    <thead>
-        <tr class="text-center">
-            <th>Район</th>
-            <th>Общая площадь района,<br />га</th>
-            <th>Площадь земель,<br />га</th>
-            <th>Площадь с/х земель,<br />га</th>
-            <th>Площадь озёр,<br />га</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Items)
-        {
-            <tr rowid="@item.RegionId">
-                <td>@item.RegionName</td>
-                <td colid="@((int)TerritorialColumns.Plochad)">@item.Plochad</td>
-                <td colid="@((int)TerritorialColumns.Zemelnye)">@item.Zemelnye</td>
-                <td colid="@((int)TerritorialColumns.Sh)">@item.Sh</td>
-                <td colid="@((int)TerritorialColumns.Ozernye)">@item.Ozernye</td>
+<div id="table-view">
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr class="text-center">
+                <th>Район</th>
+                <th>Общая площадь района,<br />га</th>
+                <th>Площадь земель,<br />га</th>
+                <th>Площадь с/х земель,<br />га</th>
+                <th>Площадь озёр,<br />га</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr rowid="@item.RegionId">
+                    <td>@item.RegionName</td>
+                    <td colid="@((int)TerritorialColumns.Plochad)">@item.Plochad</td>
+                    <td colid="@((int)TerritorialColumns.Zemelnye)">@item.Zemelnye</td>
+                    <td colid="@((int)TerritorialColumns.Sh)">@item.Sh</td>
+                    <td colid="@((int)TerritorialColumns.Ozernye)">@item.Ozernye</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
 @section scripts
 {
-    <script type="text/javascript">initItemUpdate($, '@((int)Tables.Territorial)', '@Url.Action("Update", "Stocks")');</script>
+    <script type="text/javascript">
+        window.tableView = new TableView({ tableId: '@((int)Tables.Territorial)', url: '@Url.Action("Update", "Stocks")' });
+    </script>
 }

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Aura.Web.Controllers;
 
 namespace Aura.Web.Models
 {

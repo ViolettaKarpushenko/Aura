@@ -28,7 +28,12 @@ namespace Aura.Web
             RegisterGlobalDependancies();
 
             BundleTable.Bundles.Add(new LessBundle("~/Content/less/styles.css").Include("~/Content/less/main.less"));
-            BundleTable.Bundles.Add(new ScriptBundle("~/Scripts/scripts.js").Include("~/Scripts/jquery-{version}.js", "~/Scripts/bootstrap.js", "~/Scripts/utils.js"));
+            BundleTable.Bundles.Add(new ScriptBundle("~/Scripts/scripts.js").Include(
+                "~/Scripts/jquery-{version}.js",
+                "~/Scripts/bootstrap.js",
+                "~/Scripts/underscore.js",
+                "~/Scripts/backbone.js",
+                "~/Scripts/Views/view.*"));
         }
     }
 }

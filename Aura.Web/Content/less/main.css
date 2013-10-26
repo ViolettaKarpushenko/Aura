@@ -5267,59 +5267,64 @@ a.badge:focus {
   padding-top: 60px;
   min-height: 700px;
 }
-.container-fluid.content #region-view table,
-.container.content #region-view table {
+.container-fluid.content #table-view,
+.container.content #table-view {
+  overflow-x: auto;
+  margin: auto;
+}
+.container-fluid.content #regions-view table,
+.container.content #regions-view table {
   width: 500px;
   margin: auto;
 }
-.container-fluid.content #region-view > button,
-.container.content #region-view > button {
+.container-fluid.content #regions-view > button,
+.container.content #regions-view > button {
   margin: auto;
   display: block;
   margin-top: 50px;
   margin-bottom: 50px;
 }
-.container-fluid.content #region-view .edit-region,
-.container.content #region-view .edit-region,
-.container-fluid.content #region-view .delete-region,
-.container.content #region-view .delete-region,
-.container-fluid.content #region-view .save-region,
-.container.content #region-view .save-region,
-.container-fluid.content #region-view .cancel-save-region,
-.container.content #region-view .cancel-save-region,
-.container-fluid.content #region-view .add-region,
-.container.content #region-view .add-region,
-.container-fluid.content #region-view .cancel-add-region,
-.container.content #region-view .cancel-add-region {
+.container-fluid.content #regions-view .edit-region,
+.container.content #regions-view .edit-region,
+.container-fluid.content #regions-view .delete-region,
+.container.content #regions-view .delete-region,
+.container-fluid.content #regions-view .save-region,
+.container.content #regions-view .save-region,
+.container-fluid.content #regions-view .cancel-save-region,
+.container.content #regions-view .cancel-save-region,
+.container-fluid.content #regions-view .add-region,
+.container.content #regions-view .add-region,
+.container-fluid.content #regions-view .cancel-add-region,
+.container.content #regions-view .cancel-add-region {
   cursor: pointer;
 }
-.container-fluid.content #region-view .save-region,
-.container.content #region-view .save-region,
-.container-fluid.content #region-view .cancel-save-region,
-.container.content #region-view .cancel-save-region {
+.container-fluid.content #regions-view .save-region,
+.container.content #regions-view .save-region,
+.container-fluid.content #regions-view .cancel-save-region,
+.container.content #regions-view .cancel-save-region {
   display: none;
 }
-.container-fluid.content #region-view input.region-name,
-.container.content #region-view input.region-name {
+.container-fluid.content #regions-view input.region-name,
+.container.content #regions-view input.region-name {
   display: none;
 }
-.container-fluid.content #region-view tr[row-id=null],
-.container.content #region-view tr[row-id=null] {
+.container-fluid.content #regions-view tr[row-id=null],
+.container.content #regions-view tr[row-id=null] {
   display: none;
 }
-.container-fluid.content #region-view tr,
-.container.content #region-view tr,
-.container-fluid.content #region-view tr td,
-.container.content #region-view tr td {
+.container-fluid.content #regions-view tr,
+.container.content #regions-view tr,
+.container-fluid.content #regions-view tr td,
+.container.content #regions-view tr td {
   height: 20px;
 }
-.container-fluid.content #region-view input.new-region-name,
-.container.content #region-view input.new-region-name {
+.container-fluid.content #regions-view input.new-region-name,
+.container.content #regions-view input.new-region-name {
   margin: 0;
   width: 400px;
   height: 15px;
 }
-.container-fluid.content #region-view span.help-inline,
-.container.content #region-view span.help-inline {
+.container-fluid.content #regions-view span.help-inline,
+.container.content #regions-view span.help-inline {
   color: #e04100;
 }
