@@ -27,9 +27,9 @@
         <div class="grid-container"></div>
         <div>
             <span>Zc = <span class="index-label">1</span></span><br />
-            <span>Нормированный = <span class="ball-label">1</span></span><br/>
+            <span>Нормированный = <span class="ball-label">1</span></span><br />
             <div class="progress">
-                <div class="bar" style="width: 20%"></div>
+                <div class="bar btn-success" style="width: 20%"></div>
             </div>
         </div>
     </div>
@@ -37,6 +37,15 @@
 @section scripts
 {
     <script type="text/javascript">
-        window.geochemicalAssessmentView = new GeochemicalAssessmentView({ fetchUrl: '@Url.Action("GeochemicalAssessmentGrid", "Ecological")' });
+        window.geochemicalAssessmentView = new GeochemicalAssessmentView({
+            fetchUrl: '@Url.Action("GeochemicalAssessmentGrid", "Ecological")',
+            normalizing: [
+                { min: -1e15, max: 10, value: 1, color: "success" },
+                { min: 10, max: 20, value: 2, color: "warning" },
+                { min: 20, max: 30, value: 3, color: "warning" },
+                { min: 40, max: 70, value: 4, color: "warning" },
+                { min: 70, max: 1e+15, value: 5, color: "danger" }
+            ]
+        });
     </script>
 }

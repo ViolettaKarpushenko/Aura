@@ -6,15 +6,8 @@
         "change input[type=text], input[type=number]": "calculate"
     },
 
-    normalizing: [
-        { min: 0, max: 10, value: 1, color: "success" },
-        { min: 10, max: 20, value: 2, color: "warning" },
-        { min: 20, max: 30, value: 3, color: "warning" },
-        { min: 40, max: 70, value: 4, color: "warning" },
-        { min: 70, max: 1e+15, value: 5, color: "danger" }
-    ],
-
     initialize: function (params) {
+        this.normalizing = params.normalizing;
         this.fetchUrl = params.fetchUrl;
         this.loadGrid();
     },
@@ -29,12 +22,17 @@
 
     calculate: function () {
         var items = $('table tbody tr', this.el);
+        items.find('.control-group.error').removeClass('error');
         var count = 0;
         var sum = 0;
         items.each(function () {
             var $this = $(this);
-            var val1 = parseFloat($this.find('td.value1').text());
-            var val2 = parseFloat($this.find('td.value2 input').val());
+            var val1 = parseFloat($this.find('td.value1').text()) || 0;
+            var val2 = parseFloat($this.find('td.value2 input').val()) || 0;
+            if (val2 === 0) {
+                $this.find('td.value2 input').closest('.control-group').addClass('error');
+            }
+
             var val = val2 / val1;
             if (val > 1) {
                 sum = sum + val;
@@ -44,11 +42,23 @@
 
         var result = sum - count + 1;
         $('.index-label', this.el).text(result);
+        this.normalize(result);
+    },
 
-        var ball = _.find(this.normalizing, function (item) { return item.min <= result && item.max > result; });
-        $('.ball-label', this.el).text(ball.value);
-        var bar = $('.progress', this.el);
-        bar.removeClass('progress-success').removeClass('progress-warning').removeClass('progress-danger').addClass('progress-' + ball.color);
-        bar.find('.bar').css('width', (ball.value * 20) + '%');
+    normalize: function (result) {
+        var ball = _.find(this.normalizing, function (item) {
+            return item.min <= result && item.max > result;
+        });
+
+        if (!ball) {
+            $('.ball-label', this.el).text('--');
+            var bar = $('.progress', this.el);
+            bar.find('.bar').css('width', '0%');
+        } else {
+            $('.ball-label', this.el).text(ball.value);
+            var bar = $('.progress', this.el);
+            bar.removeClass('progress-success').removeClass('progress-warning').removeClass('progress-danger').addClass('progress-' + ball.color);
+            bar.find('.bar').css('width', (ball.value * (100 / this.normalizing.length)) + '%');
+        }
     }
 })

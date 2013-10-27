@@ -10,7 +10,7 @@
 }
 
 <div id="view-ecological-assessment">
-    <div id="s-assessment" calculate="extend">
+    <div id="s-assessment" calculate="simple">
         <div class="assessment row-fluid">
             <div class="span6 element-container">
                 <div class="caption">
@@ -23,25 +23,28 @@
                             var text1 = Guid.NewGuid().ToString("N").Substring(0, random.Next(5, 15));
                             var text2 = Guid.NewGuid().ToString("N").Substring(0, random.Next(5, 15));
                             var value = random.Next(1, 10);
-                    
-                            <div class="alert alert-info item">
-                                <span class="name1">@text1</span>&nbsp;(<span class="value">@value</span>)<br />
-                                <span class="name2">@text2</span>
-                            </div>
+
+                        <div class="alert alert-info control-group item">
+                            <span class="name1">@text1</span>&nbsp;(<span class="value">@value</span>)<br />
+                            <span class="name2">@text2</span>
+                        </div>
                         }
                     }
                 </div>
             </div>
             <div class="span6 element-calculator">
                 <div class="caption">
-                    <h4>Ы (индекс сапробности Пантле-Букка в модификации Сладечка)</h4>
+                    <h4>S (индекс сапробности Пантле-Букка в модификации Сладечка)</h4>
                 </div>
                 <div class="element-calculator-placeholder">
                 </div>
                 <div class="modal-footer row-fluid">
                     <div class="span6">
                         <span>S = <span class="index-label">0</span></span><br />
-                        <span>Нормированный = <span class="ball-label">--</span></span>
+                        <span>Нормированный = <span class="ball-label">1</span></span>
+                        <div class="progress">
+                            <div class="bar btn-success" style="width: 20%"></div>
+                        </div>
                     </div>
                     <div class="span6">
                         <button type="button" class="btn btn-small btn-danger btn-clear">Очистить</button>
@@ -55,7 +58,15 @@
 @section scripts
 {
     <script type="text/javascript">
-        window.sAssessmentView = new EcologicalAssessmentView({ el: $('#s-assessment') });
+        window.sAssessmentView = new EcologicalAssessmentView({
+            el: $('#s-assessment'),
+            normalizing: [
+                { min: -1e15, max: 1, value: 1, color: "success" },
+                { min: 1, max: 1.5, value: 2, color: "warning" },
+                { min: 1.5, max: 3.5, value: 3, color: "warning" },
+                { min: 3.5, max: 4, value: 4, color: "warning" },
+                { min: 4, max: 1e+15, value: 5, color: "danger" }
+            ]
+        });
     </script>
 }
- 
