@@ -101,39 +101,39 @@ namespace Aura.Web.Data
             var results = stocks.Select(stock => new
                 {
                     stock,
-                    zaposyOzer =    stock.Bentos            / avgBentos +
-                                    stock.Zooplankton       / avgZooplankton +
-                                    stock.Ryba              / avgRyba
+                    zaposyOzer = stock.Bentos / avgBentos +
+                                    stock.Zooplankton / avgZooplankton +
+                                    stock.Ryba / avgRyba
                 })
                 .Select(stock => new
                 {
                     stock.stock,
                     stock.zaposyOzer,
                     zapasyPhg = stock.zaposyOzer +
-                           (stock.stock.DikayaUtka          / avgDikayaUtka +
-                            stock.stock.SerayaKuropatka     / avgSerayaKuropatka +
-                            stock.stock.Rabchik             / avgRabchik +
-                            stock.stock.Teterev             / avgTeterev +
-                            stock.stock.Gluhar              / avgGluhar) / 4 +
+                           (stock.stock.DikayaUtka / avgDikayaUtka +
+                            stock.stock.SerayaKuropatka / avgSerayaKuropatka +
+                            stock.stock.Rabchik / avgRabchik +
+                            stock.stock.Teterev / avgTeterev +
+                            stock.stock.Gluhar / avgGluhar) / 4 +
 
-                           (stock.stock.ZayacBelak          / avgZayacBelak +
-                            stock.stock.ZayacRusak          / avgZayacRusak +
-                            stock.stock.Kunica              / avgKunica +
-                            stock.stock.Lisica              / avgLisica +
-                            stock.stock.Ondatra             / avgOndatra +
-                            stock.stock.Norka               / avgNorka +
-                            stock.stock.Bobr                / avgBobr +
-                            stock.stock.Volk                / avgVolk +
-                            stock.stock.Barsuk              / avgBarsuk +
-                            stock.stock.Vydra               / avgVydra +
-                            stock.stock.EnotovidnayaSobaka  / avgEnotovidnayaSobaka +
-                            stock.stock.Rys                 / avgRys +
-                            stock.stock.Belka               / avgBelka) / 13 +
+                           (stock.stock.ZayacBelak / avgZayacBelak +
+                            stock.stock.ZayacRusak / avgZayacRusak +
+                            stock.stock.Kunica / avgKunica +
+                            stock.stock.Lisica / avgLisica +
+                            stock.stock.Ondatra / avgOndatra +
+                            stock.stock.Norka / avgNorka +
+                            stock.stock.Bobr / avgBobr +
+                            stock.stock.Volk / avgVolk +
+                            stock.stock.Barsuk / avgBarsuk +
+                            stock.stock.Vydra / avgVydra +
+                            stock.stock.EnotovidnayaSobaka / avgEnotovidnayaSobaka +
+                            stock.stock.Rys / avgRys +
+                            stock.stock.Belka / avgBelka) / 13 +
 
-                           (stock.stock.Los                 / avgLos +
-                            stock.stock.Olen                / avgOlen +
-                            stock.stock.Kosula              / avgKosula +
-                            stock.stock.Kaban               / avgKaban) / 4
+                           (stock.stock.Los / avgLos +
+                            stock.stock.Olen / avgOlen +
+                            stock.stock.Kosula / avgKosula +
+                            stock.stock.Kaban / avgKaban) / 4
                 })
                 .Select(stock => new ResultModel
                 {

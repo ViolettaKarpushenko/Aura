@@ -9,10 +9,10 @@ namespace Aura.Web.Data
 {
     public class MineralRepository : Repository, IEntityRepository<MineralViewModel>
     {
-        private static MineralViewModel GetItems(string tableName)
+        public MineralViewModel GetStocks()
         {
             var data = ExecuteAggregateQuery<MineralModel>(
-                tableName,
+                "stocks",
                 (int)Tables.Minerals,
                 MineralsColumns.Dolomity,
                 MineralsColumns.Glinistye,
@@ -22,11 +22,6 @@ namespace Aura.Web.Data
                 MineralsColumns.Sapropel);
 
             return new MineralViewModel { Items = data.OrderBy(stock => stock.RegionName) };
-        }
-
-        public MineralViewModel GetStocks()
-        {
-            return GetItems("stocks");
         }
 
         public MineralViewModel GetUse()

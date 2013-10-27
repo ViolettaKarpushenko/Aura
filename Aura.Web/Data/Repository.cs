@@ -60,18 +60,6 @@ namespace Aura.Web.Data
             return Execute<T>(query);
         }
 
-        private static IEnumerable<object> CreateAggregatePatternFillContent(IEnumerable<Enum> columns)
-        {
-            foreach (var column in columns)
-            {
-                var value = (ulong)Convert.ChangeType(column, typeof(ulong));
-                var name = Enum.GetName(column.GetType(), column);
-
-                yield return value;
-                yield return name;
-            }
-        }
-
         protected static string BuildAggregateQueryPattern(string tableName, int tableId, int columnQuantity)
         {
             var query = new StringBuilder();
@@ -100,6 +88,18 @@ namespace Aura.Web.Data
             }
 
             return query.ToString();
+        }
+
+        private static IEnumerable<object> CreateAggregatePatternFillContent(IEnumerable<Enum> columns)
+        {
+            foreach (var column in columns)
+            {
+                var value = (ulong)Convert.ChangeType(column, typeof(ulong));
+                var name = Enum.GetName(column.GetType(), column);
+
+                yield return value;
+                yield return name;
+            }
         }
     }
 }

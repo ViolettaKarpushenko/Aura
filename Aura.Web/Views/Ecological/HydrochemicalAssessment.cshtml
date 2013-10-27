@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div id="view-hydrochemical-assessment" class="row-fluid">
+<div id="view-ecological-assessment" class="row-fluid">
     <div id="element-container" class="span6">
         <div class="caption">
             <h4>Ингредиенты</h4>
@@ -30,18 +30,6 @@
             <h4>ИЗВ (индекс загрязнения воды)</h4>
         </div>
         <div class="placeholder">
-            @*@{
-                for (var i = 0; i < 10; i++)
-                {
-                    var text = Guid.NewGuid().ToString("N").Substring(0, random.Next(5, 15));
-                    var value = random.Next(1, 10000);
-                    <div class="alert alert-info item">
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        <span class="name">@text</span>&nbsp;(<span class="value">@value</span>)<br />
-                        <input type="number" />
-                    </div>
-                }
-            }*@
         </div>
         <div class="modal-footer row-fluid">
             <div class="span6">

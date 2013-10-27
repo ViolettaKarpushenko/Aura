@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
-using System.Web.Routing;
 using System.Web.Optimization;
+using System.Web.Routing;
 using Ninject;
 
 namespace Aura.Web
@@ -9,12 +9,6 @@ namespace Aura.Web
     public class MvcApplication : HttpApplication
     {
         private static IKernel _kernel;
-
-        private static void RegisterGlobalDependancies()
-        {
-            _kernel = new StandardKernel(new AuraModule());
-            ControllerBuilder.Current.SetControllerFactory(new AuraControllerFactory(_kernel));
-        }
 
         protected void Application_Start()
         {
@@ -36,6 +30,12 @@ namespace Aura.Web
                 "~/Scripts/backbone.js",
                 "~/Scripts/modules.js",
                 "~/Scripts/Views/view.*"));
+        }
+
+        private static void RegisterGlobalDependancies()
+        {
+            _kernel = new StandardKernel(new AuraModule());
+            ControllerBuilder.Current.SetControllerFactory(new AuraControllerFactory(_kernel));
         }
     }
 }

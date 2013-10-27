@@ -4,3 +4,47 @@
     ViewBag.Title = "Экологическое состояние - Геохимическая оценка";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<div id="view-ecological-assessment" class="row-fluid">
+    <div id="element-container" class="span6">
+        <div class="caption">
+            <h4>Ингредиенты</h4>
+        </div>
+        <div class="placeholder">
+            @{
+                var random = new Random();
+                for (var i = 0; i < 35; i++)
+                {
+                    var text = Guid.NewGuid().ToString("N").Substring(0, random.Next(5, 15));
+                    var value = random.Next(1, 10);
+                    
+                    <div class="alert alert-info item">
+                        <span class="name">@text</span>&nbsp;(<span class="value">@value</span>)
+                    </div>
+                }
+            }
+        </div>
+    </div>
+    <div id="element-calculator" class="span6">
+        <div class="caption">
+            <h4>Ipm (индекс содержания тяжелых металлов в растениях)</h4>
+        </div>
+        <div class="placeholder">
+        </div>
+        <div class="modal-footer row-fluid">
+            <div class="span6">
+                <span>Ipm = <span id="index-label">0</span></span><br />
+                <span>Нормированный = <span id="ball-label">--</span></span>
+            </div>
+            <div class="span6">
+                <button id="clear-btn" type="button" class="btn btn-small btn-danger">Очистить</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    <script type="text/javascript">
+        window.ecologicalAssessmentView = new EcologicalAssessmentView();
+    </script>
+}

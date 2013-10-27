@@ -1,17 +1,17 @@
+using System.Linq;
 using Aura.Web.Common;
 using Aura.Web.Common.Columns;
 using Aura.Web.Interfaces;
 using Aura.Web.Models;
-using System.Linq;
 
 namespace Aura.Web.Data
 {
     public class BiologicalRepository : Repository, IEntityRepository<BiologicalViewModel>
     {
-        private static BiologicalViewModel GetItems(string tableName)
+        public BiologicalViewModel GetStocks()
         {
             var data = ExecuteAggregateQuery<BiologicalModel>(
-                tableName,
+                "stocks",
                 (int)Tables.Biological,
                 BiologicalColumns.Drevesina,
                 BiologicalColumns.Lekarstvennye,
@@ -21,11 +21,6 @@ namespace Aura.Web.Data
                 BiologicalColumns.Makrofity);
 
             return new BiologicalViewModel { Items = data.OrderBy(stock => stock.RegionName) };
-        }
-
-        public BiologicalViewModel GetStocks()
-        {
-            return GetItems("stocks");
         }
 
         public BiologicalViewModel GetUse()

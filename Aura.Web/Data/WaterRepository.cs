@@ -9,21 +9,6 @@ namespace Aura.Web.Data
 {
     public class WaterRepository : Repository, IEntityRepository<WaterViewModel>
     {
-        private WaterViewModel GetItems(string tableName)
-        {
-            var query = BuildAggregateQueryPattern(tableName, (int)Tables.Water, 3);
-            var data = Execute<WaterModel>(
-                query,
-                (int)WaterColumns.RechnoiStok,
-                WaterColumns.RechnoiStok,
-                (int)WaterColumns.PodzemnyeVody,
-                WaterColumns.PodzemnyeVody,
-                (int)WaterColumns.ObemVody,
-                WaterColumns.ObemVody);
-
-            return new WaterViewModel { Items = data.OrderBy(stock => stock.RegionName) };
-        }
-
         public WaterViewModel GetStocks()
         {
             return GetItems("stocks");
@@ -94,6 +79,21 @@ namespace Aura.Web.Data
                           };
 
             return new ResultsViewModel { Items = results };
+        }
+
+        private WaterViewModel GetItems(string tableName)
+        {
+            var query = BuildAggregateQueryPattern(tableName, (int)Tables.Water, 3);
+            var data = Execute<WaterModel>(
+                query,
+                (int)WaterColumns.RechnoiStok,
+                WaterColumns.RechnoiStok,
+                (int)WaterColumns.PodzemnyeVody,
+                WaterColumns.PodzemnyeVody,
+                (int)WaterColumns.ObemVody,
+                WaterColumns.ObemVody);
+
+            return new WaterViewModel { Items = data.OrderBy(stock => stock.RegionName) };
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿var EcologicalAssessmentView = Backbone.View.extend({
-    el: "#view-hydrochemical-assessment",
+    el: "#view-ecological-assessment",
 
     events: {
         "click #element-calculator>.placeholder .item .close": "removeItem",
@@ -41,13 +41,14 @@
         sum = sum / items.length;
         $('#index-label', this.el).text(sum);
     },
-    
-    clear: function() {
+
+    clear: function () {
         $('#element-calculator>.placeholder>.item', this.el).remove();
         $('#index-label', this.el).text(0);
     },
 
-    removeItem: function () {
+    removeItem: function (event) {
+        $(event.currentTarget).closest('.item').remove();
         this.calculate();
     }
 });

@@ -8,10 +8,10 @@ namespace Aura.Web.Data
 {
     public class TerritorialRepository : Repository, IEntityRepository<TerritorialViewModel>
     {
-        private static TerritorialViewModel GetItems(string tableName)
+        public TerritorialViewModel GetStocks()
         {
             var data = ExecuteAggregateQuery<TerritorialModel>(
-                tableName,
+                "stocks",
                 (int)Tables.Territorial,
                 TerritorialColumns.Plochad,
                 TerritorialColumns.Zemelnye,
@@ -19,11 +19,6 @@ namespace Aura.Web.Data
                 TerritorialColumns.Ozernye);
 
             return new TerritorialViewModel { Items = data.OrderBy(stock => stock.RegionName) };
-        }
-
-        public TerritorialViewModel GetStocks()
-        {
-            return GetItems("stocks");
         }
 
         public TerritorialViewModel GetUse()

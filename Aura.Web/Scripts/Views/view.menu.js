@@ -3,7 +3,7 @@
 
     events: {
     },
-    
+
     initialize: function (params) {
         if (!(params.tabId | 0)) {
             params.tabId = 1;

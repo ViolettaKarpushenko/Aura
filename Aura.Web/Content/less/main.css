@@ -5318,7 +5318,7 @@ a.badge:focus {
   -ms-user-select: none;
   user-select: none;
 }
-#view-hydrochemical-assessment {
+#view-ecological-assessment {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -5326,44 +5326,44 @@ a.badge:focus {
   -ms-user-select: none;
   user-select: none;
 }
-#view-hydrochemical-assessment .item {
+#view-ecological-assessment .item {
   margin: 5px;
   width: auto;
   max-width: 235px;
   cursor: move;
   display: inline-block;
 }
-#view-hydrochemical-assessment .item input[type=number] {
+#view-ecological-assessment .item input[type=number] {
   margin-top: 5px;
   width: 80px;
 }
-#view-hydrochemical-assessment #element-container {
+#view-ecological-assessment #element-container {
   padding: 0;
   height: 910px;
 }
-#view-hydrochemical-assessment #element-container .caption {
+#view-ecological-assessment #element-container .caption {
   text-align: center;
 }
-#view-hydrochemical-assessment #element-container .placeholder {
+#view-ecological-assessment #element-container .placeholder {
   padding: 4px;
   background-color: #eeeeee;
   overflow-y: auto;
   height: 400px;
 }
-#view-hydrochemical-assessment #element-calculator {
+#view-ecological-assessment #element-calculator {
   padding: 0;
   height: 910px;
 }
-#view-hydrochemical-assessment #element-calculator .caption {
+#view-ecological-assessment #element-calculator .caption {
   text-align: center;
 }
-#view-hydrochemical-assessment #element-calculator .placeholder {
+#view-ecological-assessment #element-calculator .placeholder {
   padding: 4px;
   background-color: #CCCCCC;
   overflow-y: auto;
   height: 400px;
 }
-#view-hydrochemical-assessment #element-calculator .modal-footer {
+#view-ecological-assessment #element-calculator .modal-footer {
   text-align: left;
 }
 .container-fluid.content,

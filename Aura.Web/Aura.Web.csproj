@@ -151,9 +151,18 @@
       <DependentUpon>main.less</DependentUpon>
     </Content>
     <Content Include="Global.asax" />
-    <Content Include="Content\less\views\view.table.less" />
-    <Content Include="Content\less\views\view.regions.less" />
-    <Content Include="Content\less\views\view.ecological.assessment.less" />
+    <Content Include="Content\less\views\view.table.less">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+    </Content>
+    <Content Include="Content\less\views\view.regions.less">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+    </Content>
+    <Content Include="Content\less\views\view.ecological.assessment.less">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+    </Content>
     <None Include="Content\less\wells.less">
       <Compile>False</Compile>
       <Minify>False</Minify>
@@ -314,7 +323,7 @@
     <Content Include="Scripts\modules.js" />
     <Content Include="Scripts\underscore.js" />
     <Content Include="Scripts\underscore.min.js" />
-    <Content Include="Scripts\Views\view.hydrochemicalassessment.js" />
+    <Content Include="Scripts\Views\view.ecologicalassessment.js" />
     <Content Include="Scripts\Views\view.menu.js" />
     <Content Include="Scripts\Views\view.regions.js" />
     <Content Include="Scripts\Views\view.table.js" />

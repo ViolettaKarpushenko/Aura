@@ -28,7 +28,6 @@ namespace Aura.Web.Controllers
             _animalRepository = animalRepository;
         }
 
-
         [HttpGet]
         public ActionResult Animal()
         {
