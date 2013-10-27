@@ -25,7 +25,7 @@
                     .appendTo(calculatorContainer)
                     .fadeIn();
 
-                //this.calculate();
+                this.calculate();
             }, this)
         });
     },
