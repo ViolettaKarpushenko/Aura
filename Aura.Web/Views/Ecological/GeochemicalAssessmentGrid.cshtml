@@ -1,0 +1,23 @@
+﻿@model IEnumerable<GeochemicalAssessmentItemModel>
+
+<table class="table table-bordered table-hover table-striped">
+    <thead>
+        <tr>
+            <th>Микроэлементы</th>
+            <th>Фоновое содержание<br />мг/кг сухого вещества</th>
+            <th>Содержание в пробе<br />мг/кг сухого вещества</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td class="value1">@item.Value</td>
+                <td class="value2">
+                    <input type="number" value="0"/>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

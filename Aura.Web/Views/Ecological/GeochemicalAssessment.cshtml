@@ -1,4 +1,6 @@
-﻿@{
+﻿@model GeochemicalAssessmentModel
+
+@{
     ViewBag.TabId = 7;
     ViewBag.SubTabId = 2;
     ViewBag.Title = "Экологическое состояние - Геохимическая оценка";
@@ -20,6 +22,21 @@
         *@
     </div>
     <div>
+        @Html.DropDownListFor(m => m.RegionId, Model.Regions)<br />
         <a href="#mapModal" role="button" class="btn btn-link" data-toggle="modal">Карта педогеохимического районирования РБ</a>
+        <div class="grid-container"></div>
+        <div>
+            <span>Zc = <span class="index-label">1</span></span><br />
+            <span>Нормированный = <span class="ball-label">1</span></span><br/>
+            <div class="progress">
+                <div class="bar" style="width: 20%"></div>
+            </div>
+        </div>
     </div>
 </div>
+@section scripts
+{
+    <script type="text/javascript">
+        window.geochemicalAssessmentView = new GeochemicalAssessmentView({ fetchUrl: '@Url.Action("GeochemicalAssessmentGrid", "Ecological")' });
+    </script>
+}
