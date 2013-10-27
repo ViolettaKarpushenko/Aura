@@ -5,46 +5,94 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div id="view-ecological-assessment" class="row-fluid">
-    <div id="element-container" class="span6">
-        <div class="caption">
-            <h4>Ингредиенты</h4>
-        </div>
-        <div class="placeholder">
-            @{
-                var random = new Random();
-                for (var i = 0; i < 35; i++)
-                {
-                    var text = Guid.NewGuid().ToString("N").Substring(0, random.Next(5, 15));
-                    var value = random.Next(1, 10);
+@{
+    var random = new Random();
+}
+
+<div id="view-ecological-assessment">
+    <div id="izv-assessment" calculate="simple">
+        <div class="assessment row-fluid">
+            <div class="span6 element-container">
+                <div class="caption">
+                    <h4>Ингредиенты</h4>
+                </div>
+                <div class="element-container-placeholder">
+                    @{
+                        for (var i = 0; i < 35; i++)
+                        {
+                            var text = Guid.NewGuid().ToString("N").Substring(0, random.Next(5, 15));
+                            var value = random.Next(1, 10);
                     
-                    <div class="alert alert-info item">
-                        <span class="name">@text</span>&nbsp;(<span class="value">@value</span>)
+                            <div class="alert alert-info item">
+                                <span class="name">@text</span>&nbsp;(<span class="value">@value</span>)
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+            <div class="span6 element-calculator">
+                <div class="caption">
+                    <h4>ИЗВ (индекс загрязнения воды)</h4>
+                </div>
+                <div class="element-calculator-placeholder">
+                </div>
+                <div class="modal-footer row-fluid">
+                    <div class="span6">
+                        <span>ИЗВ = <span class="index-label">0</span></span><br />
+                        <span>Нормированный = <span class="ball-label">--</span></span>
                     </div>
-                }
-            }
+                    <div class="span6">
+                        <button type="button" class="btn btn-small btn-danger btn-clear">Очистить</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div id="element-calculator" class="span6">
-        <div class="caption">
-            <h4>ИЗВ (индекс загрязнения воды)</h4>
-        </div>
-        <div class="placeholder">
-        </div>
-        <div class="modal-footer row-fluid">
-            <div class="span6">
-                <span>ИЗВ = <span id="index-label">0</span></span><br />
-                <span>Нормированный = <span id="ball-label">--</span></span>
+    <hr />
+    <div id="ipm-assessment" calculate="simple">
+        <div class="assessment row-fluid">
+            <div class="span6 element-container">
+                <div class="caption">
+                    <h4>Ингредиенты</h4>
+                </div>
+                <div class="element-container-placeholder">
+                    @{
+                        for (var i = 0; i < 35; i++)
+                        {
+                            var text = Guid.NewGuid().ToString("N").Substring(0, 2).ToUpper();
+                            var value = random.Next(1, 10);
+                    
+                            <div class="alert alert-info item">
+                                <span class="name">@text</span>&nbsp;(<span class="value">@value</span>)
+                            </div>
+                        }
+                    }
+                </div>
             </div>
-            <div class="span6">
-                <button id="clear-btn" type="button" class="btn btn-small btn-danger">Очистить</button>
+            <div class="span6 element-calculator">
+                <div class="caption">
+                    <h4>Ipm (индекс содержания тяжёлых металлов в растениях)</h4>
+                </div>
+                <div class="element-calculator-placeholder">
+                </div>
+                <div class="modal-footer row-fluid">
+                    <div class="span6">
+                        <span>Ipm = <span class="index-label">0</span></span><br />
+                        <span>Нормированный = <span class="ball-label">--</span></span>
+                    </div>
+                    <div class="span6">
+                        <button type="button" class="btn btn-small btn-danger btn-clear">Очистить</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
 @section scripts
 {
     <script type="text/javascript">
-        window.ecologicalAssessmentView = new EcologicalAssessmentView();
+        window.izvAssessmentView = new EcologicalAssessmentView({ el: $('#izv-assessment') });
+        window.ipmAssessmentView = new EcologicalAssessmentView({ el: $('#ipm-assessment') });
     </script>
 }

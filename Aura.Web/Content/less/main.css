@@ -5337,33 +5337,31 @@ a.badge:focus {
   margin-top: 5px;
   width: 80px;
 }
-#view-ecological-assessment #element-container {
+#view-ecological-assessment .element-container {
   padding: 0;
-  height: 910px;
 }
-#view-ecological-assessment #element-container .caption {
+#view-ecological-assessment .element-container .caption {
   text-align: center;
 }
-#view-ecological-assessment #element-container .placeholder {
+#view-ecological-assessment .element-container .element-container-placeholder {
   padding: 4px;
   background-color: #eeeeee;
   overflow-y: auto;
   height: 400px;
 }
-#view-ecological-assessment #element-calculator {
+#view-ecological-assessment .element-calculator {
   padding: 0;
-  height: 910px;
 }
-#view-ecological-assessment #element-calculator .caption {
+#view-ecological-assessment .element-calculator .caption {
   text-align: center;
 }
-#view-ecological-assessment #element-calculator .placeholder {
+#view-ecological-assessment .element-calculator .element-calculator-placeholder {
   padding: 4px;
   background-color: #CCCCCC;
   overflow-y: auto;
   height: 400px;
 }
-#view-ecological-assessment #element-calculator .modal-footer {
+#view-ecological-assessment .element-calculator .modal-footer {
   text-align: left;
 }
 .container-fluid.content,

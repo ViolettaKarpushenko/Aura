@@ -150,6 +150,7 @@
     <Content Include="Content\images\home\image018.png" />
     <Content Include="Content\images\home\image019.png" />
     <Content Include="Content\images\home\image020.png" />
+    <Content Include="Content\images\home\map1.png" />
     <Content Include="Content\less\images\glyphicons-halflings-white.png" />
     <Content Include="Content\less\images\glyphicons-halflings.png" />
     <Content Include="Content\less\main.css">

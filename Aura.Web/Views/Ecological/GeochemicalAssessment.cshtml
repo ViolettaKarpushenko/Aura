@@ -4,47 +4,22 @@
     ViewBag.Title = "Экологическое состояние - Геохимическая оценка";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<div id="view-ecological-assessment" class="row-fluid">
-    <div id="element-container" class="span6">
-        <div class="caption">
-            <h4>Ингредиенты</h4>
+<div id="view-geochemical-assessment">
+    <div id="mapModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="mapModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="mapModalLabel" class="text-center">Карта педогеохимического районирования РБ</h3>
         </div>
-        <div class="placeholder">
-            @{
-                var random = new Random();
-                for (var i = 0; i < 35; i++)
-                {
-                    var text = Guid.NewGuid().ToString("N").Substring(0, random.Next(5, 15));
-                    var value = random.Next(1, 10);
-                    
-                    <div class="alert alert-info item">
-                        <span class="name">@text</span>&nbsp;(<span class="value">@value</span>)
-                    </div>
-                }
-            }
+        <div class="modal-body">
+            <img src="@Url.Content("~/Content/images/home/map1.png")" alt="Карта педогеохимического районирования РБ"/>
         </div>
+        @*
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal">Закрыть</button>
+        </div>
+        *@
     </div>
-    <div id="element-calculator" class="span6">
-        <div class="caption">
-            <h4>Ipm (индекс содержания тяжелых металлов в растениях)</h4>
-        </div>
-        <div class="placeholder">
-        </div>
-        <div class="modal-footer row-fluid">
-            <div class="span6">
-                <span>Ipm = <span id="index-label">0</span></span><br />
-                <span>Нормированный = <span id="ball-label">--</span></span>
-            </div>
-            <div class="span6">
-                <button id="clear-btn" type="button" class="btn btn-small btn-danger">Очистить</button>
-            </div>
-        </div>
+    <div>
+        <a href="#mapModal" role="button" class="btn btn-link" data-toggle="modal">Карта педогеохимического районирования РБ</a>
     </div>
 </div>
-@section scripts
-{
-    <script type="text/javascript">
-        window.ecologicalAssessmentView = new EcologicalAssessmentView();
-    </script>
-}
