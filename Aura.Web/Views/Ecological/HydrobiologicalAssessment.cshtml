@@ -1,4 +1,6 @@
-﻿@{
+﻿@model EcologicalViewModel
+
+@{
     ViewBag.TabId = 7;
     ViewBag.SubTabId = 3;
     ViewBag.Title = "Экологическое состояние - Гидробиологическая оценка";
@@ -18,16 +20,13 @@
                 </div>
                 <div class="element-container-placeholder">
                     @{
-                        for (var i = 0; i < 35; i++)
+                        var culture = CultureInfo.CreateSpecificCulture("Ru-ru");
+                        foreach (var item in Model.Items)
                         {
-                            var text1 = Guid.NewGuid().ToString("N").Substring(0, random.Next(5, 15));
-                            var text2 = Guid.NewGuid().ToString("N").Substring(0, random.Next(5, 15));
-                            var value = random.Next(1, 10);
-
-                        <div class="alert alert-info control-group item">
-                            <span class="name1">@text1</span>&nbsp;(<span class="value">@value</span>)<br />
-                            <span class="name2">@text2</span>
-                        </div>
+                            <div class="alert alert-info control-group item">
+                                <span class="name1">@item.Name</span>&nbsp;(<span class="value">@item.Value.ToString(culture.NumberFormat)</span>)<br />
+                                <span class="name2">@item.AlterName</span>
+                            </div>
                         }
                     }
                 </div>

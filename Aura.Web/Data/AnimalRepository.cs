@@ -11,7 +11,7 @@ namespace Aura.Web.Data
     {
         public AnimalViewModel GetStocks()
         {
-            var data = ExecuteAggregateQuery<AnimalModel>(
+            var data = ExecuteAggregateEntityQuery<AnimalModel>(
                 "stocks",
                 (int)Tables.Animal,
                 AnimalColumns.Los,
@@ -45,9 +45,9 @@ namespace Aura.Web.Data
 
         public AnimalViewModel GetUse()
         {
-            var useData = ExecuteAggregateQuery<AnimalModel>("use", (int)Tables.Animal, AnimalColumns.ZagotovlenoZooplankton, AnimalColumns.ZagotovlenoBentos, AnimalColumns.ZagotovlenoRyba)
+            var useData = ExecuteAggregateEntityQuery<AnimalModel>("use", (int)Tables.Animal, AnimalColumns.ZagotovlenoZooplankton, AnimalColumns.ZagotovlenoBentos, AnimalColumns.ZagotovlenoRyba)
                                 .AsParallel();
-            var stocksData = ExecuteAggregateQuery<AnimalModel>("stocks", (int)Tables.Animal, AnimalColumns.Zooplankton, AnimalColumns.Bentos, AnimalColumns.Ryba)
+            var stocksData = ExecuteAggregateEntityQuery<AnimalModel>("stocks", (int)Tables.Animal, AnimalColumns.Zooplankton, AnimalColumns.Bentos, AnimalColumns.Ryba)
                                 .AsParallel();
 
             var items = from use in useData

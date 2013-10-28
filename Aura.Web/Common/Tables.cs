@@ -6,6 +6,11 @@ namespace Aura.Web.Common
         Biological = 2,
         Territorial = 3,
         Water = 4,
-        Animal = 5
+        Animal = 5,
+        
+        HydrochemicalAssessmentIzv = 6,
+        HydrochemicalAssessmentIpm = 7,
+        GeochemicalAssessmentZc = 8,
+        HydrobiologicalAssessmentS = 9
     }
 }

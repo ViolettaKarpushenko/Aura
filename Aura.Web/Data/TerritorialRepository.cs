@@ -10,7 +10,7 @@ namespace Aura.Web.Data
     {
         public TerritorialViewModel GetStocks()
         {
-            var data = ExecuteAggregateQuery<TerritorialModel>(
+            var data = ExecuteAggregateEntityQuery<TerritorialModel>(
                 "stocks",
                 (int)Tables.Territorial,
                 TerritorialColumns.Plochad,
@@ -23,9 +23,9 @@ namespace Aura.Web.Data
 
         public TerritorialViewModel GetUse()
         {
-            var stocksData = ExecuteAggregateQuery<TerritorialModel>("stocks", (int)Tables.Territorial, TerritorialColumns.Plochad)
+            var stocksData = ExecuteAggregateEntityQuery<TerritorialModel>("stocks", (int)Tables.Territorial, TerritorialColumns.Plochad)
                                 .AsParallel();
-            var useData = ExecuteAggregateQuery<TerritorialModel>("use", (int)Tables.Territorial, TerritorialColumns.VmestimostRekreacionnyhZon, TerritorialColumns.PlochadOopt)
+            var useData = ExecuteAggregateEntityQuery<TerritorialModel>("use", (int)Tables.Territorial, TerritorialColumns.VmestimostRekreacionnyhZon, TerritorialColumns.PlochadOopt)
                                 .AsParallel();
 
             var items = from use in useData

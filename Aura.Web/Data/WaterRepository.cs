@@ -16,7 +16,7 @@ namespace Aura.Web.Data
 
         public WaterViewModel GetUse()
         {
-            var useQuery = BuildAggregateQueryPattern("use", (int)Tables.Water, 6);
+            var useQuery = BuildAggregateEntityQueryPattern("use", (int)Tables.Water, 6);
             var useData = Execute<WaterModel>(
                 useQuery,
                 (int)WaterColumns.VodyIzato,
@@ -32,7 +32,7 @@ namespace Aura.Web.Data
                 (int)WaterColumns.RhPotreblenie,
                 WaterColumns.RhPotreblenie).AsParallel();
 
-            var stocksQuery = BuildAggregateQueryPattern("stocks", (int)Tables.Water, 1);
+            var stocksQuery = BuildAggregateEntityQueryPattern("stocks", (int)Tables.Water, 1);
             var stocksData = Execute<WaterModel>(
                 stocksQuery,
                 (int)WaterColumns.ObemVody,
@@ -83,7 +83,7 @@ namespace Aura.Web.Data
 
         private WaterViewModel GetItems(string tableName)
         {
-            var query = BuildAggregateQueryPattern(tableName, (int)Tables.Water, 3);
+            var query = BuildAggregateEntityQueryPattern(tableName, (int)Tables.Water, 3);
             var data = Execute<WaterModel>(
                 query,
                 (int)WaterColumns.RechnoiStok,

@@ -50,12 +50,12 @@
 
         items.each(function () {
             var $this = $(this).removeClass('error');
-            var value = (parseFloat($this.find('input[type=text]').val()) || 0);
-            if (value === 0) {
+            var value = (parseFloat($this.find('input[type=text]').val().replace(',', '.')) || 0);
+            if (value <= 0) {
                 $this.addClass('error');
             }
 
-            sum = sum + value / (parseFloat($this.find('.value').text()) || 0);
+            sum = sum + value / (parseFloat($this.find('.value').text().replace(',', '.')) || 0);
         });
 
         var result = sum / items.length;
@@ -70,12 +70,12 @@
         var items = $('.element-calculator-placeholder .item', this.el);
         items.each(function () {
             var $this = $(this).removeClass('error');
-            var val = (parseFloat($this.find('input[type=text]').val()) || 0);
-            if (val === 0) {
+            var val = (parseFloat($this.find('input[type=text]').val().replace(',', '.')) || 0);
+            if (val <= 0) {
                 $this.addClass('error');
             }
 
-            sum1 = sum1 + val * (parseFloat($this.find('.value').text()) || 0);
+            sum1 = sum1 + val * (parseFloat($this.find('.value').text().replace(',', '.')) || 0);
             sum2 = sum2 + val;
         });
 

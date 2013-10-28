@@ -18,6 +18,8 @@ namespace Aura.Web
             Bind<IEntityRepository<WaterViewModel>>().To<WaterRepository>().InTransientScope();
 
             Bind<IRegionsRepository>().To<RegionsRepository>().InTransientScope();
+
+            Bind<IEcologicalRepository>().To<EcologicalRepository>().InTransientScope();
         }
     }
 }

@@ -3,12 +3,20 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
+using Aura.Web.Interfaces;
 using Aura.Web.Models;
 
 namespace Aura.Web.Controllers
 {
     public class EcologicalController : Controller
     {
+        private readonly IEcologicalRepository _ecologicalRepository;
+
+        public EcologicalController(IEcologicalRepository ecologicalRepository)
+        {
+            _ecologicalRepository = ecologicalRepository;
+        }
+
         [HttpGet]
         public ActionResult HydrochemicalAssessment()
         {
@@ -18,7 +26,6 @@ namespace Aura.Web.Controllers
         [HttpGet]
         public ActionResult GeochemicalAssessment()
         {
-
             var regions = Enumerable
                             .Range(1, 10)
                             .Select(index =>
@@ -56,7 +63,8 @@ namespace Aura.Web.Controllers
         [HttpGet]
         public ActionResult HydrobiologicalAssessment()
         {
-            return View();
+            var model = _ecologicalRepository.GetHydrobiologicalAssessment();
+            return View(model);
         }
 
         [HttpGet]

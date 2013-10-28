@@ -97,6 +97,7 @@
     <Compile Include="Data\AnimalRepository.cs" />
     <Compile Include="Data\BiologicalRepository.cs" />
     <Compile Include="Data\CommonRepository.cs" />
+    <Compile Include="Data\EcologicalRepository.cs" />
     <Compile Include="Data\MineralRepository.cs" />
     <Compile Include="Data\RegionsRepository.cs" />
     <Compile Include="Data\Repository.cs" />
@@ -106,6 +107,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\ICommonRepository.cs" />
+    <Compile Include="Interfaces\IEcologicalRepository.cs" />
     <Compile Include="Interfaces\IEntityController.cs" />
     <Compile Include="Interfaces\IEntityRepository.cs" />
     <Compile Include="Interfaces\IRegionsRepository.cs" />
@@ -113,6 +115,8 @@
     <Compile Include="Models\AnimalViewModel.cs" />
     <Compile Include="Models\BiologicalModel.cs" />
     <Compile Include="Models\BiologicalViewModel.cs" />
+    <Compile Include="Models\EcologicalModel.cs" />
+    <Compile Include="Models\EcologicalViewModel.cs" />
     <Compile Include="Models\GeochemicalAssessmentItemModel.cs" />
     <Compile Include="Models\GeochemicalAssessmentModel.cs" />
     <Compile Include="Models\MineralModel.cs" />

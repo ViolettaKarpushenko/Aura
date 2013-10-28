@@ -11,7 +11,7 @@ namespace Aura.Web.Data
     {
         public MineralViewModel GetStocks()
         {
-            var data = ExecuteAggregateQuery<MineralModel>(
+            var data = ExecuteAggregateEntityQuery<MineralModel>(
                 "stocks",
                 (int)Tables.Minerals,
                 MineralsColumns.Dolomity,
@@ -26,8 +26,8 @@ namespace Aura.Web.Data
 
         public MineralViewModel GetUse()
         {
-            var useData = ExecuteAggregateQuery<MineralModel>("use", (int)Tables.Minerals, MineralsColumns.DobychaSapropel).AsParallel();
-            var stocksData = ExecuteAggregateQuery<MineralModel>("stocks", (int)Tables.Minerals, MineralsColumns.Sapropel).AsParallel();
+            var useData = ExecuteAggregateEntityQuery<MineralModel>("use", (int)Tables.Minerals, MineralsColumns.DobychaSapropel).AsParallel();
+            var stocksData = ExecuteAggregateEntityQuery<MineralModel>("stocks", (int)Tables.Minerals, MineralsColumns.Sapropel).AsParallel();
 
             var items = from use in useData
                         join stock in stocksData on use.RegionId equals stock.RegionId

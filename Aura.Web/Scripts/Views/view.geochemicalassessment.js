@@ -27,9 +27,9 @@
         var sum = 0;
         items.each(function () {
             var $this = $(this);
-            var val1 = parseFloat($this.find('td.value1').text()) || 0;
-            var val2 = parseFloat($this.find('td.value2 input').val()) || 0;
-            if (val2 === 0) {
+            var val1 = parseFloat($this.find('td.value1').text().replace(',', '.')) || 0;
+            var val2 = parseFloat($this.find('td.value2 input').val().replace(',', '.')) || 0;
+            if (val2 <= 0) {
                 $this.find('td.value2 input').closest('.control-group').addClass('error');
             }
 

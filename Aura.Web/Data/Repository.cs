@@ -5,6 +5,7 @@ using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Web;
+using Aura.Web.Models;
 using Dapper;
 
 namespace Aura.Web.Data
@@ -51,16 +52,16 @@ namespace Aura.Web.Data
             }
         }
 
-        protected static IEnumerable<T> ExecuteAggregateQuery<T>(string tableName, int tableId, params Enum[] columns)
+        protected static IEnumerable<T> ExecuteAggregateEntityQuery<T>(string tableName, int tableId, params Enum[] columns)
         {
-            var content = CreateAggregatePatternFillContent(columns).ToArray();
-            var queryPattern = BuildAggregateQueryPattern(tableName, tableId, columns.Length);
+            var content = CreateAggregateEntityPatternFillContent(columns).ToArray();
+            var queryPattern = BuildAggregateEntityQueryPattern(tableName, tableId, columns.Length);
             var query = string.Format(queryPattern, content);
 
             return Execute<T>(query);
         }
 
-        protected static string BuildAggregateQueryPattern(string tableName, int tableId, int columnQuantity)
+        protected static string BuildAggregateEntityQueryPattern(string tableName, int tableId, int columnQuantity)
         {
             var query = new StringBuilder();
             query.Append("SELECT ");
@@ -90,7 +91,15 @@ namespace Aura.Web.Data
             return query.ToString();
         }
 
-        private static IEnumerable<object> CreateAggregatePatternFillContent(IEnumerable<Enum> columns)
+        protected IEnumerable<EcologicalModel> EcecuteBaseEcologicalQuery(int tableId)
+        {
+            var query = "SELECT [ID], [AlterName], [Name], [TableID], [Value] FROM [ecological];";
+            var result = Execute<EcologicalModel>(query);
+
+            return result;
+        }
+
+        private static IEnumerable<object> CreateAggregateEntityPatternFillContent(IEnumerable<Enum> columns)
         {
             foreach (var column in columns)
             {

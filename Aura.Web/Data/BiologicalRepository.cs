@@ -10,7 +10,7 @@ namespace Aura.Web.Data
     {
         public BiologicalViewModel GetStocks()
         {
-            var data = ExecuteAggregateQuery<BiologicalModel>(
+            var data = ExecuteAggregateEntityQuery<BiologicalModel>(
                 "stocks",
                 (int)Tables.Biological,
                 BiologicalColumns.Drevesina,
@@ -25,9 +25,9 @@ namespace Aura.Web.Data
 
         public BiologicalViewModel GetUse()
         {
-            var useData = ExecuteAggregateQuery<BiologicalModel>("use", (int)Tables.Biological, BiologicalColumns.ZagotovlenoMakrofitov, BiologicalColumns.ZagotovlenoFitoplankton)
+            var useData = ExecuteAggregateEntityQuery<BiologicalModel>("use", (int)Tables.Biological, BiologicalColumns.ZagotovlenoMakrofitov, BiologicalColumns.ZagotovlenoFitoplankton)
                                 .AsParallel();
-            var stocksData = ExecuteAggregateQuery<BiologicalModel>("stocks", (int)Tables.Biological, BiologicalColumns.Makrofity, BiologicalColumns.Fitoplankton)
+            var stocksData = ExecuteAggregateEntityQuery<BiologicalModel>("stocks", (int)Tables.Biological, BiologicalColumns.Makrofity, BiologicalColumns.Fitoplankton)
                                 .AsParallel();
 
             var items = from use in useData
