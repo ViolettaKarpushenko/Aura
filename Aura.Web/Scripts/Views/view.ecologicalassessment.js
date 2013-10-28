@@ -86,7 +86,7 @@
 
     clear: function () {
         $('.element-calculator-placeholder .item', this.el).remove();
-        $('.element-calculator .index-label', this.el).text(0);
+        this.calculate();
     },
 
     removeItem: function (event) {
