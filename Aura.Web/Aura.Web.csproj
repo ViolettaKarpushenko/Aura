@@ -117,8 +117,6 @@
     <Compile Include="Models\BiologicalViewModel.cs" />
     <Compile Include="Models\EcologicalModel.cs" />
     <Compile Include="Models\EcologicalViewModel.cs" />
-    <Compile Include="Models\GeochemicalAssessmentItemModel.cs" />
-    <Compile Include="Models\GeochemicalAssessmentModel.cs" />
     <Compile Include="Models\MineralModel.cs" />
     <Compile Include="Models\MineralViewModel.cs" />
     <Compile Include="Models\RegionModel.cs" />
@@ -134,6 +132,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\images\brand.png" />
     <Content Include="Content\images\glyphicons-halflings-white.png" />
     <Content Include="Content\images\glyphicons-halflings.png" />
     <Content Include="Content\images\home\image001.png" />
@@ -162,7 +161,8 @@
     <None Include="Content\less\main.css">
       <DependentUpon>main.less</DependentUpon>
     </None>
-    <Content Include="Scripts\Views\view.geochemicalassessment.js" />
+    <Content Include="favicon.ico" />
+    <Content Include="Scripts\Views\view.ecologicaltableassessment.js" />
     <Content Include="Global.asax" />
     <Content Include="Content\less\views\view.table.less">
       <Compile>False</Compile>

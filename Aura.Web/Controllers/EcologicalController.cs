@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
+using Aura.Web.Common;
 using Aura.Web.Interfaces;
 using Aura.Web.Models;
 
@@ -20,25 +20,36 @@ namespace Aura.Web.Controllers
         [HttpGet]
         public ActionResult HydrochemicalAssessment()
         {
-            return View();
+            var items = _ecologicalRepository.GetEcologicalItems(Tables.HydrobiologicalAssessmentS);
+            var model = new EcologicalViewModel
+            {
+                DataSets = new Dictionary<int, IEnumerable<EcologicalModel>> { { 0, items } }
+            };
+
+            return View(model);
         }
 
         [HttpGet]
         public ActionResult GeochemicalAssessment()
         {
-            var regions = Enumerable
-                            .Range(1, 10)
-                            .Select(index =>
+            var regions = _ecologicalRepository.GetEcologicalRegions(Tables.GeochemicalAssessmentZc)
+                            .Select(pair =>
                               new SelectListItem
                                   {
                                       Selected = false,
-                                      Value = index.ToString(CultureInfo.InvariantCulture),
-                                      Text = "Region " + index
+                                      Value = pair.Key.ToString(CultureInfo.InvariantCulture),
+                                      Text = pair.Value
                                   })
                                 .ToArray();
 
             regions.First().Selected = true;
-            var model = new GeochemicalAssessmentModel { Regions = regions, RegionId = 1 };
+
+            var items = _ecologicalRepository.GetEcologicalItems(Tables.GeochemicalAssessmentIpm);
+            var model = new EcologicalViewModel
+            {
+                Regions = regions,
+                DataSets = new Dictionary<int, IEnumerable<EcologicalModel>> { { 0, items } }
+            };
 
             return View(model);
         }
@@ -46,31 +57,32 @@ namespace Aura.Web.Controllers
         [HttpGet]
         public ActionResult GeochemicalAssessmentGrid(int regionId)
         {
-            var model = new List<GeochemicalAssessmentItemModel>();
-            var random = new Random();
-            for (var i = 0; i < 10; i++)
-            {
-                model.Add(new GeochemicalAssessmentItemModel
-                    {
-                        Name = Guid.NewGuid().ToString("N").Substring(0, 2).ToUpper(),
-                        Value = random.Next(0, 100)
-                    });
-            }
-
+            var model = _ecologicalRepository.GetEcologicalItems(Tables.GeochemicalAssessmentZc, regionId);
             return View(model);
         }
 
         [HttpGet]
         public ActionResult HydrobiologicalAssessment()
         {
-            var model = _ecologicalRepository.GetHydrobiologicalAssessment();
+            var items = _ecologicalRepository.GetEcologicalItems(Tables.HydrobiologicalAssessmentS);
+            var model = new EcologicalViewModel
+            {
+                DataSets = new Dictionary<int, IEnumerable<EcologicalModel>> { { 0, items } }
+            };
+
             return View(model);
         }
 
         [HttpGet]
         public ActionResult ReservoirTransformation()
         {
-            return View();
+            var items = _ecologicalRepository.GetEcologicalItems(Tables.ReservoirTransformationAt);
+            var model = new EcologicalViewModel
+            {
+                DataSets = new Dictionary<int, IEnumerable<EcologicalModel>> { { 0, items } }
+            };
+
+            return View(model);
         }
     }
 }

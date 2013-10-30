@@ -91,9 +91,15 @@ namespace Aura.Web.Data
             return query.ToString();
         }
 
-        protected IEnumerable<EcologicalModel> EcecuteBaseEcologicalQuery(int tableId)
+        protected IEnumerable<EcologicalModel> EcecuteBaseEcologicalQuery(int tableId, int? regionId = null)
         {
-            var query = "SELECT [ID], [AlterName], [Name], [TableID], [Value] FROM [ecological];";
+            var condition = " WHERE [TableID] = {0}";
+            if (regionId != null)
+            {
+                condition += " AND [RegionID] = {1}";
+            }
+
+            var query = string.Format("SELECT [ID], [AlterName], [Name], [TableID], [Value] FROM [ecological]" + condition + ";", tableId, regionId);
             var result = Execute<EcologicalModel>(query);
 
             return result;

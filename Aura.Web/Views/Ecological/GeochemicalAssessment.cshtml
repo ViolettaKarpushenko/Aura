@@ -1,4 +1,4 @@
-﻿@model GeochemicalAssessmentModel
+﻿@model EcologicalViewModel
 
 @{
     ViewBag.TabId = 7;
@@ -6,31 +6,74 @@
     ViewBag.Title = "Экологическое состояние - Геохимическая оценка";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div id="view-geochemical-assessment">
-    <div id="mapModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="mapModalLabel" aria-hidden="true" style="display: none;">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="mapModalLabel" class="text-center">Карта педогеохимического районирования РБ</h3>
+
+<div id="view-ecological-assessment">
+    <div id="ipm-assessment" calculate="simple">
+        <div class="assessment row-fluid">
+            <div class="span6 element-container">
+                <div class="caption">
+                    <h4>Ингредиенты</h4>
+                </div>
+                <div class="element-container-placeholder">
+                    @{
+                        var culture = CultureInfo.CreateSpecificCulture("Ru-ru");
+                        foreach (var item in Model.DataSets[0])
+                        {
+                            <div class="alert alert-info control-group item">
+                                <span class="name1">@item.Name</span>&nbsp;(<span class="value">@item.Value.ToString(culture.NumberFormat)</span>)
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+            <div class="span6 element-calculator">
+                <div class="caption">
+                    <h4>Ipm (индекс содержания тяжёлых металлов в растениях)</h4>
+                </div>
+                <div class="element-calculator-placeholder">
+                </div>
+                <div class="modal-footer row-fluid">
+                    <div class="span6">
+                        <span>Ipm = <span class="index-label">0</span></span><br />
+                        <span>Нормированный = <span class="ball-label">1</span></span><br />
+                        <div class="progress progress-success">
+                            <div class="bar" style="width: 20%"></div>
+                        </div>
+                    </div>
+                    <div class="span6">
+                        <button type="button" class="btn btn-small btn-danger btn-clear">Очистить</button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-            <img src="@Url.Content("~/Content/images/home/map1.png")" alt="Карта педогеохимического районирования РБ"/>
-        </div>
-        @*
-        <div class="modal-footer">
-            <button class="btn" data-dismiss="modal">Закрыть</button>
-        </div>
-        *@
     </div>
-    <div>
-        @Html.DropDownListFor(m => m.RegionId, Model.Regions)<br />
-        <a href="#mapModal" role="button" class="btn btn-link" data-toggle="modal">Карта педогеохимического районирования РБ</a>
-        <div class="grid-container"></div>
-        <div class="row-fluid">
-            <div class="span3">
-                <span>Zc = <span class="index-label">1</span></span><br />
-                <span>Нормированный = <span class="ball-label">1</span></span><br />
-                <div class="progress progress-success">
-                    <div class="bar" style="width: 20%"></div>
+    <hr />
+    <div id="view-geochemical-assessment" calculate="extend">
+        <div id="mapModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="mapModalLabel" aria-hidden="true" style="display: none;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="mapModalLabel" class="text-center">Карта педогеохимического районирования РБ</h3>
+            </div>
+            <div class="modal-body">
+                <img src="@Url.Content("~/Content/images/home/map1.png")" alt="Карта педогеохимического районирования РБ"/>
+            </div>
+            @*
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal">Закрыть</button>
+            </div>
+            *@
+        </div>
+        <div>
+            @Html.DropDownList("region-id", Model.Regions)<br />
+            <a href="#mapModal" role="button" class="btn btn-link" data-toggle="modal">Карта педогеохимического районирования РБ</a>
+            <div class="grid-container"></div>
+            <div class="row-fluid">
+                <div class="span3">
+                    <span>Zc = <span class="index-label">1</span></span><br />
+                    <span>Нормированный = <span class="ball-label">1</span></span><br />
+                    <div class="progress progress-success">
+                        <div class="bar" style="width: 20%"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -39,7 +82,7 @@
 @section scripts
 {
     <script type="text/javascript">
-        window.geochemicalAssessmentView = new GeochemicalAssessmentView({
+        window.ecologicalTableAssessmentView = new EcologicalTableAssessmentView({
             fetchUrl: '@Url.Action("GeochemicalAssessmentGrid", "Ecological")',
             normalizing: [
                 { min: -1e15, max: 10, value: 1, color: "success" },
@@ -47,6 +90,17 @@
                 { min: 20, max: 30, value: 3, color: "warning" },
                 { min: 40, max: 70, value: 4, color: "warning" },
                 { min: 70, max: 1e+15, value: 5, color: "danger" }
+            ]
+        });
+
+        window.ipmAssessmentView = new EcologicalAssessmentView({
+            el: $('#ipm-assessment'),
+            normalizing: [
+                { min: -1e15, max: 0.1, value: 1, color: "success" },
+                { min: 0.1, max: 1, value: 2, color: "warning" },
+                { min: 0.1, max: 2, value: 3, color: "warning" },
+                { min: 2, max: 3, value: 4, color: "warning" },
+                { min: 3, max: 1e+15, value: 5, color: "danger" }
             ]
         });
     </script>

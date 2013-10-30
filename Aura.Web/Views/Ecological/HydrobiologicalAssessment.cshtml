@@ -21,7 +21,7 @@
                 <div class="element-container-placeholder">
                     @{
                         var culture = CultureInfo.CreateSpecificCulture("Ru-ru");
-                        foreach (var item in Model.Items)
+                        foreach (var item in Model.DataSets[0])
                         {
                             <div class="alert alert-info control-group item">
                                 <span class="name1">@item.Name</span>&nbsp;(<span class="value">@item.Value.ToString(culture.NumberFormat)</span>)<br />

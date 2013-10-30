@@ -1,12 +1,9 @@
-﻿@{
+﻿@model EcologicalViewModel
+@{
     ViewBag.TabId = 7;
     ViewBag.SubTabId = 1;
     ViewBag.Title = "Экологическое состояние - Гидрохимическая оценка";
     Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
-@{
-    var random = new Random();
 }
 
 <div id="view-ecological-assessment">
@@ -18,14 +15,12 @@
                 </div>
                 <div class="element-container-placeholder">
                     @{
-                        for (var i = 0; i < 35; i++)
+                        var culture = CultureInfo.CreateSpecificCulture("Ru-ru");
+                        foreach (var item in Model.DataSets[0])
                         {
-                            var text = Guid.NewGuid().ToString("N").Substring(0, random.Next(5, 15));
-                            var value = random.Next(1, 10);
-                    
-                        <div class="alert alert-info control-group item">
-                            <span class="name">@text</span>&nbsp;(<span class="value">@value</span>)
-                        </div>
+                            <div class="alert alert-info control-group item">
+                                <span class="name1">@item.Name</span>&nbsp;(<span class="value">@item.Value.ToString(culture.NumberFormat)</span>)
+                            </div>
                         }
                     }
                 </div>
@@ -51,48 +46,6 @@
             </div>
         </div>
     </div>
-    <hr />
-    <div id="ipm-assessment" calculate="simple">
-        <div class="assessment row-fluid">
-            <div class="span6 element-container">
-                <div class="caption">
-                    <h4>Ингредиенты</h4>
-                </div>
-                <div class="element-container-placeholder">
-                    @{
-                        for (var i = 0; i < 35; i++)
-                        {
-                            var text = Guid.NewGuid().ToString("N").Substring(0, 2).ToUpper();
-                            var value = random.Next(1, 10);
-                    
-                        <div class="alert alert-info control-group item">
-                            <span class="name">@text</span>&nbsp;(<span class="value">@value</span>)
-                        </div>
-                        }
-                    }
-                </div>
-            </div>
-            <div class="span6 element-calculator">
-                <div class="caption">
-                    <h4>Ipm (индекс содержания тяжёлых металлов в растениях)</h4>
-                </div>
-                <div class="element-calculator-placeholder">
-                </div>
-                <div class="modal-footer row-fluid">
-                    <div class="span6">
-                        <span>Ipm = <span class="index-label">0</span></span><br />
-                        <span>Нормированный = <span class="ball-label">1</span></span><br />
-                        <div class="progress progress-success">
-                            <div class="bar" style="width: 20%"></div>
-                        </div>
-                    </div>
-                    <div class="span6">
-                        <button type="button" class="btn btn-small btn-danger btn-clear">Очистить</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 @section scripts
@@ -100,17 +53,6 @@
     <script type="text/javascript">
         window.izvAssessmentView = new EcologicalAssessmentView({
             el: $('#izv-assessment'),
-            normalizing: [
-                { min: -1e15, max: 0.1, value: 1, color: "success" },
-                { min: 0.1, max: 1, value: 2, color: "warning" },
-                { min: 0.1, max: 2, value: 3, color: "warning" },
-                { min: 2, max: 3, value: 4, color: "warning" },
-                { min: 3, max: 1e+15, value: 5, color: "danger" }
-            ]
-        });
-
-        window.ipmAssessmentView = new EcologicalAssessmentView({
-            el: $('#ipm-assessment'),
             normalizing: [
                 { min: -1e15, max: 0.1, value: 1, color: "success" },
                 { min: 0.1, max: 1, value: 2, color: "warning" },

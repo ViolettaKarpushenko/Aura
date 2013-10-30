@@ -1,7 +1,7 @@
 ﻿var EcologicalAssessmentView = Backbone.View.extend({
     events: {
         "click .item .close": "removeItem",
-        "change .item input[type=text]": "changeValculate",
+        "change .item input[type=text], input[type=number]": "changeValue",
         "click .btn-clear": "clear"
     },
 
@@ -40,7 +40,7 @@
         });
     },
 
-    changeValculate: function () {
+    changeValue: function () {
         this.calculate();
     },
 
@@ -101,13 +101,13 @@
 
         if (!ball) {
             $('.ball-label', this.el).text('--');
-            var bar = $('.progress', this.el);
-            bar.find('.bar').css('width', '0%');
+            var bar1 = $('.progress', this.el);
+            bar1.find('.bar').css('width', '0%');
         } else {
-            $('.ball-label', this.el).text(ball.value);
-            var bar = $('.progress', this.el);
-            bar.removeClass('progress-success').removeClass('progress-warning').removeClass('progress-danger').addClass('progress-' + ball.color);
-            bar.find('.bar').css('width', (ball.value * (100 / this.normalizing.length)) + '%');
+            $('.ball-label', this.el).text(ball.text ? ball.text : ball.value);
+            var bar2 = $('.progress', this.el);
+            bar2.removeClass('progress-success').removeClass('progress-warning').removeClass('progress-danger').addClass('progress-' + ball.color);
+            bar2.find('.bar').css('width', (ball.value * (100 / this.normalizing.length)) + '%');
         }
     }
 });

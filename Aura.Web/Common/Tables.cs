@@ -7,10 +7,11 @@ namespace Aura.Web.Common
         Territorial = 3,
         Water = 4,
         Animal = 5,
-        
+
         HydrochemicalAssessmentIzv = 6,
-        HydrochemicalAssessmentIpm = 7,
+        GeochemicalAssessmentIpm = 7,
         GeochemicalAssessmentZc = 8,
-        HydrobiologicalAssessmentS = 9
+        HydrobiologicalAssessmentS = 9,
+        ReservoirTransformationAt = 10
     }
 }
