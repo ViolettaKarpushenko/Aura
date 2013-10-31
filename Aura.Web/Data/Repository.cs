@@ -93,10 +93,10 @@ namespace Aura.Web.Data
 
         protected IEnumerable<EcologicalModel> EcecuteBaseEcologicalQuery(int tableId, int? regionId = null)
         {
-            var condition = " WHERE [TableID] = {0}";
+            var condition = " WHERE [TableID] = {0} ";
             if (regionId != null)
             {
-                condition += " AND [RegionID] = {1}";
+                condition += " AND [RegionID] = {1} ";
             }
 
             var query = string.Format("SELECT [ID], [AlterName], [Name], [TableID], [Value] FROM [ecological]" + condition + ";", tableId, regionId);

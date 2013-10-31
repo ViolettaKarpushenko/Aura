@@ -1,5 +1,5 @@
 ﻿var EcologicalTableAssessmentView = Backbone.View.extend({
-    el: "#view-geochemical-assessment",
+    el: "#view-table-assessment",
 
     events: {
         "change #region-id": "loadGrid",
@@ -52,10 +52,14 @@
             sum1 = sum1 + (val1 * val2);
             sum2 = sum2 + val2;
         });
-
-        var result = sum1 / sum2;
-        $('.index-label', this.el).text(result);
-        this.normalize(result);
+        if (sum2 === 0) {
+            $('.index-label', this.el).text('--');
+            $('.ball-label', this.el).text('--');
+        } else {
+            var result = sum1 / sum2;
+            $('.index-label', this.el).text(result);
+            this.normalize(result);
+        }
     },
 
     extendCalculate: function () {
