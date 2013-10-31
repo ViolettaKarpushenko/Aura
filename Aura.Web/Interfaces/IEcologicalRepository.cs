@@ -7,6 +7,7 @@ namespace Aura.Web.Interfaces
     public interface IEcologicalRepository
     {
         IEnumerable<EcologicalModel> GetEcologicalItems(Tables table, int? regionId = null);
+
         IEnumerable<KeyValuePair<int, string>> GetEcologicalRegions(Tables table);
     }
 }

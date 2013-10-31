@@ -23,7 +23,7 @@ namespace Aura.Web.Data
                         "AND [RegionName] IS NOT NULL " +
                         "GROUP BY [RegionID], [RegionName]";
 
-            var result = Execute<KeyValuePair<int, string>>(query, (int) table);
+            var result = Execute<KeyValuePair<int, string>>(query, (int)table);
 
             return result;
         }
