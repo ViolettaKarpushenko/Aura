@@ -20,7 +20,7 @@ namespace Aura.Web.Controllers
         [HttpGet]
         public ActionResult HydrochemicalAssessment()
         {
-            var items = _ecologicalRepository.GetEcologicalItems(Tables.HydrobiologicalAssessmentS);
+            var items = _ecologicalRepository.GetEcologicalItems(Tables.HydrochemicalAssessmentIzv);
             var model = new EcologicalViewModel
             {
                 DataSets = new Dictionary<int, IEnumerable<EcologicalModel>> { { 0, items } }
