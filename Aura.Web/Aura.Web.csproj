@@ -158,10 +158,28 @@
     <Content Include="Content\images\home\map1.png" />
     <Content Include="Content\less\images\glyphicons-halflings-white.png" />
     <Content Include="Content\less\images\glyphicons-halflings.png" />
+    <Content Include="Content\less\layouts.less" />
+    <Content Include="Content\less\labels-badges.less" />
+    <Content Include="Content\less\hero-unit.less" />
+    <Content Include="Content\less\grid.less" />
+    <Content Include="Content\less\forms.less" />
+    <Content Include="Content\less\dropdowns.less" />
+    <Content Include="Content\less\component-animations.less" />
+    <Content Include="Content\less\code.less" />
+    <Content Include="Content\less\close.less" />
+    <Content Include="Content\less\carousel.less" />
+    <Content Include="Content\less\buttons.less" />
+    <Content Include="Content\less\button-groups.less" />
+    <Content Include="Content\less\breadcrumbs.less" />
+    <Content Include="Content\less\bootstrap.less" />
+    <Content Include="Content\less\alerts.less" />
+    <Content Include="Content\less\accordion.less" />
+    <Content Include="Content\files\methodology.docx" />
     <None Include="Content\less\main.css">
       <DependentUpon>main.less</DependentUpon>
     </None>
     <Content Include="favicon.ico" />
+    <Content Include="Scripts\less.min.js" />
     <Content Include="Scripts\Views\view.ecologicaltableassessment.js" />
     <Content Include="Global.asax" />
     <Content Include="Content\less\views\view.table.less">
@@ -176,143 +194,11 @@
       <Compile>False</Compile>
       <Minify>False</Minify>
     </Content>
-    <Content Include="Content\less\wells.less">
-      <Compile>False</Compile>
-      <Minify>False</Minify>
-    </Content>
     <Content Include="Content\less\variables.less">
       <Compile>False</Compile>
       <Minify>False</Minify>
     </Content>
-    <Content Include="Content\less\utilities.less">
-      <Compile>False</Compile>
-      <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\type.less">
-      <Compile>False</Compile>
-      <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\tooltip.less">
-      <Compile>False</Compile>
-      <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\thumbnails.less">
-      <Compile>False</Compile>
-      <Minify>False</Minify>
-    </Content>
     <Content Include="Content\less\tables.less">
-      <Compile>False</Compile>
-      <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\sprites.less">
-      <Compile>False</Compile>
-      <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\scaffolding.less">
-      <Compile>False</Compile>
-      <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\reset.less">
-      <Compile>False</Compile>
-      <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\progress-bars.less">
-      <Compile>False</Compile>
-      <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\popovers.less">
-      <Compile>False</Compile>
-      <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\pagination.less">
-      <Compile>False</Compile>
-      <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\pager.less">
-      <Compile>False</Compile>
-      <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\navs.less">
-      <Compile>False</Compile>
-      <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\navbar.less">
-      <Compile>False</Compile>
-      <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\modals.less">
-      <Compile>False</Compile>
-      <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\mixins.less">
-      <Compile>False</Compile>
-      <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\media.less">
-      <Compile>False</Compile>
-      <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\layouts.less">
-      <Compile>False</Compile>
-      <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\labels-badges.less">
-      <Compile>False</Compile>
-      <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\hero-unit.less">
-      <Compile>False</Compile>
-      <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\grid.less">
-      <Compile>False</Compile>
-      <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\forms.less">
-      <Compile>False</Compile>
-      <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\dropdowns.less">
-      <Compile>False</Compile>
-      <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\component-animations.less">
-      <Compile>False</Compile>
-      <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\code.less">
-      <Compile>False</Compile>
-      <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\close.less">
-      <Compile>False</Compile>
-      <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\carousel.less">
-      <Compile>False</Compile>
-      <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\buttons.less">
-      <Compile>False</Compile>
-      <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\button-groups.less">
-      <Compile>False</Compile>
-      <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\breadcrumbs.less">
-      <Compile>False</Compile>
-      <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\bootstrap.less">
-      <Compile>False</Compile>
-      <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\alerts.less">
-      <Compile>False</Compile>
-      <Minify>False</Minify>
-    </Content>
-    <Content Include="Content\less\accordion.less">
       <Compile>False</Compile>
       <Minify>False</Minify>
     </Content>
@@ -321,6 +207,30 @@
       <Minify>False</Minify>
     </Content>
     <Content Include="App_Data\aura.db" />
+    <Content Include="Content\less\wells.less" />
+    <Content Include="Content\less\utilities.less" />
+    <Content Include="Content\less\type.less" />
+    <Content Include="Content\less\tooltip.less" />
+    <Content Include="Content\less\thumbnails.less" />
+    <Content Include="Content\less\sprites.less" />
+    <Content Include="Content\less\scaffolding.less" />
+    <Content Include="Content\less\responsive-utilities.less" />
+    <Content Include="Content\less\responsive-navbar.less" />
+    <Content Include="Content\less\responsive-768px-979px.less" />
+    <Content Include="Content\less\responsive-767px-max.less" />
+    <Content Include="Content\less\responsive-1200px-min.less" />
+    <Content Include="Content\less\responsive.less" />
+    <Content Include="Content\less\reset.less" />
+    <Content Include="Content\less\progress-bars.less" />
+    <Content Include="Content\less\popovers.less" />
+    <Content Include="Content\less\pagination.less" />
+    <Content Include="Content\less\pager.less" />
+    <Content Include="Content\less\navs.less" />
+    <Content Include="Content\less\navbar.less" />
+    <Content Include="Content\less\modals.less" />
+    <Content Include="Content\less\mixins.less" />
+    <Content Include="Content\less\media.less" />
+    <None Include="Properties\PublishProfiles\debug.fs.pubxml" />
     <None Include="Properties\PublishProfiles\prod.ftp.pubxml" />
     <Content Include="Scripts\backbone.js" />
     <Content Include="Scripts\backbone.min.js" />
@@ -375,7 +285,7 @@
     <Content Include="Views\Use\Territorial.cshtml" />
     <Content Include="Views\Use\Water.cshtml" />
     <Content Include="Views\Regions\Index.cshtml" />
-    <Content Include="Settings.StyleCop" />
+    <None Include="Settings.StyleCop" />
     <Content Include="Views\Ecological\HydrochemicalAssessment.cshtml" />
     <Content Include="Views\Ecological\GeochemicalAssessment.cshtml" />
     <Content Include="Views\Ecological\HydrobiologicalAssessment.cshtml" />
@@ -385,7 +295,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="packages.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

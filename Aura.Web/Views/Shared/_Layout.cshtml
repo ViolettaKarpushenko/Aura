@@ -15,9 +15,10 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-	            <a class="brand" href="@Url.Action("Index", "Home")">
-		            <img src="@Url.Content("~/Content/images/brand.png")"/> Aura
-	            </a>
+                <a class="brand" href="@Url.Action("Index", "Home")">
+                    <img src="@Url.Content("~/Content/images/brand.png")"/>
+                    Aura
+                </a>
                 <div class="nav-collapse collapse">
                     <ul class="nav" id="menu-ul">
                         <li tabid="1">
@@ -75,6 +76,13 @@
                                 <li subtabid="2"><a href="@Url.Action("GeochemicalAssessment", "Ecological")">Геохимическая оценка</a></li>
                                 <li subtabid="3"><a href="@Url.Action("HydrobiologicalAssessment", "Ecological")">Гидробиологическая оценка</a></li>
                                 <li subtabid="4"><a href="@Url.Action("ReservoirTransformation", "Ecological")">Трансформация водосбора</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown" tabid="8">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Справка<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li subtabid="1"><a href="@Url.Content("~/Content/files/methodology.docx")">Методика расчета</a></li>
+                                <li subtabid="2"><a href="@Url.Content("~/Content/files/methodology.docx")">Руководство пользователя</a></li>
                             </ul>
                         </li>
                     </ul>
