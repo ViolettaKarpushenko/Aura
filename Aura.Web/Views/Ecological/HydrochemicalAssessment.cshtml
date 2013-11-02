@@ -11,7 +11,7 @@
         <div class="assessment row-fluid">
             <div class="span6 element-container">
                 <div class="caption">
-                    <h4>Ингредиенты</h4>
+                    <h4>Вещества</h4>
                 </div>
                 <div class="element-container-placeholder">
                     @{
@@ -19,7 +19,7 @@
                         foreach (var item in Model.DataSets[0])
                         {
                             <div class="alert alert-info control-group item">
-                                <span class="name1">@item.Name</span>&nbsp;(<span class="value">@item.Value.ToString(culture.NumberFormat)</span>)
+                                <span class="name1">@item.Name</span><span class="value" style =" display: none;"> @item.Value.ToString(culture.NumberFormat)</span>
                             </div>
                         }
                     }
@@ -34,7 +34,7 @@
                 <div class="modal-footer row-fluid">
                     <div class="span6">
                         <span>ИЗВ = <span class="index-label">0</span></span><br />
-                        <span>Нормированный = <span class="ball-label">1</span></span><br />
+                        <span>Нормированный балл = <span class="ball-label">1</span></span><br />
                         <div class="progress progress-success">
                             <div class="bar" style="width: 20%"></div>
                         </div>

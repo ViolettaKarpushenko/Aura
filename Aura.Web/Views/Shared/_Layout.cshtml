@@ -15,43 +15,41 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="brand" href="@Url.Action("Index", "Home")">
-                    <img src="@Url.Content("~/Content/images/brand.png")"/>
-                    Aura
-                </a>
                 <div class="nav-collapse collapse">
                     <ul class="nav" id="menu-ul">
                         <li tabid="1">
-                            <a href="/">Методика</a>
+                            <a class="brand" href="@Url.Action("Index", "Home")">
+                                <img src="@Url.Content("~/Content/images/brand.png")" alt="Aura" title="Aura"/>
+                            </a>
                         </li>
                         <li class="dropdown" tabid="2">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Запасы природных ресурсов<b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li subtabid="1"><a href="@Url.Action("Mineral", "Stocks")">Балансовые запасы минеральных ресурсов</a></li>
+                                <li subtabid="1"><a href="@Url.Action("Mineral", "Stocks")">Запасы минеральных ресурсов</a></li>
                                 <li subtabid="2"><a href="@Url.Action("Water", "Stocks")">Водные ресурсы</a></li>
                                 <li subtabid="3"><a href="@Url.Action("Territorial", "Stocks")">Территориальные ресурсы</a></li>
                                 <li subtabid="4"><a href="@Url.Action("Biological", "Stocks")">Ресурсы растительного мира</a></li>
-                                <li subtabid="5"><a href="@Url.Action("Animal", "Stocks")">Животного мира</a></li>
+                                <li subtabid="5"><a href="@Url.Action("Animal", "Stocks")">Ресурсы животного мира</a></li>
                             </ul>
                         </li>
                         <li class="dropdown" tabid="3">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Хозяйственное использование<b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li subtabid="1"><a href="@Url.Action("Mineral", "Use")">Балансовые запасы минеральных ресурсов</a></li>
+                                <li subtabid="1"><a href="@Url.Action("Mineral", "Use")">Запасы минеральных ресурсов</a></li>
                                 <li subtabid="2"><a href="@Url.Action("Water", "Use")">Водные ресурсы</a></li>
                                 <li subtabid="3"><a href="@Url.Action("Territorial", "Use")">Территориальные ресурсы</a></li>
                                 <li subtabid="4"><a href="@Url.Action("Biological", "Use")">Ресурсы растительного мира</a></li>
-                                <li subtabid="5"><a href="@Url.Action("Animal", "Use")">Животного мира</a></li>
+                                <li subtabid="5"><a href="@Url.Action("Animal", "Use")">Запасы животного мира</a></li>
                             </ul>
                         </li>
                         <li class="dropdown" tabid="4">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Итог<b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li subtabid="1"><a href="@Url.Action("Mineral", "Result")">Балансовые запасы минеральных ресурсов</a></li>
+                                <li subtabid="1"><a href="@Url.Action("Mineral", "Result")">Запасы минеральных ресурсов</a></li>
                                 <li subtabid="2"><a href="@Url.Action("Water", "Result")">Водные ресурсы</a></li>
                                 <li subtabid="3"><a href="@Url.Action("Territorial", "Result")">Территориальные ресурсы</a></li>
                                 <li subtabid="4"><a href="@Url.Action("Biological", "Result")">Ресурсы растительного мира</a></li>
-                                <li subtabid="5"><a href="@Url.Action("Animal", "Result")">Животного мира</a></li>
+                                <li subtabid="5"><a href="@Url.Action("Animal", "Result")">Запасы животного мира</a></li>
                             </ul>
                         </li>
                         @*
@@ -66,9 +64,7 @@
                             </ul>
                         </li>
                         *@
-                        <li tabid="6">
-                            <a href="@Url.Action("Index", "Regions")">Районы</a>
-                        </li>
+                       </li>
                         <li class="dropdown" tabid="7">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Экологическое состояние озёр<b class="caret"></b></a>
                             <ul class="dropdown-menu">
@@ -77,11 +73,13 @@
                                 <li subtabid="3"><a href="@Url.Action("HydrobiologicalAssessment", "Ecological")">Гидробиологическая оценка</a></li>
                                 <li subtabid="4"><a href="@Url.Action("ReservoirTransformation", "Ecological")">Трансформация водосбора</a></li>
                             </ul>
-                        </li>
+                        <li tabid="6">
+                            <a href="@Url.Action("Index", "Regions")">Районы</a>
+                             </li>
                         <li class="dropdown" tabid="8">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Справка<b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li subtabid="1"><a href="@Url.Content("~/Content/files/methodology.docx")">Методика расчета</a></li>
+                                <li subtabid="1"><a href="@Url.Action("Metodology", "Home")">Методика расчета</a></li>
                                 <li subtabid="2"><a href="@Url.Content("~/Content/files/methodology.docx")">Руководство пользователя</a></li>
                             </ul>
                         </li>

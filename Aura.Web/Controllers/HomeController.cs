@@ -8,5 +8,10 @@ namespace Aura.Web.Controllers
         {
             return View();
         }
+
+        public ActionResult Metodology()
+        {
+            return View();
+        }
     }
 }

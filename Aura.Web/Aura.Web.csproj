@@ -292,6 +292,7 @@
     <Content Include="Views\Ecological\ReservoirTransformation.cshtml" />
     <Content Include="Scripts\underscore.min.map" />
     <Content Include="Views\Ecological\GeochemicalAssessmentGrid.cshtml" />
+    <Content Include="Views\Home\Metodology.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
