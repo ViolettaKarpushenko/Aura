@@ -156,6 +156,7 @@
     <Content Include="Content\images\home\image019.png" />
     <Content Include="Content\images\home\image020.png" />
     <Content Include="Content\images\home\map1.png" />
+    <Content Include="Content\images\Strusta_Lake_-_Panorama.png" />
     <Content Include="Content\less\images\glyphicons-halflings-white.png" />
     <Content Include="Content\less\images\glyphicons-halflings.png" />
     <Content Include="Content\less\layouts.less" />
@@ -230,6 +231,7 @@
     <Content Include="Content\less\modals.less" />
     <Content Include="Content\less\mixins.less" />
     <Content Include="Content\less\media.less" />
+    <Content Include="Content\less\views\view.metodology.less" />
     <None Include="Properties\PublishProfiles\debug.fs.pubxml" />
     <None Include="Properties\PublishProfiles\prod.ftp.pubxml" />
     <Content Include="Scripts\backbone.js" />
