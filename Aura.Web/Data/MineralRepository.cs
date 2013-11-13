@@ -53,7 +53,15 @@ namespace Aura.Web.Data
             var avgSapropel = stocks.Average(stock => stock.Sapropel);
             var avgGravinoPeschanye = stocks.Average(stock => stock.GravinoPeschanye);
 
+            var useData = ExecuteAggregateEntityQuery<MineralModel>(
+                "use",
+                (int)Tables.Minerals,
+                MineralsColumns.Sapropel).AsParallel();
+
+            var avgUseSapropel = useData.Average(stock => stock.Sapropel);
+
             var results = from stock in stocks
+                          join use in useData on stock.RegionId equals use.RegionId
                           let zapasyPhg = stock.Dolomity / avgDolomity +
                                             stock.Peski / avgPeski +
                                             stock.Glinistye / avgGlinistye +
@@ -61,15 +69,16 @@ namespace Aura.Web.Data
                                             stock.Torf / avgTorf +
                                             stock.Sapropel / avgSapropel
                           let zapasyOzera = stock.Sapropel / avgSapropel
+                          let useZapasyOzera = use.Sapropel / avgUseSapropel
                           orderby stock.RegionName
                           select new ResultModel
                           {
                               RegionId = stock.RegionId,
                               RegionName = stock.RegionName,
-                              ZapasyPhg = zapasyPhg,
-                              ZapasyOzera = zapasyOzera,
-                              Percent = zapasyOzera / zapasyPhg,
-                              KoefBalansa = stock.Glinistye / zapasyOzera
+                              DolaResursovTerritoriiVSumarnomZapasePercent = 1 - (zapasyOzera / zapasyPhg),
+                              DolaResursovOzerVSumarnomZapasePercent = zapasyOzera / zapasyPhg,
+                              KoefSootnosheniaResursov = stock.Glinistye / zapasyOzera,
+                              IndexVelichinyIspolzovaniyaOzerVHozDeatelnosti = useZapasyOzera / zapasyOzera
                           };
 
             return new ResultsViewModel { Items = results };

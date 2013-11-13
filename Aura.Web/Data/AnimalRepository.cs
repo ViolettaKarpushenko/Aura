@@ -98,53 +98,61 @@ namespace Aura.Web.Data
             var avgBentos = stocks.Average(stock => stock.Bentos);
             var avgRyba = stocks.Average(stock => stock.Ryba);
 
-            var results = stocks.Select(stock => new
-                {
-                    stock,
-                    zaposyOzer = stock.Bentos / avgBentos +
-                                    stock.Zooplankton / avgZooplankton +
-                                    stock.Ryba / avgRyba
-                })
-                .Select(stock => new
-                {
-                    stock.stock,
-                    stock.zaposyOzer,
-                    zapasyPhg = stock.zaposyOzer +
-                           (stock.stock.DikayaUtka / avgDikayaUtka +
-                            stock.stock.SerayaKuropatka / avgSerayaKuropatka +
-                            stock.stock.Rabchik / avgRabchik +
-                            stock.stock.Teterev / avgTeterev +
-                            stock.stock.Gluhar / avgGluhar) / 4 +
+            var useData = ExecuteAggregateEntityQuery<AnimalModel>(
+                "use",
+                (int)Tables.Animal,
+                AnimalColumns.Zooplankton,
+                AnimalColumns.Bentos,
+                AnimalColumns.Ryba).AsParallel();
 
-                           (stock.stock.ZayacBelak / avgZayacBelak +
-                            stock.stock.ZayacRusak / avgZayacRusak +
-                            stock.stock.Kunica / avgKunica +
-                            stock.stock.Lisica / avgLisica +
-                            stock.stock.Ondatra / avgOndatra +
-                            stock.stock.Norka / avgNorka +
-                            stock.stock.Bobr / avgBobr +
-                            stock.stock.Volk / avgVolk +
-                            stock.stock.Barsuk / avgBarsuk +
-                            stock.stock.Vydra / avgVydra +
-                            stock.stock.EnotovidnayaSobaka / avgEnotovidnayaSobaka +
-                            stock.stock.Rys / avgRys +
-                            stock.stock.Belka / avgBelka) / 13 +
+            var avgUseZooplankton = useData.Average(stock => stock.Zooplankton);
+            var avgUseBentos = useData.Average(stock => stock.Bentos);
+            var avgUseRyba = useData.Average(stock => stock.Ryba);
 
-                           (stock.stock.Los / avgLos +
-                            stock.stock.Olen / avgOlen +
-                            stock.stock.Kosula / avgKosula +
-                            stock.stock.Kaban / avgKaban) / 4
-                })
-                .Select(stock => new ResultModel
-                {
-                    ZapasyPhg = stock.zapasyPhg,
-                    ZapasyOzera = stock.zaposyOzer,
-                    Percent = stock.zapasyPhg * stock.zaposyOzer,
-                    KoefBalansa = stock.zaposyOzer / (stock.zapasyPhg - stock.zaposyOzer),
-                    RegionId = stock.stock.RegionId,
-                    RegionName = stock.stock.RegionName
-                })
-                .OrderBy(stock => stock.RegionName);
+            var results = from stock in stocks
+                          join use in useData on stock.RegionId equals use.RegionId
+                          let zapasyOzera = stock.Bentos / avgBentos +
+                                            stock.Zooplankton / avgZooplankton +
+                                            stock.Ryba / avgRyba
+                          let useZapasyOzera = use.Bentos / avgUseBentos +
+                                                use.Zooplankton / avgUseZooplankton +
+                                                use.Ryba / avgUseRyba
+                          let zapasyPhg = zapasyOzera +
+                                          (stock.DikayaUtka / avgDikayaUtka +
+                                           stock.SerayaKuropatka / avgSerayaKuropatka +
+                                           stock.Rabchik / avgRabchik +
+                                           stock.Teterev / avgTeterev +
+                                           stock.Gluhar / avgGluhar) / 4 +
+
+                                          (stock.ZayacBelak / avgZayacBelak +
+                                           stock.ZayacRusak / avgZayacRusak +
+                                           stock.Kunica / avgKunica +
+                                           stock.Lisica / avgLisica +
+                                           stock.Ondatra / avgOndatra +
+                                           stock.Norka / avgNorka +
+                                           stock.Bobr / avgBobr +
+                                           stock.Volk / avgVolk +
+                                           stock.Barsuk / avgBarsuk +
+                                           stock.Vydra / avgVydra +
+                                           stock.EnotovidnayaSobaka / avgEnotovidnayaSobaka +
+                                           stock.Rys / avgRys +
+                                           stock.Belka / avgBelka) / 13 +
+
+                                          (stock.Los / avgLos +
+                                           stock.Olen / avgOlen +
+                                           stock.Kosula / avgKosula +
+                                           stock.Kaban / avgKaban) / 4
+                          let dolaResursovOzerVSumarnomZapasePercent = zapasyPhg / zapasyOzera
+                          orderby stock.RegionName
+                          select new ResultModel
+                              {
+                                  DolaResursovOzerVSumarnomZapasePercent = dolaResursovOzerVSumarnomZapasePercent,
+                                  DolaResursovTerritoriiVSumarnomZapasePercent = 1 - dolaResursovOzerVSumarnomZapasePercent,
+                                  KoefSootnosheniaResursov = zapasyOzera / (zapasyPhg - zapasyOzera),
+                                  RegionId = stock.RegionId,
+                                  RegionName = stock.RegionName,
+                                  IndexVelichinyIspolzovaniyaOzerVHozDeatelnosti = useZapasyOzera / zapasyOzera
+                              };
 
             return new ResultsViewModel { Items = results };
         }

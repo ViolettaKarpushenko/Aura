@@ -2,6 +2,7 @@ using System;
 
 namespace Aura.Web.Common
 {
+    [Serializable]
     public class PresentationException : Exception
     {
         public PresentationException()

@@ -29,7 +29,7 @@ namespace Aura.Web
                 "~/Scripts/underscore.js",
                 "~/Scripts/backbone.js",
                 "~/Scripts/modules.js",
-                "~/Scripts/Views/view.*"));
+                "~/Scripts/views/view.*"));
         }
 
         private static void RegisterGlobalDependancies()

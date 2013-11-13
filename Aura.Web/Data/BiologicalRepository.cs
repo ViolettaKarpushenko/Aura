@@ -57,31 +57,38 @@ namespace Aura.Web.Data
             var avgFitoplankton = stocks.Average(stock => stock.Fitoplankton);
             var avgMakrofity = stocks.Average(stock => stock.Makrofity);
 
-            var results = stocks.Select(stock => new
-                {
-                    stock,
-                    zapasyPhg = (stock.Drevesina / avgDrevesina + stock.Lekarstvennye / avgLekarstvennye) +
-                                (stock.Pishcevye / avgPishcevye + stock.Griby / avgGriby + stock.Fitoplankton / avgFitoplankton) +
-                                (stock.Makrofity / avgMakrofity)
-                })
-                .Select(stock => new
-                {
-                    stock,
-                    zapasyOzera = stock.stock.Fitoplankton / avgFitoplankton + stock.stock.Makrofity / avgMakrofity
-                })
-                .Select(stock => new ResultModel
-                {
-                    RegionId = stock.stock.stock.RegionId,
-                    RegionName = stock.stock.stock.RegionName,
-                    ZapasyPhg = stock.stock.zapasyPhg,
-                    ZapasyOzera = stock.zapasyOzera,
-                    Percent = stock.zapasyOzera / stock.stock.zapasyPhg,
-                    KoefBalansa =
-                        stock.zapasyOzera /
-                        (stock.stock.stock.Drevesina / avgDrevesina + stock.stock.stock.Lekarstvennye / avgLekarstvennye +
-                        stock.stock.stock.Pishcevye / avgPishcevye + stock.stock.stock.Griby / avgGriby)
-                })
-                .OrderBy(stock => stock.RegionName);
+            var useData = ExecuteAggregateEntityQuery<BiologicalModel>(
+                "use",
+                (int)Tables.Biological,
+                BiologicalColumns.Fitoplankton,
+                BiologicalColumns.Makrofity).AsParallel();
+
+            var avgUseFitoplankton = useData.Average(stock => stock.Fitoplankton);
+            var avgUseMakrofity = useData.Average(stock => stock.Makrofity);
+
+            var results = from stock in stocks
+                          join use in useData on stock.RegionId equals use.RegionId
+                          let zapasyPhg = (stock.Drevesina / avgDrevesina + stock.Lekarstvennye / avgLekarstvennye) +
+                                          (stock.Pishcevye / avgPishcevye + stock.Griby / avgGriby +
+                                           stock.Fitoplankton / avgFitoplankton) +
+                                          (stock.Makrofity / avgMakrofity)
+                          let zapasyOzera = stock.Fitoplankton / avgFitoplankton + stock.Makrofity / avgMakrofity
+                          let useZapasyOzera = use.Fitoplankton / avgUseFitoplankton + use.Makrofity / avgUseMakrofity
+                          let dolaResursovOzerVSumarnomZapasePercent = zapasyPhg / zapasyOzera
+                          orderby stock.RegionName
+                          select new ResultModel
+                              {
+                                  RegionId = stock.RegionId,
+                                  RegionName = stock.RegionName,
+                                  DolaResursovTerritoriiVSumarnomZapasePercent = 1 - dolaResursovOzerVSumarnomZapasePercent,
+                                  DolaResursovOzerVSumarnomZapasePercent = dolaResursovOzerVSumarnomZapasePercent,
+                                  KoefSootnosheniaResursov =
+                                      zapasyOzera /
+                                      (stock.Drevesina / avgDrevesina +
+                                       stock.Lekarstvennye / avgLekarstvennye +
+                                       stock.Pishcevye / avgPishcevye + stock.Griby / avgGriby),
+                                  IndexVelichinyIspolzovaniyaOzerVHozDeatelnosti = useZapasyOzera / zapasyOzera
+                              };
 
             return new ResultsViewModel { Items = results };
         }

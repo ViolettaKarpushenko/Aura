@@ -11,7 +11,14 @@ namespace Aura.Web.Data
     {
         public WaterViewModel GetStocks()
         {
-            return GetItems("stocks");
+            var data = ExecuteAggregateEntityQuery<WaterModel>(
+                "stocks", 
+                (int)Tables.Water, 
+                WaterColumns.RechnoiStok,
+                WaterColumns.PodzemnyeVody,
+                WaterColumns.ObemVody);
+
+            return new WaterViewModel { Items = data.OrderBy(stock => stock.RegionName) };
         }
 
         public WaterViewModel GetUse()
@@ -63,37 +70,32 @@ namespace Aura.Web.Data
             var avgObemVody = stocks.Average(stock => stock.ObemVody);
             var avgPodzemnyeVody = stocks.Average(stock => stock.PodzemnyeVody);
             var avgRechnoiStok = stocks.Average(stock => stock.RechnoiStok);
+            
+            var useData = ExecuteAggregateEntityQuery<WaterModel>(
+                "stocks",
+                (int)Tables.Water,
+                WaterColumns.ObemVody).AsParallel();
+
+            var avgUseObemVody = useData.Average(use => use.ObemVody);
 
             var results = from stock in stocks
+                          join use in useData on stock.RegionId equals use.RegionId
                           let zapasyPhg = stock.RechnoiStok / avgRechnoiStok + stock.PodzemnyeVody / avgPodzemnyeVody + stock.ObemVody / avgObemVody
                           let zapasyOzera = stock.ObemVody / avgObemVody
+                          let useZapasyOzera = use.ObemVody / avgUseObemVody
+                          let dolaResursovOzerVSumarnomZapasePercent = zapasyPhg / zapasyOzera
                           orderby stock.RegionName
                           select new ResultModel
                           {
                               RegionId = stock.RegionId,
                               RegionName = stock.RegionName,
-                              ZapasyPhg = zapasyPhg,
-                              ZapasyOzera = zapasyOzera,
-                              Percent = zapasyOzera / zapasyPhg,
-                              KoefBalansa = zapasyOzera / (stock.RechnoiStok / avgRechnoiStok + stock.PodzemnyeVody / avgPodzemnyeVody)
+                              DolaResursovTerritoriiVSumarnomZapasePercent = 1 - dolaResursovOzerVSumarnomZapasePercent,
+                              DolaResursovOzerVSumarnomZapasePercent = dolaResursovOzerVSumarnomZapasePercent,
+                              KoefSootnosheniaResursov = zapasyOzera / (stock.RechnoiStok / avgRechnoiStok + stock.PodzemnyeVody / avgPodzemnyeVody),
+                              IndexVelichinyIspolzovaniyaOzerVHozDeatelnosti = useZapasyOzera / zapasyOzera
                           };
 
             return new ResultsViewModel { Items = results };
-        }
-
-        private WaterViewModel GetItems(string tableName)
-        {
-            var query = BuildAggregateEntityQueryPattern(tableName, (int)Tables.Water, 3);
-            var data = Execute<WaterModel>(
-                query,
-                (int)WaterColumns.RechnoiStok,
-                WaterColumns.RechnoiStok,
-                (int)WaterColumns.PodzemnyeVody,
-                WaterColumns.PodzemnyeVody,
-                (int)WaterColumns.ObemVody,
-                WaterColumns.ObemVody);
-
-            return new WaterViewModel { Items = data.OrderBy(stock => stock.RegionName) };
         }
     }
 }

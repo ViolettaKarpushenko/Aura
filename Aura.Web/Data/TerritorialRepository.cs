@@ -49,19 +49,31 @@ namespace Aura.Web.Data
             var avgZemelnye = stocks.Average(stock => stock.Zemelnye);
             var avgOzernye = stocks.Average(stock => stock.Ozernye);
 
+            var useData = ExecuteAggregateEntityQuery<TerritorialModel>(
+                            "use",
+                            (int)Tables.Territorial,
+                            TerritorialColumns.Ozernye)
+                        .AsParallel();
+
+            var avgUseOzernye = useData.Average(use => use.Ozernye);
+
             var results = from stock in stocks
+                          join use in useData on stock.RegionId equals use.RegionId
                           let zapasyPhg = stock.Zemelnye / avgZemelnye + stock.Ozernye / avgOzernye
                           let zapasyOzera = stock.Ozernye / avgOzernye
+                          let useZapasyOzera = use.Ozernye / avgUseOzernye
+                          let dolaResursovOzerVSumarnomZapasePercent = zapasyPhg / zapasyOzera
                           orderby stock.RegionName
                           select new ResultModel
-                          {
-                              RegionId = stock.RegionId,
-                              RegionName = stock.RegionName,
-                              ZapasyPhg = zapasyPhg,
-                              ZapasyOzera = zapasyOzera,
-                              Percent = zapasyOzera / zapasyPhg,
-                              KoefBalansa = zapasyOzera / (stock.Zemelnye / avgZemelnye)
-                          };
+                              {
+                                  RegionId = stock.RegionId,
+                                  RegionName = stock.RegionName,
+                                  DolaResursovTerritoriiVSumarnomZapasePercent =
+                                      1 - dolaResursovOzerVSumarnomZapasePercent,
+                                  DolaResursovOzerVSumarnomZapasePercent = dolaResursovOzerVSumarnomZapasePercent,
+                                  KoefSootnosheniaResursov = zapasyOzera / (stock.Zemelnye / avgZemelnye),
+                                  IndexVelichinyIspolzovaniyaOzerVHozDeatelnosti = useZapasyOzera / zapasyOzera
+                              };
 
             return new ResultsViewModel { Items = results };
         }

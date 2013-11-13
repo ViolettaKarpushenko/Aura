@@ -12,8 +12,8 @@
         <thead>
             <tr class="text-center">
                 <th>Район</th>
-                <th>Запасы ПХГ</th>
-                <th>Запасы озера</th>
+                <th>Доля ресурсов территории в суммарном запасе, %</th>
+                <th>Индекс величины использования озёр в хозяйственной деятельности</th>
                 <th>Доля ресурсов озёр в суммарном запасе, %</th>
                 <th>Коэффициент соотношения ресурсов</th>
             </tr>
@@ -23,10 +23,10 @@
             {
                 <tr rowid="@item.RegionId">
                     <td>@item.RegionName</td>
-                    <td>@(double.IsNaN(item.ZapasyPhg) ? string.Empty : item.ZapasyPhg.ToString("F3", CultureInfo.CurrentCulture)) </td>
-                    <td>@(double.IsNaN(item.ZapasyOzera) ? string.Empty : item.ZapasyOzera.ToString("F3", CultureInfo.CurrentCulture))</td>
-                    <td>@(double.IsNaN(item.Percent) ? string.Empty : item.Percent.ToString("P3", CultureInfo.CurrentCulture))</td>
-                    <td>@(double.IsNaN(item.KoefBalansa) ? string.Empty : item.KoefBalansa.ToString("F3", CultureInfo.CurrentCulture))</td>
+                    <td>@(double.IsNaN(item.DolaResursovTerritoriiVSumarnomZapasePercent) ? string.Empty : item.DolaResursovTerritoriiVSumarnomZapasePercent.ToString("P3", CultureInfo.CurrentCulture)) </td>
+                    <td>@(double.IsNaN(item.IndexVelichinyIspolzovaniyaOzerVHozDeatelnosti) ? string.Empty : item.IndexVelichinyIspolzovaniyaOzerVHozDeatelnosti.ToString("F3", CultureInfo.CurrentCulture))</td>
+                    <td>@(double.IsNaN(item.DolaResursovOzerVSumarnomZapasePercent) ? string.Empty : item.DolaResursovOzerVSumarnomZapasePercent.ToString("P3", CultureInfo.CurrentCulture))</td>
+                    <td>@(double.IsNaN(item.KoefSootnosheniaResursov) ? string.Empty : item.KoefSootnosheniaResursov.ToString("F3", CultureInfo.CurrentCulture))</td>
                 </tr>
             }
         </tbody>
