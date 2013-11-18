@@ -83,7 +83,7 @@ namespace Aura.Web.Data
                           let zapasyPhg = stock.RechnoiStok / avgRechnoiStok + stock.PodzemnyeVody / avgPodzemnyeVody + stock.ObemVody / avgObemVody
                           let zapasyOzera = stock.ObemVody / avgObemVody
                           let useZapasyOzera = use.ObemVody / avgUseObemVody
-                          let dolaResursovOzerVSumarnomZapasePercent = zapasyPhg / zapasyOzera
+                          let dolaResursovOzerVSumarnomZapasePercent = zapasyOzera / zapasyPhg
                           orderby stock.RegionName
                           select new ResultModel
                           {
