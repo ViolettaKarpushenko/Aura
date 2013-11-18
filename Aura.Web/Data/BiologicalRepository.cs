@@ -74,7 +74,7 @@ namespace Aura.Web.Data
                                           (stock.Makrofity / avgMakrofity)
                           let zapasyOzera = stock.Fitoplankton / avgFitoplankton + stock.Makrofity / avgMakrofity
                           let useZapasyOzera = use.Fitoplankton / avgUseFitoplankton + use.Makrofity / avgUseMakrofity
-                          let dolaResursovOzerVSumarnomZapasePercent = zapasyPhg / zapasyOzera
+                           let dolaResursovOzerVSumarnomZapasePercent = zapasyOzera / zapasyPhg
                           orderby stock.RegionName
                           select new ResultModel
                               {
@@ -82,12 +82,9 @@ namespace Aura.Web.Data
                                   RegionName = stock.RegionName,
                                   DolaResursovTerritoriiVSumarnomZapasePercent = 1 - dolaResursovOzerVSumarnomZapasePercent,
                                   DolaResursovOzerVSumarnomZapasePercent = dolaResursovOzerVSumarnomZapasePercent,
-                                  KoefSootnosheniaResursov =
-                                      zapasyOzera /
-                                      (stock.Drevesina / avgDrevesina +
-                                       stock.Lekarstvennye / avgLekarstvennye +
-                                       stock.Pishcevye / avgPishcevye + stock.Griby / avgGriby),
-                                  IndexVelichinyIspolzovaniyaOzerVHozDeatelnosti = useZapasyOzera / zapasyOzera
+                                  KoefSootnosheniaResursov = dolaResursovOzerVSumarnomZapasePercent / (1 - dolaResursovOzerVSumarnomZapasePercent),
+                                  IndexVelichinyIspolzovaniyaOzerVHozDeatelnosti = useZapasyOzera / zapasyOzera,
+                                  ZapasyPhg = zapasyPhg
                               };
 
             return new ResultsViewModel { Items = results };

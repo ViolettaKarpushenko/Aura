@@ -19,13 +19,13 @@
                     <ul class="nav" id="menu-ul">
                         <li tabid="1">
                             <a class="brand" href="@Url.Action("Index", "Home")">
-                                <img src="@Url.Content("~/Content/images/brand.png")" alt="Aura" title="Aura" />
+                                <img src="@Url.Content("~/Content/images/brand.png")" alt="Aura" title="Главная страница" />
                             </a>
                         </li>
                         <li class="dropdown" tabid="2">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Запасы природных ресурсов<b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li subtabid="1"><a href="@Url.Action("Mineral", "Stocks")">Запасы минеральных ресурсов</a></li>
+                                <li subtabid="1"><a href="@Url.Action("Mineral", "Stocks")">Минеральных ресурсы</a></li>
                                 <li subtabid="2"><a href="@Url.Action("Water", "Stocks")">Водные ресурсы</a></li>
                                 <li subtabid="3"><a href="@Url.Action("Territorial", "Stocks")">Территориальные ресурсы</a></li>
                                 <li subtabid="4"><a href="@Url.Action("Biological", "Stocks")">Ресурсы растительного мира</a></li>
@@ -33,23 +33,23 @@
                             </ul>
                         </li>
                         <li class="dropdown" tabid="3">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Хозяйственное использование<b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Использование ресурсов озер<b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li subtabid="1"><a href="@Url.Action("Mineral", "Use")">Запасы минеральных ресурсов</a></li>
+                                <li subtabid="1"><a href="@Url.Action("Mineral", "Use")">Минеральных ресурсы</a></li>
                                 <li subtabid="2"><a href="@Url.Action("Water", "Use")">Водные ресурсы</a></li>
                                 <li subtabid="3"><a href="@Url.Action("Territorial", "Use")">Территориальные ресурсы</a></li>
                                 <li subtabid="4"><a href="@Url.Action("Biological", "Use")">Ресурсы растительного мира</a></li>
-                                <li subtabid="5"><a href="@Url.Action("Animal", "Use")">Запасы животного мира</a></li>
+                                <li subtabid="5"><a href="@Url.Action("Animal", "Use")">Ресурсы животного мира</a></li>
                             </ul>
                         </li>
                         <li class="dropdown" tabid="4">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Итог<b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li subtabid="1"><a href="@Url.Action("Mineral", "Result")">Запасы минеральных ресурсов</a></li>
+                                <li subtabid="1"><a href="@Url.Action("Mineral", "Result")">Минеральных ресурсы</a></li>
                                 <li subtabid="2"><a href="@Url.Action("Water", "Result")">Водные ресурсы</a></li>
                                 <li subtabid="3"><a href="@Url.Action("Territorial", "Result")">Территориальные ресурсы</a></li>
                                 <li subtabid="4"><a href="@Url.Action("Biological", "Result")">Ресурсы растительного мира</a></li>
-                                <li subtabid="5"><a href="@Url.Action("Animal", "Result")">Запасы животного мира</a></li>
+                                <li subtabid="5"><a href="@Url.Action("Animal", "Result")">Ресурсы животного мира</a></li>
                             </ul>
                         </li>
                         @*
@@ -79,7 +79,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Справка<b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li subtabid="1"><a href="@Url.Action("Metodology", "Home")">Методика расчета</a></li>
-                                <li subtabid="2"><a href="@Url.Content("~/Content/files/methodology.docx")">Руководство пользователя</a></li>
+                                <li subtabid="2"><a href="@Url.Content("~/Content/files/manual.docx")">Руководство пользователя</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -102,6 +102,7 @@
     @Scripts.Render("~/Scripts/scripts.js")
     <script type="text/javascript">
         window.menuView = new MenuView({ tabId: '@ViewBag.TabId', subTabId: '@ViewBag.SubTabId' });
+        $('body>center').addClass('visible-desktop');
     </script>
 
     @RenderSection("scripts", false)

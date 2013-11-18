@@ -156,6 +156,7 @@
     <Content Include="Content\images\home\image019.png" />
     <Content Include="Content\images\home\image020.png" />
     <Content Include="Content\images\home\map1.png" />
+    <Content Include="Content\images\s-info.png" />
     <Content Include="Content\images\Strusta_Lake_-_Panorama.png" />
     <Content Include="Content\less\images\glyphicons-halflings-white.png" />
     <Content Include="Content\less\images\glyphicons-halflings.png" />
@@ -176,6 +177,7 @@
     <Content Include="Content\less\alerts.less" />
     <Content Include="Content\less\accordion.less" />
     <Content Include="Content\files\methodology.docx" />
+    <Content Include="Content\files\manual.docx" />
     <None Include="Content\less\main.css">
       <DependentUpon>main.less</DependentUpon>
     </None>

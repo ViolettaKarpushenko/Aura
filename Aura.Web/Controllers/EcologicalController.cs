@@ -76,7 +76,7 @@ namespace Aura.Web.Controllers
         [HttpGet]
         public ActionResult ReservoirTransformation()
         {
-            var items = _ecologicalRepository.GetEcologicalItems(Tables.ReservoirTransformationAt);
+            var items = _ecologicalRepository.GetEcologicalItems(Tables.ReservoirTransformationAtv);
             var model = new EcologicalViewModel
             {
                 DataSets = new Dictionary<int, IEnumerable<EcologicalModel>> { { 0, items } }

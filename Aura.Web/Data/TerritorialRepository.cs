@@ -23,7 +23,7 @@ namespace Aura.Web.Data
 
         public TerritorialViewModel GetUse()
         {
-            var stocksData = ExecuteAggregateEntityQuery<TerritorialModel>("stocks", (int)Tables.Territorial, TerritorialColumns.Plochad)
+            var stocksData = ExecuteAggregateEntityQuery<TerritorialModel>("stocks", (int)Tables.Territorial, TerritorialColumns.Ozernye)
                                 .AsParallel();
             var useData = ExecuteAggregateEntityQuery<TerritorialModel>("use", (int)Tables.Territorial, TerritorialColumns.VmestimostRekreacionnyhZon, TerritorialColumns.PlochadOopt)
                                 .AsParallel();
@@ -36,7 +36,7 @@ namespace Aura.Web.Data
                             RegionName = use.RegionName,
                             VmestimostRekreacionnyhZon = use.VmestimostRekreacionnyhZon,
                             PlochadOopt = use.PlochadOopt,
-                            Plochad = stock.Plochad
+                            Plochad = stock.Ozernye
                         };
 
             return new TerritorialViewModel { Items = items.OrderBy(stock => stock.RegionName) };
@@ -62,17 +62,17 @@ namespace Aura.Web.Data
                           let zapasyPhg = stock.Zemelnye / avgZemelnye + stock.Ozernye / avgOzernye
                           let zapasyOzera = stock.Ozernye / avgOzernye
                           let useZapasyOzera = use.Ozernye / avgUseOzernye
-                          let dolaResursovOzerVSumarnomZapasePercent = zapasyPhg / zapasyOzera
+                          let dolaResursovOzerVSumarnomZapasePercent = zapasyOzera / zapasyPhg
                           orderby stock.RegionName
                           select new ResultModel
                               {
                                   RegionId = stock.RegionId,
                                   RegionName = stock.RegionName,
-                                  DolaResursovTerritoriiVSumarnomZapasePercent =
-                                      1 - dolaResursovOzerVSumarnomZapasePercent,
+                                  DolaResursovTerritoriiVSumarnomZapasePercent = 1 - dolaResursovOzerVSumarnomZapasePercent,
                                   DolaResursovOzerVSumarnomZapasePercent = dolaResursovOzerVSumarnomZapasePercent,
-                                  KoefSootnosheniaResursov = zapasyOzera / (stock.Zemelnye / avgZemelnye),
-                                  IndexVelichinyIspolzovaniyaOzerVHozDeatelnosti = useZapasyOzera / zapasyOzera
+                                  KoefSootnosheniaResursov = dolaResursovOzerVSumarnomZapasePercent / (1 - dolaResursovOzerVSumarnomZapasePercent),
+                                  IndexVelichinyIspolzovaniyaOzerVHozDeatelnosti = useZapasyOzera / zapasyOzera,
+                                  ZapasyPhg = zapasyPhg
                               };
 
             return new ResultsViewModel { Items = results };

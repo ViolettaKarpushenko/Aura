@@ -91,8 +91,9 @@ namespace Aura.Web.Data
                               RegionName = stock.RegionName,
                               DolaResursovTerritoriiVSumarnomZapasePercent = 1 - dolaResursovOzerVSumarnomZapasePercent,
                               DolaResursovOzerVSumarnomZapasePercent = dolaResursovOzerVSumarnomZapasePercent,
-                              KoefSootnosheniaResursov = zapasyOzera / (stock.RechnoiStok / avgRechnoiStok + stock.PodzemnyeVody / avgPodzemnyeVody),
-                              IndexVelichinyIspolzovaniyaOzerVHozDeatelnosti = useZapasyOzera / zapasyOzera
+                              KoefSootnosheniaResursov = dolaResursovOzerVSumarnomZapasePercent / (1 - dolaResursovOzerVSumarnomZapasePercent),
+                              IndexVelichinyIspolzovaniyaOzerVHozDeatelnosti = useZapasyOzera / zapasyOzera,
+                              ZapasyPhg = zapasyPhg
                           };
 
             return new ResultsViewModel { Items = results };

@@ -12,6 +12,6 @@ namespace Aura.Web.Common
         GeochemicalAssessmentIpm = 7,
         GeochemicalAssessmentZc = 8,
         HydrobiologicalAssessmentS = 9,
-        ReservoirTransformationAt = 10
+        ReservoirTransformationAtv = 10
     }
 }

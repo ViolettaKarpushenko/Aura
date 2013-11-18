@@ -142,16 +142,17 @@ namespace Aura.Web.Data
                                            stock.Olen / avgOlen +
                                            stock.Kosula / avgKosula +
                                            stock.Kaban / avgKaban) / 4
-                          let dolaResursovOzerVSumarnomZapasePercent = zapasyPhg / zapasyOzera
+                          let dolaResursovOzerVSumarnomZapasePercent = zapasyOzera / zapasyPhg
                           orderby stock.RegionName
                           select new ResultModel
                               {
                                   DolaResursovOzerVSumarnomZapasePercent = dolaResursovOzerVSumarnomZapasePercent,
                                   DolaResursovTerritoriiVSumarnomZapasePercent = 1 - dolaResursovOzerVSumarnomZapasePercent,
-                                  KoefSootnosheniaResursov = zapasyOzera / (zapasyPhg - zapasyOzera),
+                                  KoefSootnosheniaResursov = dolaResursovOzerVSumarnomZapasePercent / (1 - dolaResursovOzerVSumarnomZapasePercent),
                                   RegionId = stock.RegionId,
                                   RegionName = stock.RegionName,
-                                  IndexVelichinyIspolzovaniyaOzerVHozDeatelnosti = useZapasyOzera / zapasyOzera
+                                  IndexVelichinyIspolzovaniyaOzerVHozDeatelnosti = useZapasyOzera / zapasyOzera,
+                                  ZapasyPhg = zapasyPhg
                               };
 
             return new ResultsViewModel { Items = results };
